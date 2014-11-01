@@ -6,42 +6,37 @@
 # translated to ruby-processing Martin Prout
 
 # A class to describe a group of Particles
-# An Array is used to manage the list of Particles 
+# An Array is used to manage the list of Particles
+require 'forwardable'
+
+module Runnable
+  def run
+    reject! { |item| item.done }
+    each { |item| item.display }
+  end
+end
 
 class ParticleSystem
+  include Enumerable, Runnable
+  extend Forwardable
+  def_delegators(:@particles, :each, :reject!, :<<, :empty?)
+  def_delegator(:@particles, :empty?, :dead?)
+
   attr_reader :particles, :x, :y
   
   def initialize(bd, num, x, y)
     @particles = []          # Initialize the Array
     @x, @y = x, y            # Store the origin point  
     num.times do
-      particles << Particle.new(bd, x, y)
+      self << Particle.new(bd, x, y)
     end
-  end
-  
-  def run
-    # Display all the particles
-    particles.each do |p|
-      p.display
-    end    
-    # Particles that leave the screen, we delete them
-    # (note they have to be deleted from both the box2d world and our list
-    
-    particles.reject! { |p| p.done}
-    
   end
   
   def add_particles(bd, n)
     n.times do
-      particles << Particle.new(bd, x, y)
+      self << Particle.new(bd, x, y)
     end
   end
-  
-  # A method to test if the particle system still has particles
-  def dead  
-    particles.empty?
-  end
-  
 end
 
 # The Nature of Code
@@ -115,27 +110,20 @@ class Particle
     # Define and create the body
     bd = PB::BodyDef.new
     bd.type = PB::BodyType::DYNAMIC
-    
     bd.position.set(box2d.coord_pixels_to_world(center))
     @body = box2d.create_body(bd)
-    
     # Give it some initial random velocity
-    body.set_linear_velocity(PB::Vec2.new(rand(-1..1), rand(-1..1)))
-    
+    body.set_linear_velocity(PB::Vec2.new(rand(-1.0..1), rand(-1.0..1)))
     # Make the body's shape a circle
     cs = PB::CircleShape.new
     cs.m_radius = box2d.scalar_pixels_to_world(r)
-    
     fd = PB::FixtureDef.new
     fd.shape = cs
-    
     fd.density = 1
     fd.friction = 0  # Slippery when wet!
     fd.restitution = 0.5
-    
     # We could use this if we want to turn collisions off
     #cd.filter.groupIndex = -10
-    
     # Attach fixture to body
     body.create_fixture(fd)      
   end    
@@ -145,7 +133,7 @@ end
 class Boundary
   include Processing::Proxy
   include PB
-  attr_reader :box2d, :b, :x, :y, :w, :h #, :a
+  attr_reader :box2d, :b, :x, :y, :w, :h 
   
   def initialize(b2d, x, y, w, h, a)
     @box2d = b2d
@@ -153,24 +141,19 @@ class Boundary
     @y = y
     @w = w
     @h = h
-    
     # Define the polygon
     sd = PB::PolygonShape.new
-    
     # Figure out the box2d coordinates
-    box2dW = box2d.scalar_pixels_to_world(w/2)
-    box2dH = box2d.scalar_pixels_to_world(h/2)
+    box2dW = box2d.scalar_pixels_to_world(w / 2)
+    box2dH = box2d.scalar_pixels_to_world(h / 2)
     # We're just a box
     sd.set_as_box(box2dW, box2dH)
-    
-    
     # Create the body
     bd = PB::BodyDef.new
     bd.type = PB::BodyType::STATIC
     bd.angle = a
     bd.position.set(box2d.coord_pixels_to_world(x,y))
     @b = box2d.create_body(bd)
-    
     # Attached the shape to the body using a Fixture
     b.create_fixture(sd,1)
   end
@@ -183,9 +166,9 @@ class Boundary
     rect_mode(CENTER)
     a = b.get_angle
     push_matrix
-    translate(x,y)
+    translate(x, y)
     rotate(-a)
-    rect(0,0,w,h)
+    rect(0, 0, w, h)
     pop_matrix
   end    
 end  
