@@ -12,12 +12,12 @@ spec = Gem::Specification.new do |s|
   s.version = Pbox2D::VERSION
   s.has_rdoc = true
   s.extra_rdoc_files = ['README.md', 'LICENSE.md']
-  s.summary = 'Experimental gem for some jbox2d'
+  s.summary = 'Experimental gem for jbox2d'
   s.description = 'A gem wrapper for JBox2D in ruby-processing'
   s.license = 'MIT'
   s.authors = ['Martin Prout']
   s.email = 'martin_p@lineone.net'
-  s.homepage = 'https://github.com/ruby-processing/pbox2d'
+  s.homepage = 'https://github.com/ruby-processing/jbox2d'
   s.files = %w(LICENSE.md README.md Rakefile) + FileList['lib/**/*.rb', 'example/**/*.rb']
   s.files << 'lib/pbox2d.jar'
   s.files << 'lib/jbox2d-library-2.2.1-ds.jar' 
