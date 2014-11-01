@@ -1,0 +1,6 @@
+*~
+*.jar
+*.gem
+tmp
+pkg
+
