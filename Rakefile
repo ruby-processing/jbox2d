@@ -12,8 +12,12 @@ spec = Gem::Specification.new do |s|
   s.version = Pbox2D::VERSION
   s.has_rdoc = true
   s.extra_rdoc_files = ['README.md', 'LICENSE.md']
-  s.summary = 'Experimental gem for jbox2d'
-  s.description = 'A gem wrapper for JBox2D in ruby-processing'
+  s.summary = 'jbox2d wrapped in a gem for ruby-processing'
+  s.description = <<-EOF
+"An exemplar for how processing/java libraries can be made available
+for use in ruby-processing. In this example avoiding an overdose of java 
+reflection by letting jruby sugar implement an interface"
+EOF
   s.license = 'MIT'
   s.authors = ['Martin Prout']
   s.email = 'martin_p@lineone.net'
@@ -22,8 +26,10 @@ spec = Gem::Specification.new do |s|
   s.files << 'lib/pbox2d.jar'
   s.files << 'lib/jbox2d-library-2.2.1-ds.jar' 
   s.require_path = 'lib'
+  s.add_dependency "ruby-processing", "~> 2.6.4"
   s.add_development_dependency "rake", "~> 10.3"
   s.add_development_dependency "rake-compiler", "~> 0.9"
+  s.platform='java'
   s.requirements << 'A decent graphics card'
   s.requirements << 'java runtime >= 1.7+'
   s.requirements << 'processing = 2.2.1+'

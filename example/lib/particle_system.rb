@@ -80,7 +80,7 @@ class Particle
     begin_shape
     no_fill
     stroke_weight(2)
-    stroke(0,150)
+    stroke(0, 150)
     trail.each do |v|
       vertex(v[0], v[1])
     end
@@ -133,7 +133,7 @@ class Boundary
     bd.position.set(box2d.coord_pixels_to_world(x,y))
     @b = box2d.create_body(bd)
     # Attached the shape to the body using a Fixture
-    b.create_fixture(sd,1)
+    b.create_fixture(sd, 1)
   end
   
   # Draw the boundary, it doesn't move so we don't have to ask the Body for location
