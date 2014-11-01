@@ -1,6 +1,6 @@
 ### License
 
-This work makes use of jbox2d see included LICENSE, and is derived from,
+This work makes use of jbox2d see included LICENCE, and is derived from,
 but different significantly different from Dan Shiffmans PBox2D-for-processing 
 who claims this:-
 
