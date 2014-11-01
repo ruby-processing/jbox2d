@@ -13,7 +13,7 @@ class ParticleSystem
   def_delegators(:@particles, :each, :reject!, :<<, :empty?)
   def_delegator(:@particles, :empty?, :dead?)
 
-  attr_reader :particles, :x, :y
+  attr_reader :x, :y
   
   def initialize(bd, num, x, y)
     @particles = []          # Initialize the Array
