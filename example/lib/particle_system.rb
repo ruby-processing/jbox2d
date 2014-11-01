@@ -1,12 +1,3 @@
-
-
-# Box2D Particle System
-# <http://www.shiffman.net/teaching/nature>
-# Spring 2010
-# translated to ruby-processing Martin Prout
-
-# A class to describe a group of Particles
-# An Array is used to manage the list of Particles
 require 'forwardable'
 
 module Runnable
@@ -38,11 +29,6 @@ class ParticleSystem
     end
   end
 end
-
-# The Nature of Code
-# <http://www.shiffman.net/teaching/nature>
-# Spring 2012
-# PBox2D example
 
 # A Particle
 require 'pbox2d'
@@ -76,27 +62,23 @@ class Particle
     # Let's find the screen position of the particle
     pos = box2d.get_body_pixel_coord(body)
     # Is it off the bottom of the screen?
-    if (pos.y > $app.height + 20)
-      kill_body
-      return true
-    end
-    return false
+    return false unless (pos.y > $app.height + 20)
+    kill_body
+    true
   end
   
   # Drawing the box
   def display
     # We look at each body and get its screen position
     pos = box2d.get_body_pixel_coord(body)
-    
     # Keep track of a history of screen positions in an array
     (TRAIL_SIZE - 1).times do |i|
       trail[i] = trail[i + 1]
     end
     trail[TRAIL_SIZE - 1] = [pos.x, pos.y]
-    
     # Draw particle as a trail
     begin_shape
-    noFill
+    no_fill
     stroke_weight(2)
     stroke(0,150)
     trail.each do |v|
@@ -136,11 +118,7 @@ class Boundary
   attr_reader :box2d, :b, :x, :y, :w, :h 
   
   def initialize(b2d, x, y, w, h, a)
-    @box2d = b2d
-    @x = x
-    @y = y
-    @w = w
-    @h = h
+    @box2d, @x, @y, @w, @h = b2d, x, y, w, h
     # Define the polygon
     sd = PB::PolygonShape.new
     # Figure out the box2d coordinates
