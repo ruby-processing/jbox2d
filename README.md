@@ -24,7 +24,11 @@ This gem was created by Martin Prout
 
 Copyright (c) 2014 Martin Prout
 
+### To compile
+
+To compile the gem follow the instructions for [JRubyArt][]
+
 [JBox2D Home]:http://www.jbox2d.org/
 [JBox2D on github]:https://github.com/jbox2d/jbox2d
 [Box2D for processing on github]:https://github.com/shiffman/Box2D-for-Processing
-
+[JRubyArt]:https://github.com/ruby-processing/JRubyArt
