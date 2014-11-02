@@ -36,7 +36,7 @@ Like really easy, but if you have to use rvm or rbenv you will also know what to
 
 ### To use
 
-You need to `require 'pbox2d'` in the the usual way (to require a gem) but as in the included [example][] you must also `include ContactListener` interface (by [jruby magic], including the interface as a module implements the java interface). Now you should create a new instance of Box2D.
+You need to `require 'pbox2d'` in the the usual way (to require a gem) but as in the included [examples][] you must also `include ContactListener` interface (by [jruby magic], including the interface as a module implements the java interface). Now you should create a new instance of Box2D.
 ```ruby
 @box2d = Box2D.new(self)
 box2d.create_world 
@@ -49,7 +49,7 @@ To make things dead simple, we have set those parameters to sensible defaults, a
 [JBox2D on github]:https://github.com/jbox2d/jbox2d
 [Box2D for processing on github]:https://github.com/shiffman/Box2D-for-Processing
 [JRubyArt]:https://github.com/ruby-processing/JRubyArt
-[example]:https://github.com/ruby-processing/jbox2d/blob/master/example/liquidy.rb
+[examples]:https://github.com/ruby-processing/jbox2d/blob/master/examples/liquidy.rb
 [jruby magic]:https://github.com/jruby/jruby/wiki/CallingJavaFromJRuby
 [Nature of Code book]:http://natureofcode.com/
 [Sandi Metz]:http://www.poodr.com/

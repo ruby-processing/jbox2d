@@ -34,8 +34,7 @@ end
 require 'pbox2d'
 
 class Particle
-  include Processing::Proxy
-  include PB
+  include Processing::Proxy, PB
   TRAIL_SIZE = 6
   # We need to keep track of a Body
   
@@ -45,11 +44,10 @@ class Particle
   def initialize(b2d, x, y)
     @box2d = b2d
     @trail = Array.new(TRAIL_SIZE, [x, y])
-    
     # Add the box to the box2d world
     # Here's a little trick, let's make a tiny tiny radius
     # This way we have collisions, but they don't overwhelm the system
-    make_body(PB::Vec2.new(x,y), 0.2)
+    make_body(PB::Vec2.new(x, y), 0.2)
   end
   
   # This function removes the particle from the box2d world
@@ -105,32 +103,30 @@ class Particle
     fd.friction = 0  # Slippery when wet!
     fd.restitution = 0.5
     # We could use this if we want to turn collisions off
-    #cd.filter.groupIndex = -10
+    # cd.filter.groupIndex = -10
     # Attach fixture to body
-    body.create_fixture(fd)      
-  end    
+    body.create_fixture(fd)
+  end
 end
   
-  
 class Boundary
-  include Processing::Proxy
-  include PB
-  attr_reader :box2d, :b, :x, :y, :w, :h 
+  include Processing::Proxy, PB
+  attr_reader :box2d, :b, :x, :y, :w, :h
   
   def initialize(b2d, x, y, w, h, a)
     @box2d, @x, @y, @w, @h = b2d, x, y, w, h
     # Define the polygon
     sd = PB::PolygonShape.new
     # Figure out the box2d coordinates
-    box2dW = box2d.scalar_pixels_to_world(w / 2)
-    box2dH = box2d.scalar_pixels_to_world(h / 2)
+    box2d_w = box2d.scalar_pixels_to_world(w / 2)
+    box2d_h = box2d.scalar_pixels_to_world(h / 2)
     # We're just a box
-    sd.set_as_box(box2dW, box2dH)
+    sd.set_as_box(box2d_w, box2d_h)
     # Create the body
     bd = PB::BodyDef.new
     bd.type = PB::BodyType::STATIC
     bd.angle = a
-    bd.position.set(box2d.coord_pixels_to_world(x,y))
+    bd.position.set(box2d.coord_pixels_to_world(x, y))
     @b = box2d.create_body(bd)
     # Attached the shape to the body using a Fixture
     b.create_fixture(sd, 1)
@@ -148,5 +144,5 @@ class Boundary
     rotate(-a)
     rect(0, 0, w, h)
     pop_matrix
-  end    
-end  
+  end
+end
