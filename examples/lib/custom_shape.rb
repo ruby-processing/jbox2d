@@ -1,9 +1,5 @@
 require 'pbox2d'
 
-module PB
-  include_package 'org.jbox2d.collision.shapes'
-end
-
 class CustomShape
   include Processing::Proxy, PB
   # We need to keep track of a Body and a width and height
