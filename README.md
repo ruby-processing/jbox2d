@@ -37,7 +37,7 @@ box2d.create_world
 box2d.set_gravity(0, -20) # to set a custom gravity
 ```
 That's about all you need to know, use the box2d instance to access the jbox2d physics world. Ordinarily (with jbox2d) you need to set some other parameters and call `box2d.step` in the draw loop to update the physics world.
-To make things dead simple we have set those parameters to sensible defaults, and call `step` in the draw loop for you (under the hood using java reflection). The other thing you should know is there is a mismatch between the physics world and the sketch world (processing got it wrong to my view, down is up) and the scaling is different. This is why you need to keep translating from one world the others coordinates Dan Shiffman explains it in his [book][].
+To make things dead simple we have set those parameters to sensible defaults, and call `step` in the draw loop for you (under the hood using java reflection). The other thing you should know is there is a mismatch between the physics world and the sketch world (processing got it wrong to my view, down is up) and the scaling is different. This is why you need to keep translating from one worlds (coordinates) to the others coordinates, Dan Shiffman explains it in his [book][].
 
 [JBox2D Home]:http://www.jbox2d.org/
 [JBox2D on github]:https://github.com/jbox2d/jbox2d
