@@ -30,7 +30,7 @@ To compile the gem follow the instructions for [JRubyArt][], but now also availa
 ```bash
 jruby -S gem install box2d
 ```
-really easy but if you have to use rvm or rbenv you will know what to do (but you then you might find this all a bit difficult to understand, and wonder where the tests are).
+Like really easy, but if you have to use rvm or rbenv you will alos know what to do (but then you might find this all a bit difficult to understand, and wonder where the tests are, believe me you should throw away those crutches).
 
 ### To use
 
