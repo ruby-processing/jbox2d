@@ -26,7 +26,7 @@ Copyright (c) 2014 Martin Prout
 
 ### To compile
 
-To compile the gem follow the instructions for [JRubyArt][], but now also available as a ruby gem:-
+To compile the gem follow the instructions for [JRubyArt][], but also available as a ruby gem:-
 ```bash
 jruby -S gem install box2d
 ```
