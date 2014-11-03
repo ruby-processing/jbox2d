@@ -1,5 +1,5 @@
 # Basic example of falling rectangles
-require 'box2d'
+require 'pbox2d'
 require_relative 'lib/custom_shape'
 
 include ContactListener
@@ -12,7 +12,7 @@ def setup
   @box2d = Box2D.new(self)
   box2d.create_world
   # We are setting a custom gravity
-  box2d.set_gravity(0, -20)
+  box2d.gravity(0, -20)
   # Create Arrays
   @polygons = []
   @boundaries = []
@@ -35,5 +35,5 @@ def draw
 end
 
 def mouse_pressed
-  polygons << CustomShape.new(box2d, mouse_x, mouse_y)
+  polygons << CustomShape.new(box2d, mouse_x, mouse_y, height)
 end

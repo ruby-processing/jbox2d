@@ -1,4 +1,4 @@
-require 'box2d'
+require 'pbox2d'
 require_relative 'lib/particle_system'
 attr_reader :box2d, :boundaries, :systems
 
@@ -9,7 +9,7 @@ def setup
   @box2d = Box2D.new(self)
   box2d.create_world  
   # We are setting a custom gravity
-  box2d.set_gravity(0, -20)
+  box2d.gravity(0, -20)
 
   # Create Arrays
   @systems = []

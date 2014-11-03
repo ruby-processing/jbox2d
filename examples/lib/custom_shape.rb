@@ -3,12 +3,12 @@ require 'pbox2d'
 class CustomShape
   include Processing::Proxy, PB
   # We need to keep track of a Body and a width and height
-  attr_reader :body, :box2d
+  attr_reader :body, :box2d, :height
 
   # Constructor
-  def initialize(b2d, x, y)
+  def initialize(b2d, x, y, h)
     # Add the box to the box2d world
-    @box2d = b2d
+    @box2d, @height = b2d, h
     make_body(PB::Vec2.new(x, y))
   end
 
@@ -20,9 +20,9 @@ class CustomShape
   # Is the particle ready for deletion?
   def done
     # Let's find the screen position of the particle
-    pos = box2d.get_body_pixel_coord(body)
+    pos = box2d.body_coord(body)
     # Is it off the bottom of the screen?
-    return false unless pos.y > $app.height
+    return false unless pos.y > height
     kill_body!
     true
   end
@@ -30,7 +30,7 @@ class CustomShape
   # Drawing the box
   def display
     # We look at each body and get its screen position
-    pos = box2d.get_body_pixel_coord(body)
+    pos = box2d.body_coord(body)
     # Get its angle of rotation
     a = body.get_angle
     f = body.get_fixture_list
@@ -44,7 +44,7 @@ class CustomShape
     begin_shape
     # For every vertex, convert to pixel vector
     ps.get_vertex_count.times do |i|
-      v = box2d.vector_world_to_pixels(ps.get_vertex(i))
+      v = box2d.vector_to_processing(ps.get_vertex(i))
       vertex(v.x, v.y)
     end
     end_shape(CLOSE)
@@ -56,15 +56,15 @@ class CustomShape
     # Define a polygon (this is what we use for a rectangle)
     sd = PB::PolygonShape.new
     vertices = []
-    vertices << box2d.vector_pixels_to_world(PB::Vec2.new(-15, 25))
-    vertices << box2d.vector_pixels_to_world(PB::Vec2.new(15, 0))
-    vertices << box2d.vector_pixels_to_world(PB::Vec2.new(20, -15))
-    vertices << box2d.vector_pixels_to_world(PB::Vec2.new(-10, -10))
+    vertices << box2d.vector_to_world(PB::Vec2.new(-15, 25))
+    vertices << box2d.vector_to_world(PB::Vec2.new(15, 0))
+    vertices << box2d.vector_to_world(PB::Vec2.new(20, -15))
+    vertices << box2d.vector_to_world(PB::Vec2.new(-10, -10))
     sd.set(vertices.to_java(Java::OrgJbox2dCommon::Vec2), vertices.length)
     # Define the body and make it from the shape
     bd = PB::BodyDef.new
     bd.type = PB::BodyType::DYNAMIC
-    bd.position.set(box2d.coord_pixels_to_world(center))
+    bd.position.set(box2d.processing_to_world(center))
     @body = box2d.create_body(bd)
     body.create_fixture(sd, 1.0)
     # Give it some initial random velocity
@@ -81,15 +81,15 @@ class Boundary
     # Define the polygon
     sd = PB::PolygonShape.new
     # Figure out the box2d coordinates
-    box2d_w = box2d.scalar_pixels_to_world(w / 2)
-    box2d_h = box2d.scalar_pixels_to_world(h / 2)
+    box2d_w = box2d.scale_to_world(w / 2)
+    box2d_h = box2d.scale_to_world(h / 2)
     # We're just a box
     sd.set_as_box(box2d_w, box2d_h)
     # Create the body
     bd = PB::BodyDef.new
     bd.type = PB::BodyType::STATIC
     bd.angle = a
-    bd.position.set(box2d.coord_pixels_to_world(x, y))
+    bd.position.set(box2d.processing_to_world(x, y))
     @b = box2d.create_body(bd)
     # Attached the shape to the body using a Fixture
     b.create_fixture(sd, 1)

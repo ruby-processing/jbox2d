@@ -58,7 +58,7 @@ class Particle
   # Is the particle ready for deletion?
   def done
     # Let's find the screen position of the particle
-    pos = box2d.get_body_pixel_coord(body)
+    pos = box2d.body_coord(body)
     # Is it off the bottom of the screen?
     return false unless (pos.y > $app.height + 20)
     kill_body
@@ -68,7 +68,7 @@ class Particle
   # Drawing the box
   def display
     # We look at each body and get its screen position
-    pos = box2d.get_body_pixel_coord(body)
+    pos = box2d.body_coord(body)
     # Keep track of a history of screen positions in an array
     (TRAIL_SIZE - 1).times do |i|
       trail[i] = trail[i + 1]
@@ -90,13 +90,13 @@ class Particle
     # Define and create the body
     bd = PB::BodyDef.new
     bd.type = PB::BodyType::DYNAMIC
-    bd.position.set(box2d.coord_pixels_to_world(center))
+    bd.position.set(box2d.processing_to_world(center))
     @body = box2d.create_body(bd)
     # Give it some initial random velocity
     body.set_linear_velocity(PB::Vec2.new(rand(-1.0..1), rand(-1.0..1)))
     # Make the body's shape a circle
     cs = PB::CircleShape.new
-    cs.m_radius = box2d.scalar_pixels_to_world(r)
+    cs.m_radius = box2d.scale_to_world(r)
     fd = PB::FixtureDef.new
     fd.shape = cs
     fd.density = 1
@@ -118,15 +118,15 @@ class Boundary
     # Define the polygon
     sd = PB::PolygonShape.new
     # Figure out the box2d coordinates
-    box2d_w = box2d.scalar_pixels_to_world(w / 2)
-    box2d_h = box2d.scalar_pixels_to_world(h / 2)
+    box2d_w = box2d.scale_to_world(w / 2)
+    box2d_h = box2d.scale_to_world(h / 2)
     # We're just a box
     sd.set_as_box(box2d_w, box2d_h)
     # Create the body
     bd = PB::BodyDef.new
     bd.type = PB::BodyType::STATIC
     bd.angle = a
-    bd.position.set(box2d.coord_pixels_to_world(x, y))
+    bd.position.set(box2d.processing_to_world(x, y))
     @b = box2d.create_body(bd)
     # Attached the shape to the body using a Fixture
     b.create_fixture(sd, 1)

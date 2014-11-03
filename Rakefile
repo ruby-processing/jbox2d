@@ -5,7 +5,7 @@ require 'rubygems/package_task'
 require 'rdoc/task'
 require 'rake/testtask'
 require 'rspec/core/rake_task'
-require_relative 'lib/box2d/version'
+require_relative 'lib/pbox2d/version'
 
 spec = Gem::Specification.new do |s|
   s.name = 'pbox2d'
@@ -23,7 +23,7 @@ EOF
   s.email = 'martin_p@lineone.net'
   s.homepage = 'https://github.com/ruby-processing/jbox2d'
   s.files = %w(LICENSE.md README.md Rakefile) + FileList['lib/**/*.rb', 'example/**/*.rb']
-  s.files << 'lib/pbox2d.jar'
+  s.files << 'lib/box2d.jar'
   s.files << 'lib/jbox2d-library-2.2.1-ds.jar' 
   s.require_path = 'lib'
   s.add_dependency "ruby-processing", "~> 2.6.4"
@@ -66,7 +66,7 @@ copy_jars(:processing_jars, 'lib')
 Rake::JavaExtensionTask.new('processing') do |ext|
   jars = FileList['lib/*.jar']
   ext.classpath = jars.map { |x| File.expand_path x}.join ':'
-  ext.name = 'pbox2d'
+  ext.name = 'box2d'
   ext.debug = true
   ext.lib_dir = 'lib'
   ext.source_version='1.7'
