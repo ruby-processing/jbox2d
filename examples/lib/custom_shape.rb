@@ -1,15 +1,15 @@
 require 'pbox2d'
 
 class CustomShape
-  include Processing::Proxy, PB
+  include Processing::Proxy
   # We need to keep track of a Body and a width and height
   attr_reader :body, :box2d, :height
 
   # Constructor
-  def initialize(b2d, x, y, h)
+  def initialize(b2d, x, y)
     # Add the box to the box2d world
-    @box2d, @height = b2d, h
-    make_body(PB::Vec2.new(x, y))
+    @box2d, @height = b2d, b2d.height
+    make_body(Vec2.new(x, y))
   end
 
   # This function removes the particle from the box2d world
@@ -54,16 +54,16 @@ class CustomShape
   # This function adds the rectangle to the box2d world
   def make_body(center)
     # Define a polygon (this is what we use for a rectangle)
-    sd = PB::PolygonShape.new
+    sd = PolygonShape.new
     vertices = []
-    vertices << box2d.vector_to_world(PB::Vec2.new(-15, 25))
-    vertices << box2d.vector_to_world(PB::Vec2.new(15, 0))
-    vertices << box2d.vector_to_world(PB::Vec2.new(20, -15))
-    vertices << box2d.vector_to_world(PB::Vec2.new(-10, -10))
+    vertices << box2d.vector_to_world(Vec2.new(-15, 25))
+    vertices << box2d.vector_to_world(Vec2.new(15, 0))
+    vertices << box2d.vector_to_world(Vec2.new(20, -15))
+    vertices << box2d.vector_to_world(Vec2.new(-10, -10))
     sd.set(vertices.to_java(Java::OrgJbox2dCommon::Vec2), vertices.length)
     # Define the body and make it from the shape
-    bd = PB::BodyDef.new
-    bd.type = PB::BodyType::DYNAMIC
+    bd = BodyDef.new
+    bd.type = BodyType::DYNAMIC
     bd.position.set(box2d.processing_to_world(center))
     @body = box2d.create_body(bd)
     body.create_fixture(sd, 1.0)
@@ -74,20 +74,20 @@ class CustomShape
 end
 
 class Boundary
-  include Processing::Proxy, PB
+  include Processing::Proxy
   attr_reader :box2d, :b, :x, :y, :w, :h
   def initialize(b2d, x, y, w, h, a)
     @box2d, @x, @y, @w, @h = b2d, x, y, w, h
     # Define the polygon
-    sd = PB::PolygonShape.new
+    sd = PolygonShape.new
     # Figure out the box2d coordinates
     box2d_w = box2d.scale_to_world(w / 2)
     box2d_h = box2d.scale_to_world(h / 2)
     # We're just a box
     sd.set_as_box(box2d_w, box2d_h)
     # Create the body
-    bd = PB::BodyDef.new
-    bd.type = PB::BodyType::STATIC
+    bd = BodyDef.new
+    bd.type = BodyType::STATIC
     bd.angle = a
     bd.position.set(box2d.processing_to_world(x, y))
     @b = box2d.create_body(bd)

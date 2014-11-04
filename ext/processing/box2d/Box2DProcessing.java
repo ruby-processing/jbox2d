@@ -9,10 +9,10 @@ import org.jbox2d.dynamics.joints.Joint;
 import org.jbox2d.dynamics.joints.JointDef;
 
 import processing.core.PApplet;
-import processing.core.PVector;
 
 /**
  * Loosely based on Box2D-for-processing by Dan Shiffman
+ *
  * @author Martin Prout
  */
 public class Box2DProcessing {
@@ -23,14 +23,13 @@ public class Box2DProcessing {
     /**
      *
      */
-        public World world;
+    public World world;
 
     // Variables to keep track of translating between world and screen coordinates
-
     /**
      *
      */
-        public float transX;// = 320.0f;
+    public float transX;// = 320.0f;
 
     /**
      *
@@ -43,24 +42,22 @@ public class Box2DProcessing {
     public float scaleFactor;// = 10.0f;
 
     /**
-     *
+     * 
      */
     public float yFlip;// = -1.0f; //flip y coordinate
 
     /**
-     *
+     * Controls access to processing draw loop
      */
     public boolean isActive = false;
 
     Body groundBody;
 
-    // Construct with a default scaleFactor of 10
-
     /**
-     *
+     * Construct with a default scaleFactor of 10
      * @param p
      */
-        public Box2DProcessing(PApplet p) {
+    public Box2DProcessing(PApplet p) {
         this(p, 10);
     }
 
@@ -77,39 +74,34 @@ public class Box2DProcessing {
         yFlip = -1;
         setActive(true);
     }
-
-    // Change the scaleFactor
-
+ 
     /**
-     *
+     * Change the scaleFactor
      * @param scale
      */
-        public void scaleFactor(float scale) {
+    public void scaleFactor(float scale) {
         scaleFactor = scale;
     }
 
-    // This is the all important physics "step" function
-    // Says to move ahead one unit in time
-    // Default
-
+    // 
     /**
-     *
+     * This is the all important physics "step" function
+     * Says to move ahead one unit in time
+     * Default
      */
-        public void step() {
+    public void step() {
         float timeStep = 1.0f / 60f;
         this.step(timeStep, 10, 8);
         world.clearForces();
     }
 
-    // Custom
-
     /**
-     *
+     * Custom
      * @param timeStep
      * @param velocityIterations
      * @param positionIterations
      */
-        public void step(float timeStep, int velocityIterations, int positionIterations) {
+    public void step(float timeStep, int velocityIterations, int positionIterations) {
         world.step(timeStep, velocityIterations, positionIterations);
     }
 
@@ -129,12 +121,10 @@ public class Box2DProcessing {
         world.setContinuousPhysics(b);
     }
 
-    // Create a default world with default gravity
-
     /**
-     *
+     * Create a default world with default gravity
      */
-        public void createWorld() {
+    public void createWorld() {
         Vec2 gravity = new Vec2(0.0f, -10.0f);
         createWorld(gravity);
         warmStarting(true);
@@ -170,33 +160,30 @@ public class Box2DProcessing {
     public Body groundBody() {
         return groundBody;
     }
-
-    // Set the gravity (this can change in real-time)
-
+ 
     /**
-     *
+     * Set the gravity (this can change in real-time)
      * @param x
      * @param y
      */
-        public void gravity(float x, float y) {
+    public void gravity(float x, float y) {
         world.setGravity(new Vec2(x, y));
     }
 
-    // These functions are very important
-    // Box2d has its own coordinate system and we have to move back and forth between them
-    // convert from Box2d world to pixel space
-
+ 
     /**
-     *
+     * Box2d has its own coordinate system and we have to move back and forth 
+     * between them to convert from Box2d world to processing pixel space
      * @param world
      * @return
      */
-        public Vec2 worldToProcessing(Vec2 world) {
+    public Vec2 worldToProcessing(Vec2 world) {
         return worldToProcessing(world.x, world.y);
     }
 
     /**
-     *
+     * Box2d has its own coordinate system and we have to move back and forth 
+     * between them to convert from Box2d world to processing pixel space
      * @param worldX
      * @param worldY
      * @return
@@ -210,23 +197,12 @@ public class Box2DProcessing {
         return new Vec2(pixelX, pixelY);
     }
 
-    // convert Coordinate from pixel space to box2d world
-
     /**
-     *
+     * convert Coordinate from pixel space to box2d world
      * @param screen
      * @return
      */
-        public Vec2 processingToWorld(Vec2 screen) {
-        return processingToWorld(screen.x, screen.y);
-    }
-
-    /**
-     *
-     * @param screen
-     * @return
-     */
-    public Vec2 coordPixelsToWorld(PVector screen) {
+    public Vec2 processingToWorld(Vec2 screen) {
         return processingToWorld(screen.x, screen.y);
     }
 
@@ -246,19 +222,17 @@ public class Box2DProcessing {
         return new Vec2(worldX, worldY);
     }
 
-    // Scale scalar quantity between worlds
-
     /**
-     *
+     * Scale from processing to world 
      * @param val
      * @return
      */
-        public float scaleToWorld(float val) {
+    public float scaleToWorld(float val) {
         return val / scaleFactor;
     }
 
     /**
-     *
+     * Scale from world to processing
      * @param val
      * @return
      */
@@ -266,32 +240,20 @@ public class Box2DProcessing {
         return val * scaleFactor;
     }
 
-    // Scale vector between worlds
 
     /**
-     *
+     * Vector scale between two worlds
      * @param v
      * @return
      */
-        public Vec2 vectorToWorld(Vec2 v) {
+    public Vec2 vectorToWorld(Vec2 v) {
         Vec2 u = new Vec2(v.x / scaleFactor, v.y / scaleFactor);
         u.y *= yFlip;
         return u;
     }
 
     /**
-     *
-     * @param v
-     * @return
-     */
-    public Vec2 vectorToWorld(PVector v) {
-        Vec2 u = new Vec2(v.x / scaleFactor, v.y / scaleFactor);
-        u.y *= yFlip;
-        return u;
-    }
-
-    /**
-     *
+     * Translate from world coords to processing as a Vec2
      * @param x
      * @param y
      * @return
@@ -303,7 +265,7 @@ public class Box2DProcessing {
     }
 
     /**
-     *
+     * Translate from world to processing as a Vec2
      * @param v
      * @return
      */
@@ -313,37 +275,30 @@ public class Box2DProcessing {
         return u;
     }
 
-    // A common task we have to do a lot
-
     /**
-     *
+     * A common task we have to do a lot
      * @param bd
      * @return
      */
-        public Body createBody(BodyDef bd) {
+    public Body createBody(BodyDef bd) {
         return world.createBody(bd);
     }
 
-    // A common task we have to do a lot
-
     /**
-     *
+     * A common task we have to do a lot
      * @param jd
      * @return
      */
-        public Joint createJoint(JointDef jd) {
+    public Joint createJoint(JointDef jd) {
         return world.createJoint(jd);
     }
-
-    // Another common task, find the position of a body
-    // so that we can draw it
 
     /**
      *
      * @param b
-     * @return
+     * @return body coord as Vec2
      */
-        public Vec2 bodyCoord(Body b) {
+    public Vec2 bodyCoord(Body b) {
         Transform xf = b.getTransform();//b.getXForm();
         //return coordWorldToPixels(xf.position); 
         return worldToProcessing(xf.p);
@@ -358,17 +313,21 @@ public class Box2DProcessing {
     }
 
     /**
-     *
+     * Access the processing draw loop by java reflection
      */
     public void draw() {
         step();
     }
 
     /**
-     *
+     * Recommended inclusion in a processing library
      */
     public void dispose() {
-        setActive(false); 
+        setActive(false);
+    }
+
+    public float height(){
+        return parent.height; 
     }
 
     private void setActive(boolean active) {

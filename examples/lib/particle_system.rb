@@ -34,7 +34,7 @@ end
 require 'pbox2d'
 
 class Particle
-  include Processing::Proxy, PB
+  include Processing::Proxy
   TRAIL_SIZE = 6
   # We need to keep track of a Body
   
@@ -47,7 +47,7 @@ class Particle
     # Add the box to the box2d world
     # Here's a little trick, let's make a tiny tiny radius
     # This way we have collisions, but they don't overwhelm the system
-    make_body(PB::Vec2.new(x, y), 0.2)
+    make_body(Vec2.new(x, y), 0.2)
   end
   
   # This function removes the particle from the box2d world
@@ -88,16 +88,16 @@ class Particle
   # This function adds the rectangle to the box2d world
   def make_body(center, r)
     # Define and create the body
-    bd = PB::BodyDef.new
-    bd.type = PB::BodyType::DYNAMIC
+    bd = BodyDef.new
+    bd.type = BodyType::DYNAMIC
     bd.position.set(box2d.processing_to_world(center))
     @body = box2d.create_body(bd)
     # Give it some initial random velocity
-    body.set_linear_velocity(PB::Vec2.new(rand(-1.0..1), rand(-1.0..1)))
+    body.set_linear_velocity(Vec2.new(rand(-1.0..1), rand(-1.0..1)))
     # Make the body's shape a circle
-    cs = PB::CircleShape.new
+    cs = CircleShape.new
     cs.m_radius = box2d.scale_to_world(r)
-    fd = PB::FixtureDef.new
+    fd = FixtureDef.new
     fd.shape = cs
     fd.density = 1
     fd.friction = 0  # Slippery when wet!
@@ -110,21 +110,21 @@ class Particle
 end
   
 class Boundary
-  include Processing::Proxy, PB
+  include Processing::Proxy
   attr_reader :box2d, :b, :x, :y, :w, :h
   
   def initialize(b2d, x, y, w, h, a)
     @box2d, @x, @y, @w, @h = b2d, x, y, w, h
     # Define the polygon
-    sd = PB::PolygonShape.new
+    sd = PolygonShape.new
     # Figure out the box2d coordinates
     box2d_w = box2d.scale_to_world(w / 2)
     box2d_h = box2d.scale_to_world(h / 2)
     # We're just a box
     sd.set_as_box(box2d_w, box2d_h)
     # Create the body
-    bd = PB::BodyDef.new
-    bd.type = PB::BodyType::STATIC
+    bd = BodyDef.new
+    bd.type = BodyType::STATIC
     bd.angle = a
     bd.position.set(box2d.processing_to_world(x, y))
     @b = box2d.create_body(bd)

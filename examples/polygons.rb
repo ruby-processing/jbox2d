@@ -35,5 +35,5 @@ def draw
 end
 
 def mouse_pressed
-  polygons << CustomShape.new(box2d, mouse_x, mouse_y, height)
+  polygons << CustomShape.new(box2d, mouse_x, mouse_y)
 end
