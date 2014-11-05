@@ -113,7 +113,7 @@
       bd = BodyDef.new
       bd.position = box2d.processing_to_world(x, y)
       bd.type = BodyType::DYNAMIC
-      @body = box2d.world.create_body(bd)
+      @body = box2d.create_body(bd)
       # Make the body's shape a circle
       cs = CircleShape.new
       cs.m_radius = box2d.scale_to_world(r)

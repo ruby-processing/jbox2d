@@ -30,7 +30,7 @@ def draw
   # NB ? reqd to call mouse_pressed value, else method gets called.
   particles << Particle.new(box2d, mouse_x, mouse_y, rand(2.0..6)) if mouse_pressed?
   # Draw all particles
-  particles.each(&:display)# { |part| part.display(self) }
+  particles.each(&:display)
   # Particles that leave the screen, we delete them
   # (note they have to be deleted from both the box2d world and our list
   particles.reject!(&:done)
