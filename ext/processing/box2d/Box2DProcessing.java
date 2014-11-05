@@ -17,41 +17,42 @@ import processing.core.PApplet;
  */
 public class Box2DProcessing {
 
-    PApplet parent;
-    // The Box2D world
+    private PApplet parent;
+
+    private float height;
 
     /**
-     *
+     * The Box2D world
      */
-    public World world;
+    private World world;
 
     // Variables to keep track of translating between world and screen coordinates
     /**
      *
      */
-    public float transX;// = 320.0f;
+    private float transX;// = 320.0f;
 
     /**
      *
      */
-    public float transY;// = 240.0f;
+    private float transY;// = 240.0f;
 
     /**
      *
      */
-    public float scaleFactor;// = 10.0f;
+    private float scaleFactor;// = 10.0f;
 
     /**
      * 
      */
-    public float yFlip;// = -1.0f; //flip y coordinate
+    private float yFlip;// = -1.0f; //flip y coordinate
 
     /**
      * Controls access to processing draw loop
      */
-    public boolean isActive = false;
+    private boolean isActive = false;
 
-    Body groundBody;
+    private Body groundBody;
 
     /**
      * Construct with a default scaleFactor of 10
@@ -68,6 +69,7 @@ public class Box2DProcessing {
      */
     public Box2DProcessing(PApplet p, float sf) {
         parent = p;
+        height = p.height;
         transX = parent.width / 2;
         transY = parent.height / 2;
         scaleFactor = sf;
@@ -189,10 +191,10 @@ public class Box2DProcessing {
      * @return
      */
     public Vec2 worldToProcessing(float worldX, float worldY) {
-        float pixelX = PApplet.map(worldX, 0f, 1f, transX, transX + scaleFactor);
-        float pixelY = PApplet.map(worldY, 0f, 1f, transY, transY + scaleFactor);
+        float pixelX = map(worldX, 0f, 1f, transX, transX + scaleFactor);
+        float pixelY = map(worldY, 0f, 1f, transY, transY + scaleFactor);
         if (yFlip == -1.0f) {
-            pixelY = PApplet.map(pixelY, 0f, parent.height, parent.height, 0f);
+            pixelY = map(pixelY, 0f, height, height, 0f);
         }
         return new Vec2(pixelX, pixelY);
     }
@@ -213,12 +215,12 @@ public class Box2DProcessing {
      * @return
      */
     public Vec2 processingToWorld(float pixelX, float pixelY) {
-        float worldX = PApplet.map(pixelX, transX, transX + scaleFactor, 0f, 1f);
+        float worldX = map(pixelX, transX, transX + scaleFactor, 0f, 1f);
         float worldY = pixelY;
         if (yFlip == -1.0f) {
-            worldY = PApplet.map(pixelY, parent.height, 0f, 0f, parent.height);
+            worldY = map(pixelY, height, 0f, 0f, height);
         }
-        worldY = PApplet.map(worldY, transY, transY + scaleFactor, 0f, 1f);
+        worldY = map(worldY, transY, transY + scaleFactor, 0f, 1f);
         return new Vec2(worldX, worldY);
     }
 
@@ -327,7 +329,11 @@ public class Box2DProcessing {
     }
 
     public float height(){
-        return parent.height; 
+        return height; 
+    }
+    
+      private float map(float val, float startIn, float endIn, float startOut, float endOut){
+        return startOut + (endOut - startOut) * ((val - startIn) / (endIn - startIn));
     }
 
     private void setActive(boolean active) {
