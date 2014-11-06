@@ -3,12 +3,12 @@ require 'pbox2d'
 class CustomShape
   include Processing::Proxy
   # We need to keep track of a Body and a width and height
-  attr_reader :body, :box2d, :height
+  attr_reader :body, :box2d
 
   # Constructor
   def initialize(b2d, x, y)
     # Add the box to the box2d world
-    @box2d, @height = b2d, b2d.height
+    @box2d = b2d
     make_body(Vec2.new(x, y))
   end
 
@@ -22,7 +22,7 @@ class CustomShape
     # Let's find the screen position of the particle
     pos = box2d.body_coord(body)
     # Is it off the bottom of the screen?
-    return false unless pos.y > height
+    return false unless pos.y > box2d.height
     kill_body!
     true
   end

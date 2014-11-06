@@ -26,4 +26,4 @@ PolygonShape = PB::PolygonShape
 CircleShape = PB::CircleShape
 ChainShape = PB::ChainShape
 
-Box2D = PB::Box2DProcessing
+require_relative 'pbox2d/box2d.rb'

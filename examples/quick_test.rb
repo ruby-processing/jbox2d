@@ -3,11 +3,16 @@ require 'pbox2d'
 # A list we'll use to track fixed objects
 attr_reader :box2d, :boundaries, :boxes
 
+java_alias :background_int, :background, [Java::int]
+java_alias :stroke_int, :stroke, [Java::int]
+
 def setup
   size(400,300)
+  stroke_int(0)  # set stroke this way to avoid overload warnings
   srand(5)
   # Initialize box2d physics and create the world
   @box2d = Box2D.new(self, 10)
+  puts box2d.version # print out version of pbox2d gem in use
   box2d.create_world
   # Set a custom gravity
   box2d.gravity(0, -20)  
@@ -20,7 +25,7 @@ def setup
 end
 
 def draw
-  background(255)  
+  background_int(255) # set background this way to avoid overload warnings 
   # Boxes fall from the top every so often
   boxes << Box.new(box2d, width / 2, 30) if rand < 0.99
   boundaries.each(&:display)  
@@ -59,7 +64,6 @@ class Boundary
   # Draw the boundary, if it were at an angle we'd have to do something fancier
   def display
     fill(0)
-    stroke(0)
     rect_mode(CENTER)
     rect(x, y, w, h)
   end  
@@ -100,7 +104,6 @@ class Box
     translate(pos.x, pos.y)
     rotate(-a)
     fill(175)
-    stroke(0)
     rect(0, 0, w, h)
     pop_matrix
   end

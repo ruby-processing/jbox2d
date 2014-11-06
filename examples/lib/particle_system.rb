@@ -60,7 +60,7 @@ class Particle
     # Let's find the screen position of the particle
     pos = box2d.body_coord(body)
     # Is it off the bottom of the screen?
-    return false unless (pos.y > $app.height + 20)
+    return false unless (pos.y > box2d.height + 20)
     kill_body
     true
   end
