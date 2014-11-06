@@ -24,5 +24,6 @@ JointDef = PB::JointDef
 FixtureDef = PB::FixtureDef
 PolygonShape = PB::PolygonShape
 CircleShape = PB::CircleShape
+ChainShape = PB::ChainShape
 
 Box2D = PB::Box2DProcessing

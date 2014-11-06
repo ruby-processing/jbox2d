@@ -11,9 +11,9 @@
     def initialize b2d
       @box2d = b2d
       @surface = []
-      @width, @height = $app.width, b2d.height
+      @width, @height = b2d.width, b2d.height
       # This is what box2d uses to put the surface in its world
-      chain = PB::ChainShape.new
+      chain = ChainShape.new
       # Perlin noise argument
       xoff = 0.0
       # This has to go backwards so that the objects  bounce off the top of the surface

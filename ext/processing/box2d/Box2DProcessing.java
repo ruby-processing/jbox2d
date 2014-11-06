@@ -19,8 +19,8 @@ public class Box2DProcessing {
 
     private PApplet parent;
 
-    private float height;
-
+    private final float height;
+    private final float width;
     /**
      * The Box2D world
      */
@@ -70,6 +70,7 @@ public class Box2DProcessing {
     public Box2DProcessing(PApplet p, float sf) {
         parent = p;
         height = p.height;
+        width = p.width;
         transX = parent.width / 2;
         transY = parent.height / 2;
         scaleFactor = sf;
@@ -330,6 +331,10 @@ public class Box2DProcessing {
 
     public float height(){
         return height; 
+    }
+    
+     public float width(){
+        return width; 
     }
     
       private float map(float val, float startIn, float endIn, float startOut, float endOut){
