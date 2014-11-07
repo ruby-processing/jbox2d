@@ -12,6 +12,8 @@ Here we demonstrate how to use JBox2D library as a rubygem. This approach could 
 
 [Box2D for processing on github][]
 
+Downloads including examples [zip][] and [tar][]
+
 ### Licensing
 
 Daniel Murphy is currently claiming ownership of jbox2d (although surely a derived work):-
@@ -54,3 +56,5 @@ To make things dead simple, we have set those parameters to sensible defaults, a
 [Nature of Code book]:http://natureofcode.com/
 [Sandi Metz]:http://www.poodr.com/
 [this book]:http://www.crcpress.com/product/isbn/9781466565760
+[zip]:https://github.com/ruby-processing/jbox2d/archive/0.1.2.zip
+[tar]:https://github.com/ruby-processing/jbox2d/archive/0.1.2.tar.gz
