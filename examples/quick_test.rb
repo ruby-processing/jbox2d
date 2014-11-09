@@ -1,5 +1,7 @@
 require 'pbox2d'
 
+
+include ContactListener
 # A list we'll use to track fixed objects
 attr_reader :box2d, :boundaries, :boxes
 

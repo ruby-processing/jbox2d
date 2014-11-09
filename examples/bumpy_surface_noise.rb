@@ -5,6 +5,8 @@
 require 'pbox2d'
 require_relative 'lib/surface'
 
+include ContactListener
+
 attr_reader :surface, :box2d, :particles
 
 def setup
