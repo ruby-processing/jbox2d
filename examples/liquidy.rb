@@ -7,10 +7,10 @@ include ContactListener
 def setup
   size(400,300)
   @box2d = Box2D.new(self)
+  box2d.init_options(gravity: [0, -20])
   box2d.create_world  
-  # We are setting a custom gravity
-  box2d.gravity(0, -20)
-
+  # to set a custom gravity otherwise
+  # box2d.gravity([0, -20])
   # Create Arrays
   @systems = []
   @boundaries = []

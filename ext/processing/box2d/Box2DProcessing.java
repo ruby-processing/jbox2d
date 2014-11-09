@@ -17,8 +17,9 @@ import processing.core.PApplet;
  */
 public class Box2DProcessing {
 
-    private PApplet parent;
-
+    private final PApplet parent;
+    private Options options;
+    private Step stepO;
     private final float height;
     private final float width;
     /**
@@ -26,132 +27,82 @@ public class Box2DProcessing {
      */
     private World world;
 
-    // Variables to keep track of translating between world and screen coordinates
     /**
-     *
-     */
-    private float transX;// = 320.0f;
-
-    /**
-     *
-     */
-    private float transY;// = 240.0f;
-
-    /**
-     *
+     * Scale between processing sketch and physics world
      */
     private float scaleFactor;// = 10.0f;
 
     /**
-     * 
+     * Adjust for processing.org unfathomable choice of y-axis direction
      */
-    private float yFlip;// = -1.0f; //flip y coordinate
+    private final float yFlip;// = -1.0f; //flip y coordinate
 
     /**
-     * Controls access to processing draw loop
+     * Controls access to processing draw loop (via reflection)
      */
     private boolean isActive = false;
 
     private Body groundBody;
 
     /**
-     * Construct with a default scaleFactor of 10
+     *
      * @param p
      */
     public Box2DProcessing(PApplet p) {
-        this(p, 10);
+        parent = p;
+        height = p.height;
+        width = p.width;
+        yFlip = -1;
+        setActive(true);
+    }
+
+    /**
+     * 
+     * @param scale
+     * @param gravity
+     * @param warmStart
+     * @param continuous
+     */
+    protected void setOptions(float scale, float[] gravity, boolean warmStart, boolean continuous) {
+        options = new Options(scale, gravity, warmStart, continuous);
     }
 
     /**
      *
-     * @param p
-     * @param sf
+     * @param timeStep
+     * @param velocity
+     * @param position
      */
-    public Box2DProcessing(PApplet p, float sf) {
-        parent = p;
-        height = p.height;
-        width = p.width;
-        transX = parent.width / 2;
-        transY = parent.height / 2;
-        scaleFactor = sf;
-        yFlip = -1;
-        setActive(true);
-    }
- 
-    /**
-     * Change the scaleFactor
-     * @param scale
-     */
-    public void scaleFactor(float scale) {
-        scaleFactor = scale;
+    protected void setStep(float timeStep, int velocity, int position) {
+        stepO = new Step(timeStep, velocity, position);
     }
 
-    // 
+ 
     /**
-     * This is the all important physics "step" function
-     * Says to move ahead one unit in time
-     * Default
+     * This is the all important physics "step" function Says to move ahead one
+     * unit in time Default
      */
-    public void step() {
-        float timeStep = 1.0f / 60f;
-        this.step(timeStep, 10, 8);
+    protected void step() {
+        if (stepO == null) {
+            stepO = new Step();
+        }
+        world.step(stepO.timeStep, stepO.velIters, stepO.posIters);
         world.clearForces();
     }
 
     /**
-     * Custom
-     * @param timeStep
-     * @param velocityIterations
-     * @param positionIterations
+     * Create a world
      */
-    public void step(float timeStep, int velocityIterations, int positionIterations) {
-        world.step(timeStep, velocityIterations, positionIterations);
-    }
 
-    /**
-     *
-     * @param b
-     */
-    public void warmStarting(boolean b) {
-        world.setWarmStarting(b);
-    }
-
-    /**
-     *
-     * @param b
-     */
-    public void continuousPhysics(boolean b) {
-        world.setContinuousPhysics(b);
-    }
-
-    /**
-     * Create a default world with default gravity
-     */
     public void createWorld() {
-        Vec2 gravity = new Vec2(0.0f, -10.0f);
-        createWorld(gravity);
-        warmStarting(true);
-        continuousPhysics(true);
-    }
-
-    /**
-     *
-     * @param gravity
-     */
-    public void createWorld(Vec2 gravity) {
-        createWorld(gravity, true, true);
-    }
-
-    /**
-     *
-     * @param gravity
-     * @param warmStarting
-     * @param continous
-     */
-    public void createWorld(Vec2 gravity, boolean warmStarting, boolean continous) {
+        if (options == null){
+           options = new Options();
+        }
+        Vec2 gravity = new Vec2(options.gravity[0], options.gravity[1]);
+        scaleFactor = options.scaleFactor;
         world = new World(gravity);
-        warmStarting(warmStarting);
-        continuousPhysics(continous);
+        world.setWarmStarting(options.warm);
+        world.setContinuousPhysics(options.continuous);
         BodyDef bodyDef = new BodyDef();
         groundBody = world.createBody(bodyDef);
     }
@@ -163,20 +114,20 @@ public class Box2DProcessing {
     public Body groundBody() {
         return groundBody;
     }
- 
+
     /**
      * Set the gravity (this can change in real-time)
-     * @param x
-     * @param y
+     *
+     * @param gravity
      */
-    public void gravity(float x, float y) {
-        world.setGravity(new Vec2(x, y));
+    protected void changeGravity(float[] gravity) {
+        world.setGravity(new Vec2(gravity[0], gravity[1]));
     }
 
- 
     /**
-     * Box2d has its own coordinate system and we have to move back and forth 
+     * Box2d has its own coordinate system and we have to move back and forth
      * between them to convert from Box2d world to processing pixel space
+     *
      * @param world
      * @return
      */
@@ -185,15 +136,16 @@ public class Box2DProcessing {
     }
 
     /**
-     * Box2d has its own coordinate system and we have to move back and forth 
+     * Box2d has its own coordinate system and we have to move back and forth
      * between them to convert from Box2d world to processing pixel space
+     *
      * @param worldX
      * @param worldY
      * @return
      */
     public Vec2 worldToProcessing(float worldX, float worldY) {
-        float pixelX = map(worldX, 0f, 1f, transX, transX + scaleFactor);
-        float pixelY = map(worldY, 0f, 1f, transY, transY + scaleFactor);
+        float pixelX = map(worldX, 0f, 1f, parent.width  / 2, parent.width  / 2 + scaleFactor);
+        float pixelY = map(worldY, 0f, 1f, parent.height  / 2, parent.height  / 2 + scaleFactor);
         if (yFlip == -1.0f) {
             pixelY = map(pixelY, 0f, height, height, 0f);
         }
@@ -202,6 +154,7 @@ public class Box2DProcessing {
 
     /**
      * convert Coordinate from pixel space to box2d world
+     *
      * @param screen
      * @return
      */
@@ -216,17 +169,18 @@ public class Box2DProcessing {
      * @return
      */
     public Vec2 processingToWorld(float pixelX, float pixelY) {
-        float worldX = map(pixelX, transX, transX + scaleFactor, 0f, 1f);
+        float worldX = map(pixelX, parent.width  / 2, parent.width  / 2 + scaleFactor, 0f, 1f);
         float worldY = pixelY;
         if (yFlip == -1.0f) {
             worldY = map(pixelY, height, 0f, 0f, height);
         }
-        worldY = map(worldY, transY, transY + scaleFactor, 0f, 1f);
+        worldY = map(worldY, parent.height  / 2, parent.height  / 2 + scaleFactor, 0f, 1f);
         return new Vec2(worldX, worldY);
     }
 
     /**
-     * Scale from processing to world 
+     * Scale from processing to world
+     *
      * @param val
      * @return
      */
@@ -236,6 +190,7 @@ public class Box2DProcessing {
 
     /**
      * Scale from world to processing
+     *
      * @param val
      * @return
      */
@@ -243,9 +198,9 @@ public class Box2DProcessing {
         return val * scaleFactor;
     }
 
-
     /**
      * Vector scale between two worlds
+     *
      * @param v
      * @return
      */
@@ -257,6 +212,7 @@ public class Box2DProcessing {
 
     /**
      * Translate from world coords to processing as a Vec2
+     *
      * @param x
      * @param y
      * @return
@@ -269,6 +225,7 @@ public class Box2DProcessing {
 
     /**
      * Translate from world to processing as a Vec2
+     *
      * @param v
      * @return
      */
@@ -280,6 +237,7 @@ public class Box2DProcessing {
 
     /**
      * A common task we have to do a lot
+     *
      * @param bd
      * @return
      */
@@ -289,6 +247,7 @@ public class Box2DProcessing {
 
     /**
      * A common task we have to do a lot
+     *
      * @param jd
      * @return
      */
@@ -329,15 +288,23 @@ public class Box2DProcessing {
         setActive(false);
     }
 
-    public float height(){
-        return height; 
+    /**
+     *
+     * @return
+     */
+    public float height() {
+        return height;
     }
-    
-     public float width(){
-        return width; 
+
+    /**
+     *
+     * @return
+     */
+    public float width() {
+        return width;
     }
-    
-      private float map(float val, float startIn, float endIn, float startOut, float endOut){
+
+    private float map(float val, float startIn, float endIn, float startOut, float endOut) {
         return startOut + (endOut - startOut) * ((val - startIn) / (endIn - startIn));
     }
 

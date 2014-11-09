@@ -10,9 +10,10 @@ def setup
   smooth
   # Initialize box2d physics and create the world
   @box2d = Box2D.new(self)
+  box2d.init_options(gravity: [0, -20])
   box2d.create_world
-  # We are setting a custom gravity
-  box2d.gravity(0, -20)
+  # To later set a custom gravity
+  # box2d.gravity([0, -20]
   # Create Arrays
   @polygons = []
   @boundaries = []
