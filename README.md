@@ -41,8 +41,8 @@ Like really easy, but if you have to use rvm or rbenv you will also know what to
 You need to `require 'pbox2d'` in the the usual way (to require a gem) but as in the included [examples][] you must also `include ContactListener` interface (by [jruby magic], including the interface as a module implements the java interface). Now you should create a new instance of Box2D.
 ```ruby
 @box2d = Box2D.new(self)
-box2d.create_world 
-box2d.gravity(0, -20) # to set a custom gravity
+box2d.init_options(gravity: [0, -20]) # this is new since version 0.2.0
+box2d.create_world
 ```
 That's about all you need to know, use the box2d instance to access the jbox2d physics world. Ordinarily (with jbox2d) you need to set some other parameters, and call `box2d.step` in the draw loop, to update the physics world.
 To make things dead simple, we have set those parameters to sensible defaults, and call `step` in the draw loop for you (under the hood using java reflection). The other thing you should know is there is a mismatch between the physics world and the sketch world (processing got it wrong to my view, down is up), further the scaling is different. This is why you need to keep translating from one worlds (coordinates) to the others coordinates, Dan Shiffman explains it in his [Nature of Code book][], Chapter 5 physics libraries, not that I've read it, I prefer to read code or [Sandi Metz][]. The really brave or adventurous should probably get [this book].
@@ -56,5 +56,5 @@ To make things dead simple, we have set those parameters to sensible defaults, a
 [Nature of Code book]:http://natureofcode.com/
 [Sandi Metz]:http://www.poodr.com/
 [this book]:http://www.crcpress.com/product/isbn/9781466565760
-[zip]:https://github.com/ruby-processing/jbox2d/archive/0.1.2.zip
-[tar]:https://github.com/ruby-processing/jbox2d/archive/0.1.2.tar.gz
+[zip]:https://github.com/ruby-processing/jbox2d/archive/0.2.0.zip
+[tar]:https://github.com/ruby-processing/jbox2d/archive/0.2.0.tar.gz
