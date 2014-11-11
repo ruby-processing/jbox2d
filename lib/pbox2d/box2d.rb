@@ -21,6 +21,10 @@ class Box2D < Java::ProcessingBox2d::Box2DProcessing
     change_gravity(args.to_java(Java::float))
   end
 
+  def add_listener(listener)
+    worldset.ContactListener(listener)
+  end 
+
   def version
     format("pbox2d version %s", Pbox2D::VERSION)
   end

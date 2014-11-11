@@ -15,7 +15,7 @@ import processing.core.PApplet;
  *
  * @author Martin Prout
  */
-public class Box2DProcessing {
+public abstract class Box2DProcessing {
 
     private final PApplet parent;
     private Options options;
@@ -25,7 +25,7 @@ public class Box2DProcessing {
     /**
      * The Box2D world
      */
-    private World world;
+    protected World world;
 
     /**
      * Scale between processing sketch and physics world
@@ -55,6 +55,12 @@ public class Box2DProcessing {
         yFlip = -1;
         setActive(true);
     }
+
+    /**
+     * @param listener Sketch?
+     */
+
+    public abstract void addListener(org.jbox2d.callbacks.ContactListener listener);
 
     /**
      * 
