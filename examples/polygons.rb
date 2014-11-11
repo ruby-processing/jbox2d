@@ -2,7 +2,6 @@
 require 'pbox2d'
 require_relative 'lib/custom_shape'
 
-include ContactListener
 attr_reader :box2d, :boundaries, :polygons
 
 def setup

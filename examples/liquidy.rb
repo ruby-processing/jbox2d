@@ -2,8 +2,6 @@ require 'pbox2d'
 require_relative 'lib/particle_system'
 attr_reader :box2d, :boundaries, :systems
 
-include ContactListener
-
 def setup
   size(400,300)
   @box2d = Box2D.new(self)
