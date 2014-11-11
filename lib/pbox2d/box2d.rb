@@ -22,7 +22,7 @@ class Box2D < Java::ProcessingBox2d::Box2DProcessing
   end
 
   def add_listener(listener)
-    worldset.ContactListener(listener)
+    world.setContactListener(listener)
   end 
 
   def version

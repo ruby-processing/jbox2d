@@ -23,9 +23,9 @@ public abstract class Box2DProcessing {
     private final float height;
     private final float width;
     /**
-     * The Box2D world
+     * The Box2D world (we need public access for our ContactListener)
      */
-    protected World world;
+    public World world;
 
     /**
      * Scale between processing sketch and physics world
