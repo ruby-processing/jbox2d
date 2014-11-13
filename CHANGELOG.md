@@ -1,3 +1,7 @@
+### v0.3.0 (was v0.2.1 but bumped version 'cos it features new functionality)
+
+Finally got ContactListener to work (currently best plan is to create your own CustomListener, see example test_contact)
+
 ### v0.2.0
 
 Moving away from Shiffman Box2D design, to create a more ruby like interface added Step and Option classes to make it easier to initialize runtime and step options. On the ruby side options may/should be set with hash input. Gravity may still be set dynamically, but unless it is going to change it should be set via `init_options`. Unless `init_options` or `step_options` are set, defaults on java side are used.

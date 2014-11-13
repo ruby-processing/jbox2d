@@ -58,6 +58,6 @@ The other thing you should know is there is a mismatch between the physics world
 [Nature of Code book]:http://natureofcode.com/
 [Sandi Metz]:http://www.poodr.com/
 [this book]:http://www.crcpress.com/product/isbn/9781466565760
-[zip]:https://github.com/ruby-processing/jbox2d/archive/0.2.0.zip
-[tar]:https://github.com/ruby-processing/jbox2d/archive/0.2.0.tar.gz
+[zip]:https://github.com/ruby-processing/jbox2d/archive/0.3.0.zip
+[tar]:https://github.com/ruby-processing/jbox2d/archive/0.3.0.tar.gz
 [Wiki]:https://github.com/ruby-processing/jbox2d/wiki

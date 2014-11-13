@@ -47,7 +47,7 @@ class Particle
     # Add the box to the box2d world
     # Here's a little trick, let's make a tiny tiny radius
     # This way we have collisions, but they don't overwhelm the system
-    make_body(Vec2.new(x, y), 0.2)
+    make_body(x, y, 0.2)
   end
   
   # This function removes the particle from the box2d world
@@ -86,11 +86,11 @@ class Particle
   end
   
   # This function adds the rectangle to the box2d world
-  def make_body(center, r)
+  def make_body(x, y, r)
     # Define and create the body
     bd = BodyDef.new
     bd.type = BodyType::DYNAMIC
-    bd.position.set(box2d.processing_to_world(center))
+    bd.position.set(box2d.processing_to_world(x, y))
     @body = box2d.create_body(bd)
     # Give it some initial random velocity
     body.set_linear_velocity(Vec2.new(rand(-1.0..1), rand(-1.0..1)))

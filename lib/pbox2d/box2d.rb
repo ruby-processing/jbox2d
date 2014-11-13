@@ -1,6 +1,7 @@
 require_relative  'version'
 
 class Box2D < Java::ProcessingBox2d::Box2DProcessing
+  field_accessor :world # allow access to protected variable
 
   def init_options(args = {})
     scale = args[:scale] || 10.0
@@ -22,7 +23,8 @@ class Box2D < Java::ProcessingBox2d::Box2DProcessing
   end
 
   def add_listener(listener)
-    world.setContactListener(listener)
+    # in combination with field accessor we can access protected world
+    self.world.setContactListener(listener)
   end 
 
   def version
