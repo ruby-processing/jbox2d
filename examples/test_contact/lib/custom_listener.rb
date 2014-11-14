@@ -1,5 +1,5 @@
-# A custom listener allows us to get the physics to
-# to call our code on say collision
+# A custom listener allows us to get the physics engine to
+# to call our code, on say contact (collisions)
 class CustomListener
   include ContactListener
 
