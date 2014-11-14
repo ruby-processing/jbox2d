@@ -1,6 +1,8 @@
+# A custom listener allows us to get the physics to
+# to call our code on say collision
 class CustomListener
   include ContactListener
-  
+
   def begin_contact(cp)
     # Get both fixtures
     f1 = cp.getFixtureA
@@ -11,18 +13,17 @@ class CustomListener
     # Get our objects that reference these bodies
     o1 = b1.getUserData
     o2 = b2.getUserData
-    return unless (o1.respond_to?(:change) && o2.respond_to?(:change))
+    return unless [o1, o2].all? { |obj| obj.respond_to?(:change) }
     o1.change
     o2.change
   end
-  
-  def end_contact(cp)
+
+  def end_contact(_cp)
   end
-  
-  def pre_solve(cp, m)
+
+  def pre_solve(_cp, _m)
   end
-  
-  def post_solve(cp, ci)
+
+  def post_solve(_cp, _ci)
   end
-  
 end
