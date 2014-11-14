@@ -1,5 +1,6 @@
-require_relative  'version'
-
+require_relative 'version'
+# Ruby version of java wrapper allows us to have more
+# rubified interface, also needed for add_listener
 class Box2D < Java::ProcessingBox2d::Box2DProcessing
   field_accessor :world # allow access to protected variable
 
@@ -8,7 +9,7 @@ class Box2D < Java::ProcessingBox2d::Box2DProcessing
     gravity = args[:gravity] || [0, -10.0]
     warm = args[:warm] || true
     continuous = args[:continuous] || true
-    set_options(scale, gravity.to_java(Java::float), warm, continuous)   
+    set_options(scale, gravity.to_java(Java::float), warm, continuous)
   end
 
   def step_options(args = {})
@@ -25,9 +26,9 @@ class Box2D < Java::ProcessingBox2d::Box2DProcessing
   def add_listener(listener)
     # in combination with field accessor we can access protected world
     self.world.setContactListener(listener)
-  end 
+  end
 
   def version
-    format("pbox2d version %s", Pbox2D::VERSION)
+    format('pbox2d version %s', Pbox2D::VERSION)
   end
 end

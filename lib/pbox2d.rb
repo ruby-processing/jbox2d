@@ -4,6 +4,7 @@ Dir[File.join(working_directory, '*.jar')].each do |jar|
   require jar
 end
 
+# This module allows package access to the wrapped java packages
 module PB
   include_package 'org.jbox2d.collision.shapes'
   include_package 'org.jbox2d.common'
@@ -13,13 +14,13 @@ module PB
 end
 
 ContactListener = Java::OrgJbox2dCallbacks::ContactListener
-Transform = PB::Transform                                                                                                                                      
-Vec2 = PB::Vec2                                                       
-Body = PB::Body                                                     
-BodyDef = PB::BodyDef  
+Transform = PB::Transform
+Vec2 = PB::Vec2
+Body = PB::Body
+BodyDef = PB::BodyDef
 BodyType = PB::BodyType
-World = PB::World                                                    
-Joint = PB::Joint                                             
+World = PB::World
+Joint = PB::Joint
 JointDef = PB::JointDef
 FixtureDef = PB::FixtureDef
 PolygonShape = PB::PolygonShape
