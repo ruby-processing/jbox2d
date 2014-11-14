@@ -53,7 +53,7 @@ The other thing you should know is there is a mismatch between the physics world
 [JBox2D on github]:https://github.com/jbox2d/jbox2d
 [Box2D for processing on github]:https://github.com/shiffman/Box2D-for-Processing
 [JRubyArt]:https://github.com/ruby-processing/JRubyArt
-[example]:https://github.com/ruby-processing/jbox2d/blob/master/examples/custom_test/lib/custom_listener.rb
+[example]:https://github.com/ruby-processing/jbox2d/blob/master/examples/test_contact/lib/custom_listener.rb
 [jruby magic]:https://github.com/jruby/jruby/wiki/CallingJavaFromJRuby
 [Nature of Code book]:http://natureofcode.com/
 [Sandi Metz]:http://www.poodr.com/
