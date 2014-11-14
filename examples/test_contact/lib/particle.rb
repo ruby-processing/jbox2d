@@ -1,7 +1,6 @@
 # Note the particle class change method is use to change color to red
 # when two particles collide (no change just hitting boundary)
 class Particle
-  include PB
   attr_accessor :body
   attr_reader :box2d, :radius, :col
 

@@ -2,7 +2,6 @@ CENTER ||= Java::ProcessingCore::PConstants::CENTER
 # The boundary class is used to create a floor in this
 # sketch. Note it does not have a change method
 class Boundary
-  include PB
   attr_reader :box2d, :x, :y, :w, :h, :b
   def initialize(b2d, x, y, w, h)
     @box2d, @x, @y, @w, @h = b2d, x, y, w, h
