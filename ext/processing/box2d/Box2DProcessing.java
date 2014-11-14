@@ -57,7 +57,8 @@ public abstract class Box2DProcessing {
     }
 
     /**
-     * @param listener Sketch?
+     * Abstract method implement on ruby side
+     * @param listener Custom Listener, Sketch?
      */
 
     public abstract void addListener(org.jbox2d.callbacks.ContactListener listener);

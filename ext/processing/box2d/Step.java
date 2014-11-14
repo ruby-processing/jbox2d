@@ -7,17 +7,17 @@ package processing.box2d;
 public class Step {
 
     /**
-     *
+     * time of step typically set to once per draw loop
      */
     public float timeStep;
 
     /**
-     *
+     * No of velocity iterations
      */
     public int velIters;
 
     /**
-     *
+     * No of position iterations
      */
     public int posIters;
     
@@ -34,7 +34,7 @@ public class Step {
     }  
     
     /**
-     *
+     * Step constructor with defaults
      */
     public Step(){
     this.timeStep = 1.0f / 60; 

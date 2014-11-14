@@ -22,7 +22,7 @@ public class Options {
     public final float[] gravity;
 
     /**
-     *
+     * Factor to scale between physics world and sketch
      */
     public final float scaleFactor;
 
@@ -42,7 +42,7 @@ public class Options {
     }
 
     /**
-     *
+     * Default Options constructor
      */
     public Options() {
         this.scaleFactor = 10f;
