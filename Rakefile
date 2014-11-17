@@ -26,7 +26,7 @@ EOF
   s.files << 'lib/box2d.jar'
   s.files << 'lib/jbox2d-library-2.2.1-ds.jar' 
   s.require_path = 'lib'
-  s.add_dependency "ruby-processing", "~> 2.6.4"
+  s.add_dependency 'ruby-processing', '~> 2.6', '>= 2.6.4'
   s.add_development_dependency "rake", "~> 10.3"
   s.add_development_dependency "rake-compiler", "~> 0.9"
   s.platform='java'
