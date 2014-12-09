@@ -4,6 +4,8 @@ Here we demonstrate how to use JBox2D library as a rubygem. This approach could 
 ![liquidy](http://4.bp.blogspot.com/-dwnDQZVugwo/VFXrDxGOy4I/AAAAAAAAEgo/irsZxW_WLOA/s400/liquidy.png)
 
 
+[![Gem Version](https://badge.fury.io/rb/pbox2d.svg)](http://badge.fury.io/rb/pbox2d)
+
 ### Web Links
 
 [JBox2D Home][]
