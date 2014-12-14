@@ -42,7 +42,7 @@ Like really easy, but if you have to use rvm or rbenv you will also know what to
 
 ### To use
 
-You need to `require 'pbox2d'` in the the usual way (to require a gem). Now you should create a new instance of Box2D. However as in the included [example][] you must also `include ContactListener` interface (by [jruby magic][], including the interface as a module implements the java interface) if you wish to create your own jbox2d listener. 
+You need to `require 'pbox2d'` in the the usual way (to require a gem). Now you should create a new instance of Box2D. However as in this included [example][] you may also need to `include ContactListener` interface (by [jruby magic][], including the interface as a module implements the java interface) if you wish to create your own jbox2d listener. 
 ```ruby
 @box2d = Box2D.new(self)
 box2d.init_options(gravity: [0, -20]) # this is new since version 0.2.0
