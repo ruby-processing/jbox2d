@@ -13,15 +13,17 @@ class Box2D < Java::ProcessingBox2d::Box2DProcessing
                )
   end
 
+  def step_options(args = {})
+    default_step.merge(args)
+    set_step(args[:time_step], args[:velocity_iter], args[:position_iter])
+  end
+
   def defaults
     { scale: 10.0, gravity: [0, -10], warm: true, continuous: true }
   end
 
-  def step_options(args = {})
-    time_step = args.fetch(:time_step, 1.0 / 60)
-    velocity = args.fetch(:velocity_iter, 8)
-    position = args.fetch(:position_iter, 10)
-    set_step(time_step, velocity, position)
+  def default_step
+    { time_step: 1.0 / 60, velocity_iter: 8, position_iter: 10  }
   end
 
   def gravity(args)

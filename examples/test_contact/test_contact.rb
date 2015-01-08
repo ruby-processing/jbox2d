@@ -15,7 +15,8 @@ def setup
 end
 
 def draw
-  background(255)
+  col = color('#ffffff')
+  background(col)
   particles << Particle.new(box2d, rand(width), 20, rand(4..8)) if rand < 0.1
   particles.each{ |p| p.display(self) }
   particles.reject!(&:done)
