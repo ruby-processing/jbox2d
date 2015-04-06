@@ -1,6 +1,6 @@
 ### Using JBox2D in ruby-processing
 
-Here we demonstrate how to use JBox2D library as a rubygem. This approach could be an exemplar of how to use other processing/java libraries with ruby-processing  
+Here we demonstrate how to use JBox2D library as a rubygem. This approach could be an exemplar of how to use other processing/java libraries with both ruby-processing and JRubyArt.
 ![liquidy](http://4.bp.blogspot.com/-dwnDQZVugwo/VFXrDxGOy4I/AAAAAAAAEgo/irsZxW_WLOA/s400/liquidy.png)
 
 
