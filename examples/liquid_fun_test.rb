@@ -18,8 +18,8 @@ def setup
   @boxes = []
   box2d.world.set_particle_radius(0.15)
   box2d.world.set_particle_damping(0.2)
-  boundaries << Boundary.new(box2d, width / 4, height - 5, width / 2 - 50, 10)
-  boundaries << Boundary.new(box2d, 3 * width / 4, height - 50, width / 2 - 50, 10) 
+  boundaries << Boundary.new(self, width / 4, height - 5, width / 2 - 50, 10)
+  boundaries << Boundary.new(self, 3 * width / 4, height - 50, width / 2 - 50, 10)
 end
 
 def mouse_pressed
@@ -38,5 +38,5 @@ def draw
     point(pos.x, pos.y)
   end
   fill(0)
-  text("f.p.s #{frame_rate.to_i}", 10, 60)
+  text(format('f.p.s %d', frame_rate.to_i), 10, 60)
 end

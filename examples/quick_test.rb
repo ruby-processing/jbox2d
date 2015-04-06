@@ -16,75 +16,79 @@ def setup
   box2d.init_options(scale: 10, gravity: [0, -20.0])
   box2d.create_world
   # Set a custom gravity
-  # box2d.gravity(0, -20)  
-  # Create ArrayLists	
+  # box2d.gravity(0, -20)
+  # Create ArrayLists
   @boxes = []
-  @boundaries = []  
+  @boundaries = []
   # Add a bunch of fixed boundaries
-  boundaries << Boundary.new(box2d, width / 4, height - 5, width / 2 - 50, 10)
-  boundaries << Boundary.new(box2d, 3 * width / 4, height - 50, width / 2 - 50, 10)
+  boundaries << Boundary.new(self, width / 4, height - 5, width / 2 - 50, 10)
+  boundaries << Boundary.new(self, 3 * width / 4, height - 50, width / 2 - 50, 10)
 end
 
 def draw
-  background_int(255) # set background this way to avoid overload warnings 
+  background_int(255) # set background this way to avoid overload warnings
   # Boxes fall from the top every so often
-  boxes << Box.new(box2d, width / 2, 30) if rand < 0.99
-  boundaries.each(&:display)  
-  boxes.each(&:display)  
-  # Boxes that leave the screen, we delete them note they have to be deleted 
-  # from both the box2d world and locally  
-  boxes.reject!(&:done)  
+  boxes << Box.new(self, width / 2, 30) if rand < 0.99
+  boundaries.each(&:display)
+  boxes.each(&:display)
+  # Boxes that leave the screen, we delete them note they have to be deleted
+  # from both the box2d world and locally
+  boxes.reject!(&:done)
   exit if frame_count >= 908
 end
 
 class Boundary
-  include Processing::Proxy
+  extend Forwardable
+  def_delegators(:@app, :box2d, :fill, :rect, :rect_mode)
   # A boundary is a simple rectangle with x, y, width, and height
-  attr_reader :box2d, :x, :y, :w, :h, :b 
-  
-  def initialize(box2d, x ,y, w, h)
-    @box2d, @x ,@y, @w, @h = box2d, x ,y, w, h    
+  attr_reader :x, :y, :w, :h, :b
+
+  def initialize(app, x ,y, w, h)
+    @app, @x ,@y, @w, @h = app, x ,y, w, h
     # Create the body
     bd = BodyDef.new
     bd.position.set(box2d.processing_to_world(x, y))
-    @b = box2d.create_body(bd)    
+    @b = box2d.create_body(bd)
     # Figure out the box2d coordinates
     box2d_w = box2d.scale_to_world(w / 2)
-    box2d_h = box2d.scale_to_world(h / 2)    
+    box2d_h = box2d.scale_to_world(h / 2)
     # Define the polygon
     sd = PolygonShape.new
-    sd.setAsBox(box2d_w, box2d_h)    
+    sd.setAsBox(box2d_w, box2d_h)
     fd = FixtureDef.new
     fd.shape = sd
     fd.density = 0
     fd.friction = 0.3
-    fd.restitution = 0.5    
-    b.createFixture(fd)    
+    fd.restitution = 0.5
+    b.createFixture(fd)
   end
-  
+
   # Draw the boundary, if it were at an angle we'd have to do something fancier
   def display
     fill(0)
-    rect_mode(CENTER)
+    rect_mode(Java::ProcessingCore::PConstants::CENTER)
     rect(x, y, w, h)
-  end  
+  end
 end
 
 # A rectangular box
 class Box
-  include Processing::Proxy
+  extend Forwardable
+  def_delegators(:@app, :box2d, :rect_mode, :rect,
+                 :push_matrix, :pop_matrix, :fill, :rotate,
+                 :stroke, :stroke_weight, :translate)
   # We need to keep track of a Body and a width and height
-  attr_reader :box2d, :body, :w, :h
-  
+  attr_reader :body, :w, :h
+
   # Constructor
-  def initialize(b2d, x, y)
+  def initialize(app, x, y)
     @w = rand(4..16)
     @h = rand(4..16)
-    @box2d = b2d
+    @app = app
     # Add the box to the box2d world
     make_body(Vec2.new(x, y), w, h)
   end
-  
+
   def done
     # Let's find the screen position of the particle
     pos = box2d.body_coord(body)
@@ -93,14 +97,14 @@ class Box
     box2d.destroy_body(body)
     true
   end
-  
+
   # Drawing the box
   def display
     # We look at each body and get its screen position
     pos = box2d.body_coord(body)
     # Get its angle of rotation
-    a = body.angle    
-    rect_mode(CENTER)
+    a = body.angle
+    rect_mode(Java::ProcessingCore::PConstants::CENTER)
     push_matrix
     translate(pos.x, pos.y)
     rotate(-a)
@@ -108,25 +112,25 @@ class Box
     rect(0, 0, w, h)
     pop_matrix
   end
-  
+
   # This function adds the rectangle to the box2d world
-  def make_body(center, w, h)    
+  def make_body(center, w, h)
     # Define a polygon (this is what we use for a rectangle)
     sd = PolygonShape.new
     box2d_w = box2d.scale_to_world(w / 2)
     box2d_h = box2d.scale_to_world(h / 2)
-    sd.setAsBox(box2d_w, box2d_h)    
+    sd.setAsBox(box2d_w, box2d_h)
     # Define a fixture
     fd = FixtureDef.new
     fd.shape = sd
     # Parameters that affect physics
     fd.density = 1
     fd.friction = 0.3
-    fd.restitution = 0.5    
+    fd.restitution = 0.5
     # Define the body and make it from the shape
     bd = BodyDef.new
     bd.type = BodyType::DYNAMIC
-    bd.position.set(box2d.processing_to_world(center))    
+    bd.position.set(box2d.processing_to_world(center))
     cs = CircleShape.new
     @body = box2d.create_body(bd)
     body.create_fixture(fd)

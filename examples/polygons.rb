@@ -17,10 +17,10 @@ def setup
   @polygons = []
   @boundaries = []
   # Add a bunch of fixed boundaries
-  boundaries << Boundary.new(box2d, width / 4, height - 5, width / 2 - 50, 10, 0)
-  boundaries << Boundary.new(box2d, 3 * width / 4, height - 50, width / 2 - 50, 10, 0)
-  boundaries << Boundary.new(box2d, width - 5, height / 2, 10, height, 0)
-  boundaries << Boundary.new(box2d, 5, height / 2, 10, height, 0)
+  boundaries << Boundary.new(self, width / 4, height - 5, width / 2 - 50, 10, 0)
+  boundaries << Boundary.new(self, 3 * width / 4, height - 50, width / 2 - 50, 10, 0)
+  boundaries << Boundary.new(self, width - 5, height / 2, 10, height, 0)
+  boundaries << Boundary.new(self, 5, height / 2, 10, height, 0)
 end
 
 def draw
@@ -35,5 +35,5 @@ def draw
 end
 
 def mouse_pressed
-  polygons << CustomShape.new(box2d, mouse_x, mouse_y)
+  polygons << CustomShape.new(self, mouse_x, mouse_y)
 end

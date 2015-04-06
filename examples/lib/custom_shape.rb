@@ -1,14 +1,18 @@
-require 'pbox2d'
+require 'forwardable'
 
+# custom shape or in this case polygon
 class CustomShape
-  include Processing::Proxy
+  extend Forwardable
+  def_delegators(:@app, :box2d, :push_matrix, :pop_matrix,
+                 :translate, :rotate, :fill, :stroke, :rect_mode,
+                 :vertex, :begin_shape, :end_shape)
   # We need to keep track of a Body and a width and height
-  attr_reader :body, :box2d
+  attr_reader :body
 
   # Constructor
-  def initialize(b2d, x, y)
+  def initialize(app, x, y)
     # Add the box to the box2d world
-    @box2d = b2d
+    @app = app
     make_body(Vec2.new(x, y))
   end
 
@@ -35,7 +39,7 @@ class CustomShape
     a = body.get_angle
     f = body.get_fixture_list
     ps = f.get_shape
-    rect_mode(CENTER)
+    rect_mode(Java::ProcessingCore::PConstants::CENTER)
     push_matrix
     translate(pos.x, pos.y)
     rotate(-a)
@@ -47,7 +51,7 @@ class CustomShape
       v = box2d.vector_to_processing(ps.get_vertex(i))
       vertex(v.x, v.y)
     end
-    end_shape(CLOSE)
+    end_shape(Java::ProcessingCore::PConstants::CLOSE)
     pop_matrix
   end
 
@@ -73,11 +77,15 @@ class CustomShape
   end
 end
 
+# The boundary class is used to create fixtures
 class Boundary
-  include Processing::Proxy
-  attr_reader :box2d, :b, :x, :y, :w, :h
-  def initialize(b2d, x, y, w, h, a)
-    @box2d, @x, @y, @w, @h = b2d, x, y, w, h
+  extend Forwardable
+  def_delegators(:@app, :push_matrix, :pop_matrix,
+                 :fill, :stroke, :stroke_weight, :translate,
+                 :rect, :rect_mode, :box2d, :rotate)
+  attr_reader :b, :x, :y, :w, :h
+  def initialize(app, x, y, w, h, a)
+    @app, @x, @y, @w, @h = app, x, y, w, h
     # Define the polygon
     sd = PolygonShape.new
     # Figure out the box2d coordinates
@@ -95,12 +103,13 @@ class Boundary
     b.create_fixture(sd, 1)
   end
 
-  # Draw the boundary, it doesn't move so we don't have to ask the Body for location
+  # Draw the boundary, it doesn't move so we don't have to ask the
+  # Body for location
   def display
     fill(0)
     stroke(0)
     stroke_weight(1)
-    rect_mode(CENTER)
+    rect_mode(Java::ProcessingCore::PConstants::CENTER)
     a = b.get_angle
     push_matrix
     translate(x, y)

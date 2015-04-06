@@ -19,7 +19,7 @@ def setup
   # Create the empty list
   @particles = []
   # Create the surface
-  @surface = Surface.new(box2d)
+  @surface = Surface.new(self)
 end
 
 def draw
@@ -29,7 +29,7 @@ def draw
   # Draw the surface
   surface.display
   # NB ? reqd to call mouse_pressed value, else method gets called.
-  particles << Particle.new(box2d, mouse_x, mouse_y, rand(2.0..6)) if mouse_pressed?
+  particles << Particle.new(self, mouse_x, mouse_y, rand(2.0..6)) if mouse_pressed?
   # Draw all particles
   particles.each(&:display)
   # Particles that leave the screen, we delete them
