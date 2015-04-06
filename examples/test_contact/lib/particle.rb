@@ -1,11 +1,15 @@
 # Note the particle class change method is use to change color to red
 # when two particles collide (no change just hitting boundary)
 class Particle
+  extend Forwardable
+  def_delegators(:@app, :box2d, :begin_shape, :end_shape, :line, :pop_matrix,
+                 :ellipse, :translate, :rotate, :stroke, :push_matrix,
+                 :fill, :no_fill, :stroke_weight)
   attr_accessor :body
-  attr_reader :box2d, :radius, :col
+  attr_reader :radius, :col
 
-  def initialize(b2d, x, y, r)
-    @box2d, @x, @y, @radius = b2d, x, y, r
+  def initialize(app, x, y, r)
+    @app, @x, @y, @radius = app, x, y, r
     # This function puts the particle in the Box2d world
     make_body(x, y, radius)
     @col = -5_263_441 # grey
@@ -32,21 +36,21 @@ class Particle
     true
   end
 
-  def display(app)
+  def display
     # We look at each body and get its screen position
     pos = box2d.body_coord(body)
     # Get its angle of rotation
     a = body.get_angle
-    app.push_matrix
-    app.translate(pos.x, pos.y)
-    app.rotate(a)
-    app.fill(col)
-    app.stroke(0)
-    app.stroke_weight(1)
-    app.ellipse(0, 0, radius * 2, radius * 2)
+    push_matrix
+    translate(pos.x, pos.y)
+    rotate(a)
+    fill(col)
+    stroke(0)
+    stroke_weight(1)
+    ellipse(0, 0, radius * 2, radius * 2)
     # Let's add a line so we can see the rotation
-    app.line(0, 0, radius, 0)
-    app.pop_matrix
+    line(0, 0, radius, 0)
+    pop_matrix
   end
 
   # Here's our function that adds the particle to the Box2D world

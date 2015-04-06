@@ -1,10 +1,14 @@
+require 'forwardable'
+
 CENTER ||= Java::ProcessingCore::PConstants::CENTER
 # The boundary class is used to create a floor in this
 # sketch. Note it does not have a change method
 class Boundary
-  attr_reader :box2d, :x, :y, :w, :h, :b
-  def initialize(b2d, x, y, w, h)
-    @box2d, @x, @y, @w, @h = b2d, x, y, w, h
+  extend Forwardable
+  def_delegators(:@app, :fill, :stroke, :rect, :rect_mode, :box2d)
+  attr_reader :x, :y, :w, :h, :b
+  def initialize(app, x, y, w, h)
+    @app, @x, @y, @w, @h = app, x, y, w, h
     sd = PolygonShape.new
     box2d_w = box2d.scale_to_world(w / 2)
     box2d_h = box2d.scale_to_world(h / 2)
@@ -20,10 +24,10 @@ class Boundary
   end
 
   # Draw the boundary, if it were at an angle we'd have to do something fancier
-  def display(app)
-    app.fill(0)
-    app.stroke(0)
-    app.rect_mode(CENTER)
-    app.rect(x, y, w, h)
+  def display
+    fill(0)
+    stroke(0)
+    rect_mode(CENTER)
+    rect(x, y, w, h)
   end
 end
