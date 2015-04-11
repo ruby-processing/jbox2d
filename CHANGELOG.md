@@ -1,3 +1,7 @@
+### v0.3.1
+
+Need to be less specific about ruby-processing version
+
 ### v0.3.0 (was v0.2.1 but bumped version 'cos it features new functionality)
 
 Finally got ContactListener to work (currently best plan is to create your own CustomListener, see example test_contact)
