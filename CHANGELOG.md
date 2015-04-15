@@ -1,8 +1,12 @@
+### v0.4.1
+
+Favour explicit import of classes to package include.  Use forwardable in examples to make usable in both JRubyArt and ruby-processing, further to demonstrate alternative to including Processing::Proxy to get 'inner class' like access to processing methods, in own classes.
+
 ### v0.3.1
 
 Need to be less specific about ruby-processing version
 
-### v0.3.0 (was v0.2.1 but bumped version 'cos it features new functionality)
+### v0.3.0 (was v0.2.1 but bumped version because it features new functionality)
 
 Finally got ContactListener to work (currently best plan is to create your own CustomListener, see example test_contact)
 

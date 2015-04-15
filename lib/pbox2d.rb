@@ -4,34 +4,23 @@ Dir[File.join(working_directory, '*.jar')].each do |jar|
   require jar
 end
 
-# These modules allows package access to the wrapped java packages
-module PB
-  include_package 'org.jbox2d.collision.shapes'
-  include_package 'org.jbox2d.common'
-  include_package 'processing.box2d'
-end
-
-module Dynamics
-  include_package 'org.jbox2d.dynamics'
-  include_package 'org.jbox2d.dynamics.contacts'
-  include_package 'org.jbox2d.dynamics.joints'
-end
-
 ContactListener = Java::OrgJbox2dCallbacks::ContactListener
-Transform = PB::Transform
-Vec2 = PB::Vec2
-PolygonShape = PB::PolygonShape
-CircleShape = PB::CircleShape
-ChainShape = PB::ChainShape
-Body = Dynamics::Body
-BodyDef = Dynamics::BodyDef
-BodyType = Dynamics::BodyType
-World = Dynamics::World
-Joint = Dynamics::Joint
-JointDef = Dynamics::JointDef
-DistanceJointDef = Dynamics::DistanceJointDef
-RevoluteJoint = Dynamics::RevoluteJoint
-RevoluteJointDef = Dynamics::RevoluteJointDef
-FixtureDef = Dynamics::FixtureDef
+
+def import_class_list(list, string)
+  list.each { |d| java_import format(string, d) }
+end
+
+common = %w( Vec2 Transform )
+common_format = 'org.jbox2d.common.%s'
+import_class_list(common, common_format)
+shape = %w( PolygonShape CircleShape ChainShape Shape )
+shape_format = 'org.jbox2d.collision.shapes.%s'
+import_class_list(shape, shape_format)
+world = %w( Body BodyDef BodyType World FixtureDef )
+world_format = 'org.jbox2d.dynamics.%s'
+import_class_list(world, world_format)
+joint = %w( Joint JointDef DistanceJointDef RevoluteJoint RevoluteJointDef )
+joint_format = 'org.jbox2d.dynamics.joints.%s'
+import_class_list(joint, joint_format)
 
 require_relative 'pbox2d/box2d.rb'
