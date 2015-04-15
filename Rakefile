@@ -22,7 +22,7 @@ EOF
   s.authors = ['Martin Prout']
   s.email = 'martin_p@lineone.net'
   s.homepage = 'https://github.com/ruby-processing/jbox2d'
-  s.files = %w(LICENSE.md README.md Rakefile) + FileList['lib/**/*.rb', 'example/**/*.rb']
+  s.files = %w(LICENSE.md README.md Rakefile) + FileList['lib/**/*.rb', 'examples/**/*.rb']
   s.files << 'lib/box2d.jar'
   s.files << 'lib/jbox2d-library-2.2.1-ds.jar' 
   s.require_path = 'lib'
