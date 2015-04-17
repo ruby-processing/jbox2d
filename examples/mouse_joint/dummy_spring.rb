@@ -12,7 +12,8 @@ class DummySpring
   # and the box object's location
   # @param x (will be mouse_x)
   # @param y (will be mouse_y)
-  # @return new bound spring
+  # @param box Box
+  # @return new bound Spring
   def bind(x, y, box)
     spring = Spring.new
     spring.bind(x, y, box)
