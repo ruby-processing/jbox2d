@@ -1,6 +1,4 @@
-# The Nature of Code
-# Daniel Shiffman
-# http://natureofcode.com
+# dummy_spring.rb by Martin Prout 
 
 # This class avoids test for nil
 class DummySpring
