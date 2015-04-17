@@ -19,7 +19,7 @@ import_class_list(shape, shape_format)
 world = %w( Body BodyDef BodyType World FixtureDef )
 world_format = 'org.jbox2d.dynamics.%s'
 import_class_list(world, world_format)
-joint = %w( Joint JointDef DistanceJointDef RevoluteJoint RevoluteJointDef )
+joint = %w( Joint JointDef DistanceJointDef RevoluteJoint RevoluteJointDef MouseJointDef)
 joint_format = 'org.jbox2d.dynamics.joints.%s'
 import_class_list(joint, joint_format)
 
