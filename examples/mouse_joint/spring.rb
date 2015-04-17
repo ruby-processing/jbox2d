@@ -7,7 +7,7 @@ class Spring
   extend Forwardable
   def_delegators(:@app, :line, :box2d, :stroke, :stroke_weight)
   # This is the box2d object we need to create
-  attr_accessor :mouse_joint
+  attr_reader :mouse_joint
 
   def initialize
     @app = $app
