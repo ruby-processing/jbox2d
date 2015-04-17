@@ -2,11 +2,10 @@
 # Daniel Shiffman
 # http://natureofcode.com
 
-
 # A rectangular box
 class Box
   extend Forwardable
-  def_delegators(:@app, :fill, :stroke, :stroke_weight, :rect, :rect_mode, 
+  def_delegators(:@app, :fill, :stroke, :stroke_weight, :rect, :rect_mode,
                  :box2d, :rotate, :translate, :push_matrix, :pop_matrix)
   # We need to keep track of a Body and a width and height
   attr_accessor :body, :w, :h
@@ -37,7 +36,7 @@ class Box
     a = body.getAngle
     rect_mode(Java::ProcessingCore::PConstants::CENTER)
     push_matrix
-    translate(pos.x,pos.y)
+    translate(pos.x, pos.y)
     rotate(a)
     fill(127)
     stroke(0)
@@ -55,9 +54,9 @@ class Box
     @body = box2d.createBody(bd)
     # Define a polygon (this is what we use for a rectangle)
     sd = PolygonShape.new
-    box2dW = box2d.scale_to_world(w / 2)
-    box2dH = box2d.scale_to_world(h / 2)
-    sd.setAsBox(box2dW, box2dH)
+    box2dw = box2d.scale_to_world(w / 2)
+    box2dh = box2d.scale_to_world(h / 2)
+    sd.setAsBox(box2dw, box2dh)
     # Define a fixture
     fd = FixtureDef.new
     fd.shape = sd
@@ -65,9 +64,9 @@ class Box
     fd.density = 1
     fd.friction = 0.3
     fd.restitution = 0.5
-    body.createFixture(fd)
+    body.create_fixture(fd)
     # Give it some initial random velocity
-    body.setLinearVelocity(Vec2.new(rand(-5.0..5), rand(2.0..5)))
-    body.setAngularVelocity(rand(-5.0..5))
+    body.set_linear_velocity(Vec2.new(rand(-5.0..5), rand(2.0..5)))
+    body.set_angular_velocity(rand(-5.0..5))
   end
 end

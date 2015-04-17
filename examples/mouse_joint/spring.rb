@@ -1,29 +1,26 @@
 # The Nature of Code
 # Daniel Shiffman
-# http:#natureofcode.com
+# http://natureofcode.com
 
-# Class to describe the spring jo(displayed as a line)
-
+# Class to describe the spring joint (displayed as a line)
 class Spring
   extend Forwardable
   def_delegators(:@app, :line, :box2d, :stroke, :stroke_weight)
   # This is the box2d object we need to create
-  attr_reader :mouse_joint
-  
+  attr_accessor :mouse_joint
+
   def initialize
     @app = $app
   end
-  
-  # If it exists we set its target to the mouse location 
+
+  # If it exists we set its target to the mouse location
   def update(x, y)
-    return unless mouse_joint
     # Always convert to world coordinates!
     mouse_world = box2d.processing_to_world(x, y)
     mouse_joint.set_target(mouse_world)
   end
-  
+
   def display
-    return unless mouse_joint
     # We can get the two anchor points
     v1 = Vec2.new
     mouse_joint.getAnchorA(v1)
@@ -37,15 +34,15 @@ class Spring
     stroke_weight(1)
     line(vd1.x, vd1.y, vd2.x, vd2.y)
   end
-  
-  
+
   # This is the key function where
   # we attach the spring to an x,y location
   # and the Box object's location
   def bind(x, y, box)
     # Define the joint
     md = MouseJointDef.new
-    # Body A is just a fake ground body for simplicity (there isn't anything at the mouse)
+    # Body A is just a fake ground body for simplicity
+    # (there isn't anything at the mouse)
     md.bodyA = box2d.ground_body
     # Body 2 is the box's boxy
     md.bodyB = box.body
@@ -56,18 +53,13 @@ class Spring
     # Some stuff about how strong and bouncy the spring should be
     md.maxForce = 1000.0 * box.body.m_mass
     md.frequencyHz = 5.0
-    md.dampingRatio = 0.9    
+    md.dampingRatio = 0.9
     # Make the joint!
     @mouse_joint = box2d.world.create_joint(md)
   end
-  
+
   def destroy
     # We can get rid of the joint when the mouse is released
-    return unless mouse_joint
     box2d.world.destroy_joint(mouse_joint)
-    @mouse_joint = nil
   end
-  
 end
-
-
