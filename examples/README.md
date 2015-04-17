@@ -1,6 +1,6 @@
 ### Source of Sketches
 
-These sketches have been translated from 'vanilla processing sketches' by Dan Shiffman.  The original sketches were designed to run with the Box2D-for-processing library which has a subtlely different interface for the pbox2d gem. There is probably scope for further refactoring most of the sketches to make them more ruby-like (then mouse_spring example has perhaps travelled furthest from the original version).   
+These sketches have been translated from 'vanilla processing sketches' by Dan Shiffman.  The original sketches were designed to run with the Box2D-for-processing library which has a subtlely different interface from the pbox2d gem. There is probably scope for further refactoring most of the sketches to make them more ruby-like (then mouse_spring example has perhaps travelled furthest from the original version).   
 
 
 ### java_args.txt
