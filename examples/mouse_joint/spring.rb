@@ -1,6 +1,7 @@
 # The Nature of Code
 # Daniel Shiffman
 # http://natureofcode.com
+# refactored to avoid suspicious null checking see dummy_spring.rb
 
 # Class to describe the spring joint (displayed as a line)
 class Spring
