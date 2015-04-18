@@ -1,6 +1,7 @@
 # dummy_spring.rb by Martin Prout 
+# An example of duck-typing in ruby-processing
 
-# This class avoids test for nil
+# This class avoids test for nil of the vanilla processing version
 class DummySpring
   def initialize; end
   def update(_x, _y); end
