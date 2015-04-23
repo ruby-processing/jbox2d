@@ -26,9 +26,10 @@ end
 
 def draw
   background(255)
+  pairs.reject!(&:done?)
   pairs.each(&:display)
   # Display all the boundaries
-  boundaries.each(&:display)
+  boundaries.each(&:display)  
   fill(0)
   text('Click mouse to add connected particles.', 10, 20)
 end

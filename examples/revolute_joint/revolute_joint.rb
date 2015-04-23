@@ -29,13 +29,8 @@ def draw
     particles << Particle.new(rand(width / 2 - 100..width / 2 + 100), -20, sz)
   end
   # Look at all particles, in reverse order
-  particles.reverse_each do |p|
-    p.display
-    # Particles that leave the screen, we delete them
-    # (note they have to be deleted from both the box2d world and our list
-    next unless p.done?
-    particles.shift
-  end
+  particles.each(&:display)
+  particles.reject!(&:done?)
   # Draw the windmill
   windmill.display
   status = windmill.motor_on? ? "ON" : "OFF"
