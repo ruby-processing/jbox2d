@@ -6,15 +6,16 @@
 require 'pbox2d'
 require_relative 'windmill'
 require_relative 'particle'
+require_relative 'particle_system'
 
-attr_reader :box2d, :windmill, :particles
+attr_reader :box2d, :windmill, :system
 
 def setup
   size(640,360)
   @box2d = Box2D.new(self)
   box2d.createWorld
   @windmill = Windmill.new(width / 2, 175)
-  @particles = []
+  @system = ParticleSystem.new
 end
 
 # Click the mouse to turn on or off the motor
@@ -24,12 +25,8 @@ end
 
 def draw
   background(255)
-  if rand < 0.1
-    sz = rand(4.0..8)
-    particles << Particle.new(rand(width / 2 - 100..width / 2 + 100), -20, sz)
-  end
-  particles.each(&:display)
-  particles.reject!(&:done?)
+  system.add_particles(width)
+  system.run
   # Draw the windmill
   windmill.display
   status = windmill.motor_on? ? "ON" : "OFF"
