@@ -12,7 +12,7 @@ require_relative 'pair'
 require_relative 'particle'
 require_relative 'particle_system'
 
-attr_reader :box2d, :boundaries, :pairs
+attr_reader :box2d, :boundaries, :system
 
 def setup
   size(640, 360)
