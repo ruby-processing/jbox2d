@@ -19,10 +19,10 @@ def setup
   # box2d.gravity(0, -20)
   # Create ArrayLists
   @boxes = []
-  @boundaries = []
-  # Add a bunch of fixed boundaries
-  boundaries << Boundary.new(self, width / 4, height - 5, width / 2 - 50, 10)
-  boundaries << Boundary.new(self, 3 * width / 4, height - 50, width / 2 - 50, 10)
+  @boundaries = [
+    Boundary.new(self, width / 4, height - 5, width / 2 - 50, 10),
+    Boundary.new(self, 3 * width / 4, height - 50, width / 2 - 50, 10)
+  ]
 end
 
 def draw

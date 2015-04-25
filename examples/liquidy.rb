@@ -11,23 +11,23 @@ def setup
   # box2d.gravity([0, -20])
   # Create Arrays
   @systems = []
-  @boundaries = []
-  # Add a bunch of fixed boundaries
-  boundaries << Boundary.new(self, 50, 100, 5, -0.3)
-  boundaries << Boundary.new(self, 250, 175, 5, 0.5)
+  @boundaries = [
+    Boundary.new(self, 50, 100, 5, -0.3),
+    Boundary.new(self, 250, 175, 5, 0.5)
+  ]
 end
 
 def draw
   background(255)
-  # Run all the particle systems
-  if systems.size > 0
-    systems.each do |system|
-      system.run
-      system.add_particles(self, rand(0..2))
-    end
-  end
   # Display all the boundaries
   boundaries.each(&:display)
+  # Run all the particle systems
+  return unless systems.size > 0
+  systems.each do |system|
+    system.run
+    # refresh particles (else we'll run out)
+    system.add_particles(self, rand(0..2))
+  end
 end
 
 def mouse_pressed

@@ -16,17 +16,13 @@ class ParticleSystem
   attr_reader :x, :y
 
   def initialize(app, num, x, y)
-    @particles = []          # Initialize the Array
     @x, @y = x, y            # Store the origin point
-    num.times do
-      self << Particle.new(app, x, y)
-    end
+    # initialize array with some particles
+    @particles = Array.new(num, Particle.new(app, x, y))    
   end
 
   def add_particles(app, n)
-    n.times do
-      self << Particle.new(app, x, y)
-    end
+    n.times { self << Particle.new(app, x, y) }
   end
 end
 

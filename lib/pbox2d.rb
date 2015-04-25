@@ -7,7 +7,7 @@ end
 ContactListener = Java::OrgJbox2dCallbacks::ContactListener
 
 def import_class_list(list, string)
-  list.each { |d| java_import format(string, d) }
+  list.each { |klass| java_import format(string, klass) }
 end
 
 common = %w( Vec2 Transform )

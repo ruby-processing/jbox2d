@@ -14,12 +14,13 @@ def setup
   @box2d = Box2D.new(self)
   box2d.init_options(gravity: [0, -10])
   box2d.create_world
-  @boundaries = []
   @boxes = []
   box2d.world.set_particle_radius(0.15)
   box2d.world.set_particle_damping(0.2)
-  boundaries << Boundary.new(self, width / 4, height - 5, width / 2 - 50, 10)
-  boundaries << Boundary.new(self, 3 * width / 4, height - 50, width / 2 - 50, 10)
+  @boundaries = [
+    Boundary.new(self, width / 4, height - 5, width / 2 - 50, 10),
+    Boundary.new(self, 3 * width / 4, height - 50, width / 2 - 50, 10)
+  ]
 end
 
 def mouse_pressed
