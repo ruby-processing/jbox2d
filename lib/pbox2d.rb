@@ -22,5 +22,12 @@ import_class_list(world, world_format)
 joint = %w( Joint JointDef DistanceJointDef RevoluteJoint RevoluteJointDef MouseJointDef)
 joint_format = 'org.jbox2d.dynamics.joints.%s'
 import_class_list(joint, joint_format)
+module PB
+  particle = %w( ParticleBodyContact ParticleGroup ParticleType ParticleColor
+  ParticleGroupDef StackQueue ParticleContact ParticleGroupType VoronoiDiagram
+  ParticleDef ParticleSystem )
+  particle_format = 'org.jbox2d.particle.%s'
+  import_class_list(particle, particle_format)
+end
 
 require_relative 'pbox2d/box2d.rb'

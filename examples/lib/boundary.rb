@@ -1,10 +1,8 @@
-require 'forwardable'
-
 # The boundary class is used to create fixtures
 class Boundary
   extend Forwardable
   def_delegators(:@app, :fill, :stroke, :rect, :rect_mode, :box2d)
-  attr_reader :x, :y, :w, :h, :b
+  attr_reader :pos, :size, :b
   def initialize(app, x, y, w, h)
     @app, @x, @y, @w, @h = app, x, y, w, h
     sd = PolygonShape.new
