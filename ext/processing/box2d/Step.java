@@ -20,25 +20,25 @@ public class Step {
      * No of position iterations
      */
     public int posIters;
-    
+
     /**
      *
      * @param timeStep
      * @param velIterations
      * @param posIterations
      */
-    public Step(float timeStep, int velIterations, int posIterations){
-    this.timeStep = timeStep; 
-    this.velIters = velIterations; 
-    this.posIters = posIterations;    
-    }  
-    
+    public Step(float timeStep, int velIterations, int posIterations) {
+        this.timeStep = timeStep;
+        this.velIters = velIterations;
+        this.posIters = posIterations;
+    }
+
     /**
      * Step constructor with defaults
      */
-    public Step(){
-    this.timeStep = 1.0f / 60; 
-    this.velIters = 8; 
-    this.posIters = 10;    
-    } 
+    public Step() {
+        this.timeStep = 1.0f / 60;
+        this.velIters = 8;
+        this.posIters = 10;
+    }
 }

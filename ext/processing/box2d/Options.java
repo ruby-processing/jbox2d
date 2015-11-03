@@ -37,8 +37,7 @@ public class Options {
         this.scaleFactor = scaleFactor;
         this.gravity = gravity;
         this.warm = warmStart;
-        this.continuous = continuousPhysics;
-        
+        this.continuous = continuousPhysics;        
     }
 
     /**

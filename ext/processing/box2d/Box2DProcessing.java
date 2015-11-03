@@ -38,7 +38,7 @@ public abstract class Box2DProcessing {
     private final float yFlip;// = -1.0f; //flip y coordinate
 
     /**
-     * Controls access to processing draw loop (via reflection)
+     * Controls access to processing pre loop (via reflection)
      */
     private boolean isActive = false;
 
@@ -58,13 +58,13 @@ public abstract class Box2DProcessing {
 
     /**
      * Abstract method implement on ruby side
+     *
      * @param listener Custom Listener, Sketch?
      */
-
     public abstract void addListener(org.jbox2d.callbacks.ContactListener listener);
 
     /**
-     * 
+     *
      * @param scale
      * @param gravity
      * @param warmStart
@@ -84,7 +84,6 @@ public abstract class Box2DProcessing {
         stepO = new Step(timeStep, velocity, position);
     }
 
- 
     /**
      * This is the all important physics "step" function Says to move ahead one
      * unit in time Default
@@ -100,10 +99,9 @@ public abstract class Box2DProcessing {
     /**
      * Create a world
      */
-
     public void createWorld() {
-        if (options == null){
-           options = new Options();
+        if (options == null) {
+            options = new Options();
         }
         Vec2 gravity = new Vec2(options.gravity[0], options.gravity[1]);
         scaleFactor = options.scaleFactor;
@@ -145,17 +143,14 @@ public abstract class Box2DProcessing {
     /**
      * Box2d has its own coordinate system and we have to move back and forth
      * between them to convert from Box2d world to processing pixel space
-     *
+     * Note reverse Y mapping (processing poxy coord system again)
      * @param worldX
      * @param worldY
      * @return
      */
     public Vec2 worldToProcessing(float worldX, float worldY) {
-        float pixelX = map(worldX, 0f, 1f, parent.width  / 2, parent.width  / 2 + scaleFactor);
-        float pixelY = map(worldY, 0f, 1f, parent.height  / 2, parent.height  / 2 + scaleFactor);
-        if (yFlip == -1.0f) {
-            pixelY = map(pixelY, 0f, height, height, 0f);
-        }
+        float pixelX = map(worldX, 0f, 1f, parent.width / 2, parent.width / 2 + scaleFactor);
+        float pixelY = map(worldY, 1f, 0f, parent.height / 2, parent.height / 2 + scaleFactor);
         return new Vec2(pixelX, pixelY);
     }
 
@@ -170,18 +165,14 @@ public abstract class Box2DProcessing {
     }
 
     /**
-     *
+     * Note reverse Y mapping (processing poxy coord system again)
      * @param pixelX
      * @param pixelY
      * @return
      */
     public Vec2 processingToWorld(float pixelX, float pixelY) {
-        float worldX = map(pixelX, parent.width  / 2, parent.width  / 2 + scaleFactor, 0f, 1f);
-        float worldY = pixelY;
-        if (yFlip == -1.0f) {
-            worldY = map(pixelY, height, 0f, 0f, height);
-        }
-        worldY = map(worldY, parent.height  / 2, parent.height  / 2 + scaleFactor, 0f, 1f);
+        float worldX = map(pixelX, parent.width / 2, parent.width / 2 + scaleFactor, 0f, 1f);
+        float worldY = map(pixelY, parent.height / 2, parent.height / 2 + scaleFactor, 1f, 0f);
         return new Vec2(worldX, worldY);
     }
 
@@ -268,8 +259,7 @@ public abstract class Box2DProcessing {
      * @return body coord as Vec2
      */
     public Vec2 bodyCoord(Body b) {
-        Transform xf = b.getTransform();//b.getXForm();
-        //return coordWorldToPixels(xf.position); 
+        Transform xf = b.getTransform();
         return worldToProcessing(xf.p);
     }
 
@@ -282,9 +272,9 @@ public abstract class Box2DProcessing {
     }
 
     /**
-     * Access the processing draw loop by java reflection
+     * Access the processing pre loop by java reflection
      */
-    public void draw() {
+    public void pre() {
         step();
     }
 
@@ -320,9 +310,9 @@ public abstract class Box2DProcessing {
             isActive = active;
             if (active) {
                 parent.registerMethod("dispose", this);
-                parent.registerMethod("draw", this);
+                parent.registerMethod("pre", this);
             } else {
-                parent.unregisterMethod("draw", this);
+                parent.unregisterMethod("pre", this);
             }
         }
     }
