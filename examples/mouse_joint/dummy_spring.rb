@@ -1,14 +1,13 @@
 # dummy_spring.rb by Martin Prout 
 # An example of duck-typing in ruby-processing
 
-# This class avoids the tests for null seen in vanilla processing version
+# This class avoids the tests for null of the vanilla processing version
 class DummySpring
   def initialize; end
   def update(_x, _y); end
   def display; end
-    
   # This is the key function where
-  # we attach a real spring between an x, y location
+  # we attach the spring to an x,y location
   # and the box object's location
   # @param x (will be mouse_x)
   # @param y (will be mouse_y)

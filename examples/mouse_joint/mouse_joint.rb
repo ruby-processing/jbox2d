@@ -21,15 +21,14 @@ def setup
   box2d.create_world
   # Make the box
   @box = Box.new(width / 2, height / 2)
-  # Make a dummy spring, that returns a real spring on :bind
+  # Make a dummy spring
   @spring = DummySpring.new
-  # Create a bunch of fixed boundaries
-  @boundaries = [
-    Boundary.new(width / 2, height - 5, width, 10, 0),
-    Boundary.new(width / 2, 5, width, 10, 0),
-    Boundary.new(width - 5, height / 2, 10, height, 0),
-    Boundary.new(5, height / 2, 10, height, 0)
-  ]
+  # Add a bunch of fixed boundaries
+  @boundaries = []
+  boundaries << Boundary.new(width / 2, height - 5, width, 10, 0)
+  boundaries << Boundary.new(width / 2, 5, width, 10, 0)
+  boundaries << Boundary.new(width - 5, height / 2, 10, height, 0)
+  boundaries << Boundary.new(5, height / 2, 10, height, 0)
 end
 
 # When the mouse is released we're done with the spring

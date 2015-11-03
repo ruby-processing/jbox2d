@@ -15,7 +15,7 @@ spec = Gem::Specification.new do |s|
   s.summary = 'jbox2d wrapped in a gem for ruby-processing'
   s.description = <<-EOF
 "An exemplar for how processing/java libraries can be made available
-for use in ruby-processing. In this example avoiding an overdose of java 
+for use in JRubyArt. In this example avoiding an overdose of java 
 reflection by letting jruby sugar implement an interface"
 EOF
   s.license = 'MIT'
@@ -24,15 +24,15 @@ EOF
   s.homepage = 'https://github.com/ruby-processing/jbox2d'
   s.files = %w(LICENSE.md README.md Rakefile) + FileList['lib/**/*.rb', 'examples/**/*.rb']
   s.files << 'lib/box2d.jar'
-  s.files << 'lib/jbox2d-library-2.2.1-ds.jar' 
+  s.files << 'lib/jbox2d-library-2.3.1-SNAPSHOT.jar' 
   s.require_path = 'lib'
-  s.add_dependency 'ruby-processing', '~> 2.6', '>= 2.6.4'
+  s.add_dependency 'jruby_art', '~> 1.0' 
   s.add_development_dependency "rake", "~> 10.3"
   s.add_development_dependency "rake-compiler", "~> 0.9"
   s.platform='java'
   s.requirements << 'A decent graphics card'
-  s.requirements << 'java runtime >= 1.7+'
-  s.requirements << 'processing = 2.2.1+'
+  s.requirements << 'java runtime >= 1.8+'
+  s.requirements << 'processing = 3.0.1+'
 end
 
 # -*- ruby -*-
@@ -69,8 +69,8 @@ Rake::JavaExtensionTask.new('processing') do |ext|
   ext.name = 'box2d'
   ext.debug = true
   ext.lib_dir = 'lib'
-  ext.source_version='1.7'
-  ext.target_version='1.7'
+  ext.source_version='1.8'
+  ext.target_version='1.8'
 end
 
 Gem::PackageTask.new(spec) do |p|
@@ -97,5 +97,3 @@ RSpec::Core::RakeTask.new do |spec|
   spec.pattern = 'spec/*_spec.rb'
   spec.rspec_opts = [Dir["lib"].to_a.join(':')]
 end
-
-

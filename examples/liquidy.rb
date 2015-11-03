@@ -1,36 +1,40 @@
 require 'pbox2d'
 require_relative 'lib/particle_system'
+require_relative 'lib/boundary'
 attr_reader :box2d, :boundaries, :systems
 
+Vect = Struct.new(:x, :y)
+
 def setup
-  size(400, 300)
+  sketch_title 'Liquidy'
   @box2d = Box2D.new(self)
   box2d.init_options(gravity: [0, -20])
   box2d.create_world
-  # to set a custom gravity otherwise
-  # box2d.gravity([0, -20])
-  # Create Arrays
   @systems = []
   @boundaries = [
-    Boundary.new(self, 50, 100, 5, -0.3),
-    Boundary.new(self, 250, 175, 5, 0.5)
+    Boundary.new(box2d, Vect.new(50, 100), Vect.new(300, 5), -0.3),
+    Boundary.new(box2d, Vect.new(250, 175), Vect.new(300, 5), 0.5)
   ]
 end
 
 def draw
   background(255)
+  # Run all the particle systems
+  if systems.size > 0
+    systems.each do |system|
+      system.run
+      system.add_particles(box2d, rand(0..2))
+    end
+  end
   # Display all the boundaries
   boundaries.each(&:display)
-  # Run all the particle systems
-  return unless systems.size > 0
-  systems.each do |system|
-    system.run
-    # refresh particles (else we'll run out)
-    system.add_particles(self, rand(0..2))
-  end
 end
 
 def mouse_pressed
   # Add a new Particle System whenever the mouse is clicked
-  systems << ParticleSystem.new(self, 0, mouse_x, mouse_y)
+  systems << ParticleSystem.new(box2d, 0, mouse_x, mouse_y)
+end
+
+def settings
+  size(400,300)
 end

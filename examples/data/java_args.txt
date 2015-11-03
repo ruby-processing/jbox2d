@@ -1,1 +1,2 @@
--Dsun.java2d.opengl=true
+-XX:CompileCommand=dontinline,org.jruby.runtime.invokedynamic.InvokeDynamicSupport::invocationFallback 
+

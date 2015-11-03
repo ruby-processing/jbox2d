@@ -2,25 +2,24 @@
 require 'pbox2d'
 require_relative 'lib/custom_shape'
 require_relative 'lib/boundary'
+require_relative 'lib/shape_system'
 
-attr_reader :box2d, :boundaries, :polygons
+attr_reader :box2d, :boundaries, :system
+
+Vect = Struct.new(:x, :y)
 
 def setup
-  size(640, 360)
+  sketch_title 'Polygons'
   smooth
-  # Initialize box2d physics and create the world
   @box2d = Box2D.new(self)
   box2d.init_options(gravity: [0, -20])
   box2d.create_world
-  # To later set a custom gravity
-  # box2d.gravity([0, -20]
-  # Create Arrays
-  @polygons = []
+  @system = ShapeSystem.new self
   @boundaries = [
-    Boundary.new(self, width / 4, height - 5, width / 2 - 50, 10),
-    Boundary.new(self, 3 * width / 4, height - 50, width / 2 - 50, 10),
-    Boundary.new(self, width - 5, height / 2, 10, height),
-    Boundary.new(self, 5, height / 2, 10, height)
+    Boundary.new(box2d, Vect.new(width / 4, height - 5), Vect.new(width / 2 - 50, 10)),
+    Boundary.new(box2d, Vect.new(3 * width / 4, height - 50), Vect.new(width / 2 - 50, 10)),
+    Boundary.new(box2d, Vect.new(width - 5, height / 2), Vect.new(10, height)),
+    Boundary.new(box2d, Vect.new(5, height / 2), Vect.new(10, height))
   ]
 end
 
@@ -29,12 +28,13 @@ def draw
   # Display all the boundaries
   boundaries.each(&:display)
   # Display all the polygons
-  polygons.each(&:display)
-  # polygons that leave the screen, we delete them
-  # (note they have to be deleted from both the box2d world and our list
-  polygons.reject!(&:done)
+  system.run
 end
 
 def mouse_pressed
-  polygons << CustomShape.new(self, mouse_x, mouse_y)
+  system << CustomShape.new(box2d, mouse_x, mouse_y)
+end
+
+def settings
+  size(640, 360)
 end

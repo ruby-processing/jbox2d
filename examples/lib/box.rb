@@ -1,6 +1,5 @@
 # A Box class, note how to access class ParticleGroupDef in jruby
-# which is imported into the PB module and not into global namespace
-# mainly because of probable name conflict with ParticleSystem
+# which is imported into PB module (not in global namespace)
 class Box
   attr_accessor :pg
   def initialize(b2d, x, y)

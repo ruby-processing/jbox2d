@@ -31,6 +31,4 @@ recognized licences.....
 For my part I lean toward GPL3 but MIT is OK and matches ruby-processing and
 vanilla processing.
 
-Copyright (c) 2014, Martin Prout
-
-
+Copyright (c) 2014-2015, Martin Prout

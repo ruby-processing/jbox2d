@@ -4,9 +4,9 @@ class CustomShape
   attr_reader :body, :box2d
 
   # Constructor
-  def initialize(app, x, y)
+  def initialize(b2d, x, y)
     # Add the box to the box2d world
-    @box2d = app.box2d
+    @box2d = b2d
     make_body(Vec2.new(x, y))
   end
 
@@ -70,3 +70,5 @@ class CustomShape
     body.set_angular_velocity(rand(-5.0..5))
   end
 end
+
+

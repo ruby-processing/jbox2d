@@ -2,8 +2,8 @@ require 'forwardable'
 
 module Runnable
   def run
-    reject!(&:done)
-    each(&:display)
+    reject! { |item| item.done }
+    each { |item| item.display }
   end
 end
 
@@ -14,15 +14,19 @@ class ParticleSystem
   def_delegator(:@particles, :empty?, :dead?)
 
   attr_reader :x, :y
-
-  def initialize(app, num, x, y)
-    @x, @y = x, y            # Store the origin point
-    # initialize array with some particles
-    @particles = Array.new(num, Particle.new(app, x, y))    
+  
+  def initialize(bd, num, x, y)
+    @particles = []          # Initialize the Array
+    @x, @y = x, y            # Store the origin point  
+    num.times do
+      self << Particle.new(bd, x, y)
+    end
   end
-
-  def add_particles(app, n)
-    n.times { self << Particle.new(app, x, y) }
+  
+  def add_particles(bd, n)
+    n.times do
+      self << Particle.new(bd, x, y)
+    end
   end
 end
 
@@ -30,40 +34,37 @@ end
 require 'pbox2d'
 
 class Particle
-  extend Forwardable
-  def_delegators(:@app, :box2d, :begin_shape, :end_shape,
-                 :vertex, :translate, :rotate, :stroke,
-                 :fill, :no_fill, :stroke_weight)
+  include Processing::Proxy
   TRAIL_SIZE = 6
   # We need to keep track of a Body
-
-  attr_reader :trail, :body
-
+  
+  attr_reader :trail, :body, :box2d
+  
   # Constructor
-  def initialize(app, x, y)
-    @app = app
+  def initialize(b2d, x, y)
+    @box2d = b2d
     @trail = Array.new(TRAIL_SIZE, [x, y])
     # Add the box to the box2d world
     # Here's a little trick, let's make a tiny tiny radius
     # This way we have collisions, but they don't overwhelm the system
     make_body(x, y, 0.2)
   end
-
+  
   # This function removes the particle from the box2d world
   def kill_body
     box2d.destroy_body(body)
   end
-
+  
   # Is the particle ready for deletion?
   def done
     # Let's find the screen position of the particle
     pos = box2d.body_coord(body)
     # Is it off the bottom of the screen?
-    return false unless pos.y > box2d.height + 20
+    return false unless (pos.y > box2d.height + 20)
     kill_body
     true
   end
-
+  
   # Drawing the box
   def display
     # We look at each body and get its screen position
@@ -83,7 +84,7 @@ class Particle
     end
     end_shape
   end
-
+  
   # This function adds the rectangle to the box2d world
   def make_body(x, y, r)
     # Define and create the body
@@ -105,46 +106,5 @@ class Particle
     # cd.filter.groupIndex = -10
     # Attach fixture to body
     body.create_fixture(fd)
-  end
-end
-
-class Boundary
-  extend Forwardable
-  def_delegators(:@app, :box2d, :push_matrix, :pop_matrix, :stroke, :width,
-                 :vertex, :translate, :rotate, :rect_mode, :rect,
-                 :fill, :no_fill, :stroke_weight)
-  attr_reader :b, :x, :y, :h
-
-  def initialize(app, x, y, h, a)
-    @app, @x, @y, @h = app, x, y, h
-    # Define the polygon
-    sd = PolygonShape.new
-    # Figure out the box2d coordinates
-    box2d_w = box2d.scale_to_world(width / 2)
-    box2d_h = box2d.scale_to_world(h / 2)
-    # We're just a box
-    sd.set_as_box(box2d_w, box2d_h)
-    # Create the body
-    bd = BodyDef.new
-    bd.type = BodyType::STATIC
-    bd.angle = a
-    bd.position.set(box2d.processing_to_world(x, y))
-    @b = box2d.create_body(bd)
-    # Attached the shape to the body using a Fixture
-    b.create_fixture(sd, 1)
-  end
-
-  # Draw the boundary, it doesn't move so we don't have to ask the Body for location
-  def display
-    fill(0)
-    stroke(0)
-    stroke_weight(1)
-    rect_mode(Java::ProcessingCore::PConstants::CENTER)
-    a = b.get_angle
-    push_matrix
-    translate(x, y)
-    rotate(-a)
-    rect(0, 0, width, h)
-    pop_matrix
   end
 end

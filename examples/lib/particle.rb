@@ -2,9 +2,9 @@
 # when two particles collide (no change just hitting boundary)
 class Particle
   extend Forwardable
-  def_delegators(:@app, :box2d, :begin_shape, :end_shape, :line, :pop_matrix,
-                 :ellipse, :translate, :rotate, :stroke, :push_matrix,
-                 :fill, :no_fill, :stroke_weight)
+  def_delegators(:@app, :box2d, :begin_shape, :color, :end_shape, :line, :pop_matrix,
+                 :ellipse, :translate, :rotate, :stroke, :push_matrix, :fill,
+                 :no_fill, :stroke_weight)
   attr_accessor :body
   attr_reader :radius, :col
 
@@ -12,7 +12,7 @@ class Particle
     @app, @x, @y, @radius = app, x, y, r
     # This function puts the particle in the Box2d world
     make_body(x, y, radius)
-    @col = -5_263_441 # grey
+    @col = color('#c0c0c0') # silvergrey
     body.setUserData(self)
   end
 
@@ -23,7 +23,7 @@ class Particle
 
   # Change color when hit
   def change
-    @col = -65_536 # red
+    @col = color('#cc0000') # red
   end
 
   # Is the particle ready for deletion?

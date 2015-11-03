@@ -1,3 +1,8 @@
+### v0.5.0.pre
+
+Break compatability with ruby-processing. Works with JRuby-9.0.3.0, processing-3.0.1 and jdk8.
+
+
 ### v0.4.2
 
 Re-factor extension class, last release for ruby-processing (processing-2.2.1) getting read for JRubyArt version.

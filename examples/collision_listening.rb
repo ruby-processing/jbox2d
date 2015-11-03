@@ -6,18 +6,23 @@ require_relative 'lib/boundary'
 
 attr_reader :box2d, :particles, :wall
 
-def setup
+Vect = Struct.new(:x, :y)
+
+def settings
   size 400, 400
+end
+
+def setup
+  sketch_title 'Collision Listening'
   @box2d = Box2D.new(self)
   box2d.create_world
   box2d.add_listener(CustomListener.new)
   @particles = []
-  @wall = Boundary.new(self, width / 2, height - 5, width, 10)
+  @wall = Boundary.new(box2d, Vect.new(width / 2, height - 5), Vect.new(width, 10))
 end
 
 def draw
-  col = color('#ffffff')
-  background(col)
+  background(255)
   particles << Particle.new(self, rand(width), 20, rand(4..8)) if rand < 0.1
   particles.each(&:display)
   particles.reject!(&:done)
