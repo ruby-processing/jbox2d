@@ -37,5 +37,5 @@ def draw
   particles.reject!(&:done)
   # Just drawing the framerate to see how many particles it can handle
   fill(0)
-  text("framerate: #{frame_rate.to_i}", 12, 16)
+  text(format('framerate: %d', frame_rate), 12, 16)
 end

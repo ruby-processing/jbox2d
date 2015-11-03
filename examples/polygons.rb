@@ -1,6 +1,7 @@
 # Basic example of falling rectangles
 require 'pbox2d'
 require_relative 'lib/custom_shape'
+require_relative 'lib/boundary'
 
 attr_reader :box2d, :boundaries, :polygons
 
@@ -16,10 +17,10 @@ def setup
   # Create Arrays
   @polygons = []
   @boundaries = [
-    Boundary.new(self, width / 4, height - 5, width / 2 - 50, 10, 0),
-    Boundary.new(self, 3 * width / 4, height - 50, width / 2 - 50, 10, 0),
-    Boundary.new(self, width - 5, height / 2, 10, height, 0),
-    Boundary.new(self, 5, height / 2, 10, height, 0)
+    Boundary.new(self, width / 4, height - 5, width / 2 - 50, 10),
+    Boundary.new(self, 3 * width / 4, height - 50, width / 2 - 50, 10),
+    Boundary.new(self, width - 5, height / 2, 10, height),
+    Boundary.new(self, 5, height / 2, 10, height)
   ]
 end
 

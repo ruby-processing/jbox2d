@@ -2,7 +2,7 @@
 class Boundary
   extend Forwardable
   def_delegators(:@app, :fill, :stroke, :rect, :rect_mode, :box2d)
-  attr_reader :pos, :size, :b
+  attr_reader :pos, :size, :b, :x, :y, :w, :h
   def initialize(app, x, y, w, h)
     @app, @x, @y, @w, @h = app, x, y, w, h
     sd = PolygonShape.new
