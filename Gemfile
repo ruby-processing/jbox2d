@@ -1,6 +1,4 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in ruby-processing.gemspec
+# Specify your gem's dependencies in pbox2d.gemspec
 gemspec
-
-

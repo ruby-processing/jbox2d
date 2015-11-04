@@ -1,4 +1,3 @@
-# Module here just to keep namespace tidy
-module Pbox2D
-  VERSION = '0.5.0.pre'
+module Pbox2d
+  VERSION = "0.5.0"
 end
