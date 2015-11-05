@@ -36,6 +36,6 @@ class Box2D < Java::ProcessingBox2d::Box2DProcessing
   end
 
   def version
-    format('pbox2d version %s', Pbox2D::VERSION)
+    format('pbox2d version %s', Pbox2d::VERSION)
   end
 end
