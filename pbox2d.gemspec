@@ -29,4 +29,5 @@ EOF
   spec.requirements << 'A decent graphics card'
   spec.requirements << 'java runtime >= 1.8+'
   spec.requirements << 'processing = 3.0.1+'
+  spec.requirements << 'maven = 3.3.3'
 end

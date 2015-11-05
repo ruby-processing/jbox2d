@@ -15,7 +15,7 @@ def create_manifest
   end
 end
 
-task default: [:compile, :clean]
+task default: [:init, :compile, :gem]
 
 desc 'Create Manifest'
 task :init do
@@ -26,6 +26,7 @@ desc 'Compile'
 task :compile do
   sh "mvn package"
   sh "mvn dependency:copy"
+  sh "mv target/box2d.jar lib"
 end
 
 desc 'Build Gem'
