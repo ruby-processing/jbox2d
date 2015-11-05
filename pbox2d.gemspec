@@ -13,9 +13,9 @@ Gem::Specification.new do |spec|
   spec.email         = ['martin_p@lineone.net']
   spec.summary       = %q{jbox2d wrapped in a gem for JRubyArt}
   spec.description   = <<-EOF
-"An exemplar for how processing/java libraries can be made available
-for use in JRubyArt. In this example avoiding an overdose of java 
-reflection by letting jruby sugar implement an interface"
+"An exemplar for how processing/java libraries can be made available for use 
+in JRubyArt.  Features a maven build, also is an example of how to avoid an 
+overdose of java reflection by letting jruby sugar implement an interface"
 EOF
   spec.homepage      = 'https://github.com/ruby-processing/jbox2d'
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
