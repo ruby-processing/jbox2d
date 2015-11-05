@@ -46,7 +46,7 @@ public abstract class Box2DProcessing {
 
     /**
      *
-     * @param p
+     * @param p PApplet
      */
     public Box2DProcessing(PApplet p) {
         parent = p;
@@ -65,10 +65,10 @@ public abstract class Box2DProcessing {
 
     /**
      *
-     * @param scale
-     * @param gravity
-     * @param warmStart
-     * @param continuous
+     * @param scale float
+     * @param gravity float[]
+     * @param warmStart boolean
+     * @param continuous boolean
      */
     protected void setOptions(float scale, float[] gravity, boolean warmStart, boolean continuous) {
         options = new Options(scale, gravity, warmStart, continuous);
@@ -76,9 +76,9 @@ public abstract class Box2DProcessing {
 
     /**
      *
-     * @param timeStep
-     * @param velocity
-     * @param position
+     * @param timeStep float
+     * @param velocity int
+     * @param position int
      */
     protected void setStep(float timeStep, int velocity, int position) {
         stepO = new Step(timeStep, velocity, position);
@@ -114,7 +114,7 @@ public abstract class Box2DProcessing {
 
     /**
      *
-     * @return
+     * @return Body
      */
     public Body groundBody() {
         return groundBody;
@@ -123,7 +123,7 @@ public abstract class Box2DProcessing {
     /**
      * Set the gravity (this can change in real-time)
      *
-     * @param gravity
+     * @param gravity float[]
      */
     protected void changeGravity(float[] gravity) {
         world.setGravity(new Vec2(gravity[0], gravity[1]));
@@ -133,8 +133,8 @@ public abstract class Box2DProcessing {
      * Box2d has its own coordinate system and we have to move back and forth
      * between them to convert from Box2d world to processing pixel space
      *
-     * @param world
-     * @return
+     * @param world Vec2
+     * @return Vec2
      */
     public Vec2 worldToProcessing(Vec2 world) {
         return worldToProcessing(world.x, world.y);
@@ -144,9 +144,9 @@ public abstract class Box2DProcessing {
      * Box2d has its own coordinate system and we have to move back and forth
      * between them to convert from Box2d world to processing pixel space
      * Note reverse Y mapping (processing poxy coord system again)
-     * @param worldX
-     * @param worldY
-     * @return
+     * @param worldX float
+     * @param worldY float
+     * @return Vec2
      */
     public Vec2 worldToProcessing(float worldX, float worldY) {
         float pixelX = map(worldX, 0f, 1f, parent.width / 2, parent.width / 2 + scaleFactor);
@@ -157,8 +157,8 @@ public abstract class Box2DProcessing {
     /**
      * convert Coordinate from pixel space to box2d world
      *
-     * @param screen
-     * @return
+     * @param screen Vec2
+     * @return Vec2
      */
     public Vec2 processingToWorld(Vec2 screen) {
         return processingToWorld(screen.x, screen.y);
@@ -166,9 +166,9 @@ public abstract class Box2DProcessing {
 
     /**
      * Note reverse Y mapping (processing poxy coord system again)
-     * @param pixelX
-     * @param pixelY
-     * @return
+     * @param pixelX float
+     * @param pixelY float
+     * @return Vec2
      */
     public Vec2 processingToWorld(float pixelX, float pixelY) {
         float worldX = map(pixelX, parent.width / 2, parent.width / 2 + scaleFactor, 0f, 1f);
@@ -179,8 +179,8 @@ public abstract class Box2DProcessing {
     /**
      * Scale from processing to world
      *
-     * @param val
-     * @return
+     * @param val float
+     * @return float
      */
     public float scaleToWorld(float val) {
         return val / scaleFactor;
@@ -189,8 +189,8 @@ public abstract class Box2DProcessing {
     /**
      * Scale from world to processing
      *
-     * @param val
-     * @return
+     * @param val float
+     * @return float
      */
     public float scaleToProcessing(float val) {
         return val * scaleFactor;
@@ -199,8 +199,8 @@ public abstract class Box2DProcessing {
     /**
      * Vector scale between two worlds
      *
-     * @param v
-     * @return
+     * @param v Vec2
+     * @return Vec2
      */
     public Vec2 vectorToWorld(Vec2 v) {
         Vec2 u = new Vec2(v.x / scaleFactor, v.y / scaleFactor);
@@ -211,9 +211,9 @@ public abstract class Box2DProcessing {
     /**
      * Translate from world coords to processing as a Vec2
      *
-     * @param x
-     * @param y
-     * @return
+     * @param x float
+     * @param y float
+     * @return Vec
      */
     public Vec2 vectorToWorld(float x, float y) {
         Vec2 u = new Vec2(x / scaleFactor, y / scaleFactor);
@@ -224,8 +224,8 @@ public abstract class Box2DProcessing {
     /**
      * Translate from world to processing as a Vec2
      *
-     * @param v
-     * @return
+     * @param v Vec
+     * @return Vec
      */
     public Vec2 vectorToProcessing(Vec2 v) {
         Vec2 u = new Vec2(v.x * scaleFactor, v.y * scaleFactor);
@@ -236,8 +236,8 @@ public abstract class Box2DProcessing {
     /**
      * A common task we have to do a lot
      *
-     * @param bd
-     * @return
+     * @param bd BodyDef
+     * @return Body
      */
     public Body createBody(BodyDef bd) {
         return world.createBody(bd);
@@ -246,8 +246,8 @@ public abstract class Box2DProcessing {
     /**
      * A common task we have to do a lot
      *
-     * @param jd
-     * @return
+     * @param jd JointDef
+     * @return World
      */
     public Joint createJoint(JointDef jd) {
         return world.createJoint(jd);
@@ -255,7 +255,7 @@ public abstract class Box2DProcessing {
 
     /**
      *
-     * @param b
+     * @param b Body
      * @return body coord as Vec2
      */
     public Vec2 bodyCoord(Body b) {
@@ -265,7 +265,7 @@ public abstract class Box2DProcessing {
 
     /**
      *
-     * @param b
+     * @param b Body
      */
     public void destroyBody(Body b) {
         world.destroyBody(b);
@@ -287,7 +287,7 @@ public abstract class Box2DProcessing {
 
     /**
      *
-     * @return
+     * @return height float
      */
     public float height() {
         return height;
@@ -295,7 +295,7 @@ public abstract class Box2DProcessing {
 
     /**
      *
-     * @return
+     * @return width float
      */
     public float width() {
         return width;

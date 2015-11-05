@@ -23,9 +23,9 @@ public class Step {
 
     /**
      *
-     * @param timeStep
-     * @param velIterations
-     * @param posIterations
+     * @param timeStep float
+     * @param velIterations int
+     * @param posIterations int
      */
     public Step(float timeStep, int velIterations, int posIterations) {
         this.timeStep = timeStep;

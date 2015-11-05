@@ -1,6 +1,6 @@
 ### v0.5.0.pre
 
-Break compatability with ruby-processing. Works with JRuby-9.0.3.0, processing-3.0.1 and jdk8.
+Break compatability with ruby-processing. New build uses maven. Works with JRuby-9.0.3.0, processing-3.0.1 and jdk8.
 
 
 ### v0.4.2

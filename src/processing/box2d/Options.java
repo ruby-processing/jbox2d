@@ -28,10 +28,10 @@ public class Options {
 
     /**
      *
-     * @param scaleFactor
-     * @param gravity
-     * @param warmStart
-     * @param continuousPhysics
+     * @param scaleFactor float
+     * @param gravity float[]
+     * @param warmStart boolean
+     * @param continuousPhysics boolean
      */
     public Options(float scaleFactor, float[] gravity, boolean warmStart, boolean continuousPhysics) {
         this.scaleFactor = scaleFactor;

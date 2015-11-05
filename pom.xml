@@ -28,9 +28,9 @@
 
   <licenses>
     <license>
-			<name>Simplified BSD License</name>
-			<url>http://www.opensource.org/licenses/bsd-license.php</url>
-		</license>
+      <name>Simplified BSD License</name>
+      <url>http://www.opensource.org/licenses/bsd-license.php</url>
+    </license>
   </licenses>
 
   <developers>
@@ -52,23 +52,27 @@
       <artifactId>core</artifactId>
       <scope>system</scope>
       <version>3.0.1</version>
-      <systemPath>${basedir}/src/lib/core.jar</systemPath>
+      <systemPath>${processing.home}/core/library/core.jar</systemPath>
     </dependency>
   </dependencies>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
+    <!-- for Mac developers, non Archlinux and Windows can probably figure it out
+    <processing.home>/Applications/Processing.app/Contents/Java</processing.home> 
+    -->
+    <processing.home>/usr/share/processing</processing.home>
   </properties>
-    <build>
+  <build>
     <sourceDirectory>src</sourceDirectory>
     <finalName>box2d</finalName>
     <extensions>
       <extension>
-        <groupId>org.apache.maven.wagon</groupId> 
-        <artifactId>wagon-webdav-jackrabbit</artifactId> 
-        <version>2.1</version> 
-      </extension> 
+        <groupId>org.apache.maven.wagon</groupId>
+        <artifactId>wagon-webdav-jackrabbit</artifactId>
+        <version>2.1</version>
+      </extension>
     </extensions>
     <plugins>
       <plugin>
@@ -113,20 +117,30 @@
         </configuration>
       </plugin>
       <plugin>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>2.6</version>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.6</version>
       </plugin>
       <plugin>
-        <groupId>de.saumya.mojo</groupId>
-        <artifactId>gem-maven-plugin</artifactId>
-        <version>${jruby.plugins.version}</version>
-        <configuration>
-          <gemspec>pbox2d.gemspec</gemspec>
-        </configuration>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.10</version>
+        <executions>
+          <execution>
+            <id>default-cli</id>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>org.jbox2d</groupId>
+                  <artifactId>jbox2d-library</artifactId>
+                  <version>2.3.1-SNAPSHOT</version>
+                  <type>jar</type>
+                  <outputDirectory>lib</outputDirectory>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
-      <plugin>
-      
     </plugins>
-   
   </build>
 </project>
