@@ -30,7 +30,7 @@ class Boundary
     b.create_fixture(sd, 1)
   end
 
-  # Draw the boundary, if it were at an angle we'd have to do something fancier
+  # Draw the boundary, if it were at an angle we'd have to do something fancy
   def display
     no_fill
     stroke(127)

@@ -11,11 +11,15 @@ attr_reader :boxes, :boundaries, :box2d
 
 Vect = Struct.new(:x, :y)
 
+def settings
+  size(640, 360, P2D)
+end
+
 def setup
   sketch_title 'Liquid Fun Test'
   @box2d = Box2D.new(self)
   box2d.init_options(gravity: [0, -10])
-  box2d.create_world  
+  box2d.create_world
   @boxes = []
   box2d.world.set_particle_radius(0.15)
   box2d.world.set_particle_damping(0.2)
@@ -42,8 +46,4 @@ def draw
   end
   fill(0)
   text(format('f.p.s %d', frame_rate), 10, 60)
-end
-
-def settings
-  size(640, 360, P2D)
 end

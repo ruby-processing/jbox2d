@@ -11,7 +11,7 @@ require_relative 'particle_system'
 attr_reader :box2d, :windmill, :system
 
 def settings
-  size(640,360)
+  size(640, 360)
 end
 
 def setup
@@ -37,3 +37,4 @@ def draw
   fill(0)
   text(format("Click mouse to toggle motor.\nMotor: %s", status), 10, height - 30)
 end
+

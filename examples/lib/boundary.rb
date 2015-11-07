@@ -1,7 +1,7 @@
 class Boundary
   include Processing::Proxy
   attr_reader :box2d, :b, :pos, :size, :a
-  
+
   def initialize(b2d, pos, sz, a = 0)
     @box2d, @pos, @size, @a = b2d, pos, sz, a
     # Define the polygon
@@ -31,7 +31,7 @@ class Boundary
     push_matrix
     translate(pos.x, pos.y)
     rotate(-a)
-    rect(0, 0, size.x,size.y)
+    rect(0, 0, size.x, size.y)
     pop_matrix
   end
 end

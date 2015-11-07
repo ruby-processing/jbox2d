@@ -2,9 +2,9 @@
 # when two particles collide (no change just hitting boundary)
 class Particle
   extend Forwardable
-  def_delegators(:@app, :box2d, :begin_shape, :color, :end_shape, :line, :pop_matrix,
-                 :ellipse, :translate, :rotate, :stroke, :push_matrix, :fill,
-                 :no_fill, :stroke_weight)
+  def_delegators(:@app, :box2d, :begin_shape, :color, :end_shape, :line,
+                 :pop_matrix, :ellipse, :translate, :rotate, :stroke,
+                 :push_matrix, :fill, :no_fill, :stroke_weight)
   attr_accessor :body
   attr_reader :radius, :col
 

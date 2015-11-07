@@ -5,6 +5,10 @@ attr_reader :box2d, :boundaries, :systems
 
 Vect = Struct.new(:x, :y)
 
+def settings
+  size(400, 300)
+end
+
 def setup
   sketch_title 'Liquidy'
   @box2d = Box2D.new(self)
@@ -33,8 +37,4 @@ end
 def mouse_pressed
   # Add a new Particle System whenever the mouse is clicked
   systems << ParticleSystem.new(box2d, 0, mouse_x, mouse_y)
-end
-
-def settings
-  size(400,300)
 end

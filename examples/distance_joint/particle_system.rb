@@ -11,11 +11,11 @@ class ParticleSystem
   include Enumerable, Runnable
   extend Forwardable
   def_delegators(:@pairs, :each, :reject!, :<<)
-  
+
   def initialize
     @pairs = []
   end
-  
+
   def add_pair(x, y)
     self << Pair.new(x, y)
   end

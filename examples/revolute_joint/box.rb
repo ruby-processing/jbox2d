@@ -39,7 +39,7 @@ class Box
     body.createFixture(fd)
 
     # Give it some initial random velocity
-    body.setLinearVelocity(Vec2.new(rand(-5..5),rand(2..5)))
+    body.setLinearVelocity(Vec2.new(rand(-5..5), rand(2..5)))
     body.setAngularVelocity(rand(-5..5))
   end
 
@@ -57,12 +57,12 @@ class Box
 
     rect_mode(Java::ProcessingCore::PConstants::CENTER)
     push_matrix
-    translate(pos.x,pos.y)
+    translate(pos.x, pos.y)
     rotate(-a)
     fill(127)
     stroke(0)
     stroke_weight(2)
-    rect(0,0,w,h)
+    rect(0, 0, w, h)
     pop_matrix
   end
 end

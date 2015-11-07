@@ -56,9 +56,9 @@ class Surface
     stroke(0)
     fill(135, 206, 250)
     begin_shape
-    vertex(width, 0)          # extra vertices so we can fill sky
-    surface.map { |v| vertex(v.x, v.y) }     # the mountain range
-    vertex(0, 0)              # extra vertices so we can fill sky
+    vertex(width, 0) # extra vertices so we can fill sky
+    surface.map { |v| vertex(v.x, v.y) } # the mountain range
+    vertex(0, 0) # extra vertices so we can fill sky
     end_shape
   end
 end
@@ -100,7 +100,7 @@ class Particle
     # Get its angle of rotation
     a = body.get_angle
     push_matrix
-    translate(pos.x,  pos.y)
+    translate(pos.x, pos.y)
     rotate(-a)
     fill(175)
     stroke(0)
