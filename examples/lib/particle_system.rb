@@ -2,8 +2,8 @@ require 'forwardable'
 
 module Runnable
   def run
-    reject! { |item| item.done }
-    each { |item| item.display }
+    reject!(&:done)
+    each(&:display)
   end
 end
 
