@@ -70,5 +70,3 @@ class CustomShape
     body.set_angular_velocity(rand(-5.0..5))
   end
 end
-
-

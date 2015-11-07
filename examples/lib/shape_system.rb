@@ -1,7 +1,7 @@
 module Runnable
   def run
-    reject! { |item| item.done }
-    each { |item| item.display }
+    reject!(&:done)
+    each(&:display)
   end
 end
 
@@ -21,5 +21,3 @@ class ShapeSystem
     self << CustomShape.new(bd, x, y)
   end
 end
-
-
