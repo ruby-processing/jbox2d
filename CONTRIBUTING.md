@@ -17,7 +17,6 @@ already been submitted. When submitting a bug report, ideally include a [Gist][]
 that includes a stack trace and any details that may be necessary to reproduce
 the bug, including your gem version, Ruby version, and operating system.
 
-
 ## Submitting a Pull Request
 1. [Fork the repository.][fork]
 2. [Submit a pull request.][pr]

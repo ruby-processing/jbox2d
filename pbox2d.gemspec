@@ -6,7 +6,7 @@ require 'pbox2d/version'
 Gem::Specification.new do |spec|
   spec.name          = 'pbox2d'
   spec.version       = Pbox2d::VERSION
-  spec.license       = 'FreeBSD/Simplified'
+  spec.license       = 'BSD-2-Clause'
   spec.has_rdoc = true
   spec.extra_rdoc_files = ['README.md', 'LICENSE.md']
   spec.authors       = ['Martin Prout']
@@ -26,8 +26,8 @@ EOF
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "minitest", "~> 5.8"
   spec.platform='java'
-  spec.requirements << 'A decent graphics card'
-  spec.requirements << 'java runtime >= 1.8+'
-  spec.requirements << 'processing = 3.0.1+'
+#  spec.requirements << 'A decent graphics card'
+#  spec.requirements << 'java runtime >= 1.8+'
+#  spec.requirements << 'processing = 3.0.1+'
   spec.requirements << 'maven = 3.3.3'
 end

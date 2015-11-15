@@ -25,7 +25,7 @@ end
 desc 'Compile'
 task :compile do
   sh "mvn package"
-  sh "mvn dependency:copy"
+  sh "cp ${HOME}/jbox2d/jbox2d-library/target/jbox2d-library-2.3.1-SNAPSHOT.jar lib"
   sh "mv target/box2d.jar lib"
 end
 
