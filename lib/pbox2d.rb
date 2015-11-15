@@ -18,26 +18,36 @@ shape_format = 'org.jbox2d.collision.shapes.%s'
 import_class_list(shape, shape_format)
 world = %w( Body BodyDef BodyType World FixtureDef )
 world_format = 'org.jbox2d.dynamics.%s'
-Java::OrgJbox2dParticle::ParticleGroupDef.new
 import_class_list(world, world_format)
-joint = %w( Joint JointDef DistanceJointDef RevoluteJoint RevoluteJointDef MouseJointDef)
+joint = %w(
+  Joint
+  JointDef
+  DistanceJointDef
+  RevoluteJoint
+  RevoluteJointDef
+  MouseJointDef
+)
 joint_format = 'org.jbox2d.dynamics.joints.%s'
 import_class_list(joint, joint_format)
-particle = %w(
-  ParticleColor
-  ParticleContact
-  ParticleGroupDef
-  ParticleBodyContact 
-  ParticleGroup 
-  ParticleType 
-  ParticleGroupType 
-  ParticleGroupDef 
-  ParticleSystem
-  StackQueue
-  VoronoiDiagram
-)
-particle_format = 'org.jbox2d.particle.%s'
-import_class_list(particle, particle_format)
+
+# Import into module namespace to avoid likely clashes
+module PB
+  particle = %w(
+    ParticleColor
+    ParticleContact
+    ParticleGroupDef
+    ParticleBodyContact
+    ParticleGroup
+    ParticleType
+    ParticleGroupType
+    ParticleGroupDef
+    ParticleSystem
+    StackQueue
+    VoronoiDiagram
+  )
+  particle_format = 'org.jbox2d.particle.%s'
+  import_class_list(particle, particle_format)
+end
 
 require_relative 'pbox2d/box2d.rb'
 
@@ -46,7 +56,6 @@ module WorldBuilder
   def self.build(app:, **opts)
     b2d = Box2D.new(app)
     b2d.init_options(opts)
-    p opts
     b2d.create_world
     b2d
   end
