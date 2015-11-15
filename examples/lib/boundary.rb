@@ -1,3 +1,4 @@
+# Re-usable Boundary class
 class Boundary
   include Processing::Proxy
   attr_reader :box2d, :b, :pos, :size, :a
@@ -21,7 +22,7 @@ class Boundary
     b.create_fixture(sd, 1)
   end
 
-  # Draw the boundary, it doesn't move so we don't have to ask the Body for location
+  # Draw the boundary, it doesn't move so we don't ask for location
   def display
     fill(0)
     stroke(0)

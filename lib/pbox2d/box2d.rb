@@ -23,7 +23,7 @@ class Box2D < Java::ProcessingBox2d::Box2DProcessing
   end
 
   def default_step
-    { time_step: 1.0 / 60, velocity_iter: 8, position_iter: 10  }
+    { time_step: 1.0 / 60, velocity_iter: 8, position_iter: 10 }
   end
 
   def gravity(args)
@@ -32,7 +32,7 @@ class Box2D < Java::ProcessingBox2d::Box2DProcessing
 
   def add_listener(listener)
     # in combination with field accessor we can access protected world
-    self.world.setContactListener(listener)
+    world.setContactListener(listener)
   end
 
   def version

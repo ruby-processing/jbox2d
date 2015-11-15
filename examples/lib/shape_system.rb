@@ -1,3 +1,4 @@
+# custom runnable module
 module Runnable
   def run
     reject!(&:done)
@@ -5,6 +6,7 @@ module Runnable
   end
 end
 
+# using forwardable to make a custom enumerable
 class ShapeSystem
   include Enumerable, Runnable
   extend Forwardable

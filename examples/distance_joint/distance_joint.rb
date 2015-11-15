@@ -20,8 +20,7 @@ end
 
 def setup
   # Initialize box2d physics and create the world
-  @box2d = Box2D.new(self)
-  box2d.create_world
+  @box2d = WorldBuilder.build(app: self)
   @system = ParticleSystem.new
   @boundaries = []
   # Add a bunch of fixed boundaries

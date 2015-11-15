@@ -1,4 +1,8 @@
-### v0.5.0.pre
+### v0.6.0
+
+Added import for jbox2d Particle, ParticleGroup etc.  Introduced WorldBuilder module to get rid of boilerplate code for the user. Reworked examples to use a common Boundary class.
+
+### v0.5.0
 
 Break compatability with ruby-processing. New build uses maven. Works with JRuby-9.0.3.0, processing-3.0.1 and jdk8.
 

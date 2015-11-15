@@ -7,7 +7,7 @@ end
 ContactListener = Java::OrgJbox2dCallbacks::ContactListener
 
 def import_class_list(list, string)
-  list.each { |klass| java_import format(string, klass) }
+  list.each { |d| java_import format(string, d) }
 end
 
 common = %w( Vec2 Transform )
@@ -18,16 +18,36 @@ shape_format = 'org.jbox2d.collision.shapes.%s'
 import_class_list(shape, shape_format)
 world = %w( Body BodyDef BodyType World FixtureDef )
 world_format = 'org.jbox2d.dynamics.%s'
+Java::OrgJbox2dParticle::ParticleGroupDef.new
 import_class_list(world, world_format)
 joint = %w( Joint JointDef DistanceJointDef RevoluteJoint RevoluteJointDef MouseJointDef)
 joint_format = 'org.jbox2d.dynamics.joints.%s'
 import_class_list(joint, joint_format)
-module PB
-  particle = %w( ParticleBodyContact ParticleGroup ParticleType ParticleColor
-  ParticleGroupDef StackQueue ParticleContact ParticleGroupType VoronoiDiagram
-  ParticleDef ParticleSystem )
-  particle_format = 'org.jbox2d.particle.%s'
-  import_class_list(particle, particle_format)
-end
+particle = %w(
+  ParticleColor
+  ParticleContact
+  ParticleGroupDef
+  ParticleBodyContact 
+  ParticleGroup 
+  ParticleType 
+  ParticleGroupType 
+  ParticleGroupDef 
+  ParticleSystem
+  StackQueue
+  VoronoiDiagram
+)
+particle_format = 'org.jbox2d.particle.%s'
+import_class_list(particle, particle_format)
 
 require_relative 'pbox2d/box2d.rb'
+
+# Box2D factory
+module WorldBuilder
+  def self.build(app:, **opts)
+    b2d = Box2D.new(app)
+    b2d.init_options(opts)
+    p opts
+    b2d.create_world
+    b2d
+  end
+end

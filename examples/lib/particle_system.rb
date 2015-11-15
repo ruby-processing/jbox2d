@@ -7,6 +7,7 @@ module Runnable
   end
 end
 
+# Not be confused with the jbox2d ParticleSystem
 class ParticleSystem
   include Enumerable, Runnable
   extend Forwardable

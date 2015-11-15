@@ -14,8 +14,7 @@ end
 
 def setup
   sketch_title 'Collision Listening'
-  @box2d = Box2D.new(self)
-  box2d.create_world
+  @box2d = WorldBuilder.build(app: self)
   box2d.add_listener(CustomListener.new)
   @particles = []
   @wall = Boundary.new(box2d, Vect.new(width / 2, height - 5), Vect.new(width, 10))

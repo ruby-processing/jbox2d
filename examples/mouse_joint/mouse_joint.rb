@@ -14,11 +14,14 @@ require 'forwardable'
 # A reference to our box2d world
 attr_reader :box2d, :boundaries, :box, :spring
 
-def setup
+def settings
   size(640, 360)
+end
+
+def setup
+  sketch_title 'Mouse Joint'
   # Initialize box2d physics and create the world
-  @box2d = Box2D.new self
-  box2d.create_world
+  @box2d = WorldBuilder.build(app: self)
   # Make the box
   @box = Box.new(width / 2, height / 2)
   # Make a dummy spring

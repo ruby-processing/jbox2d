@@ -6,10 +6,13 @@ require_relative 'lib/boundary'
 
 attr_reader :box2d, :particles, :wall
 
-def setup
+def settings
   size 400, 400
-  @box2d = Box2D.new(self)
-  box2d.create_world
+end
+
+def setup
+  sketch_title 'Test Contact'
+  @box2d = WorldBuilder.build(app: self)
   box2d.add_listener(CustomListener.new)
   @particles = []
   @wall = Boundary.new(self, width / 2, height - 5, width, 10)

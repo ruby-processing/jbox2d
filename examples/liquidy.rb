@@ -11,9 +11,7 @@ end
 
 def setup
   sketch_title 'Liquidy'
-  @box2d = Box2D.new(self)
-  box2d.init_options(gravity: [0, -20])
-  box2d.create_world
+  @box2d = WorldBuilder.build(app: self, gravity: [0, -20])
   @systems = []
   @boundaries = [
     Boundary.new(box2d, Vect.new(50, 100), Vect.new(300, 5), -0.3),
