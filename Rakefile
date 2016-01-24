@@ -25,13 +25,12 @@ end
 desc 'Compile'
 task :compile do
   sh "mvn package"
-  sh "cp ${HOME}/jbox2d/jbox2d-library/target/jbox2d-library-2.3.1-SNAPSHOT.jar lib"
   sh "mv target/box2d.jar lib"
 end
 
 desc 'Build Gem'
 task :gem do
-  sh "gem build pbox2d.gemspec"
+ sh "gem build pbox2d.gemspec"
 end
 
 Rake::TestTask.new do |t|
