@@ -1,3 +1,7 @@
+### v0.7.0 
+
+A strike for independence, now building from source using polyglot maven
+
 ### v0.6.0
 
 Added import for jbox2d Particle, ParticleGroup etc (see PB module).  Introduced WorldBuilder module to get rid of boilerplate code for the user. Reworked examples to use a common Boundary class.

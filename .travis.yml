@@ -1,0 +1,23 @@
+sudo: false
+
+language: ruby
+
+bundler_args: --without production
+
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
+
+rvm: 
+  - jruby-head
+
+jdk:
+  - oraclejdk8
+
+env:
+  - JRUBY_OPTS="$JRUBY_OPTS" JAVA_OPTS="-Djruby.version=$JRUBY_VERSION"
+
+before_script:
+  - export JRUBY_OPTS="-Xcext.enabled=false -Xcompile.invokedynamic=false"
+
