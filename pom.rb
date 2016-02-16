@@ -38,14 +38,14 @@ project 'pbox2d', 'https://github.com/ruby-processing/jbox2d' do
   plugin_management do
     plugin :resources, '2.6'
     plugin :dependency, '2.8'
-    plugin( :compiler, '3.1',
+    plugin( :compiler, '3.3',
           'source' =>  '1.8',
           'target' =>  '1.8' )
     plugin( :javadoc, '2.10.3',
           'detectOfflineLinks' => 'false',
           'links' => ['${processing.api}', '${jruby.api}']
           )
-    plugin( :jar, '2.4',
+    plugin( :jar, '2.6',
             'archive' => {
               'manifestFile' => 'MANIFEST.MF'
             }
