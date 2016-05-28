@@ -114,7 +114,10 @@ public class BodyDef {
    */
   public float gravityScale;
 
-  public BodyDef() {
+    /**
+     *
+     */
+    public BodyDef() {
     userData = null;
     position = new Vec2();
     angle = 0f;
@@ -134,6 +137,7 @@ public class BodyDef {
   /**
    * The body type: static, kinematic, or dynamic. Note: if a dynamic body would have zero mass, the
    * mass is set to one.
+     * @return 
    */
   public BodyType getType() {
     return type;
@@ -142,6 +146,7 @@ public class BodyDef {
   /**
    * The body type: static, kinematic, or dynamic. Note: if a dynamic body would have zero mass, the
    * mass is set to one.
+     * @param type
    */
   public void setType(BodyType type) {
     this.type = type;
@@ -149,6 +154,7 @@ public class BodyDef {
 
   /**
    * Use this to store application specific body data.
+     * @return 
    */
   public Object getUserData() {
     return userData;
@@ -156,6 +162,7 @@ public class BodyDef {
 
   /**
    * Use this to store application specific body data.
+     * @param userData
    */
   public void setUserData(Object userData) {
     this.userData = userData;
@@ -164,6 +171,7 @@ public class BodyDef {
   /**
    * The world position of the body. Avoid creating bodies at the origin since this can lead to many
    * overlapping shapes.
+     * @return 
    */
   public Vec2 getPosition() {
     return position;
@@ -172,6 +180,7 @@ public class BodyDef {
   /**
    * The world position of the body. Avoid creating bodies at the origin since this can lead to many
    * overlapping shapes.
+     * @param position
    */
   public void setPosition(Vec2 position) {
     this.position = position;
@@ -179,6 +188,7 @@ public class BodyDef {
 
   /**
    * The world angle of the body in radians.
+     * @return 
    */
   public float getAngle() {
     return angle;
@@ -186,6 +196,7 @@ public class BodyDef {
 
   /**
    * The world angle of the body in radians.
+     * @param angle
    */
   public void setAngle(float angle) {
     this.angle = angle;
@@ -193,6 +204,7 @@ public class BodyDef {
 
   /**
    * The linear velocity of the body in world co-ordinates.
+     * @return 
    */
   public Vec2 getLinearVelocity() {
     return linearVelocity;
@@ -200,6 +212,7 @@ public class BodyDef {
 
   /**
    * The linear velocity of the body in world co-ordinates.
+     * @param linearVelocity
    */
   public void setLinearVelocity(Vec2 linearVelocity) {
     this.linearVelocity = linearVelocity;
@@ -207,6 +220,7 @@ public class BodyDef {
 
   /**
    * The angular velocity of the body.
+     * @return 
    */
   public float getAngularVelocity() {
     return angularVelocity;
@@ -214,6 +228,7 @@ public class BodyDef {
 
   /**
    * The angular velocity of the body.
+     * @param angularVelocity
    */
   public void setAngularVelocity(float angularVelocity) {
     this.angularVelocity = angularVelocity;
@@ -223,6 +238,7 @@ public class BodyDef {
    * Linear damping is use to reduce the linear velocity. The damping parameter can be larger than
    * 1.0f but the damping effect becomes sensitive to the time step when the damping parameter is
    * large.
+     * @return 
    */
   public float getLinearDamping() {
     return linearDamping;
@@ -232,6 +248,7 @@ public class BodyDef {
    * Linear damping is use to reduce the linear velocity. The damping parameter can be larger than
    * 1.0f but the damping effect becomes sensitive to the time step when the damping parameter is
    * large.
+     * @param linearDamping
    */
   public void setLinearDamping(float linearDamping) {
     this.linearDamping = linearDamping;
@@ -241,6 +258,7 @@ public class BodyDef {
    * Angular damping is use to reduce the angular velocity. The damping parameter can be larger than
    * 1.0f but the damping effect becomes sensitive to the time step when the damping parameter is
    * large.
+     * @return 
    */
   public float getAngularDamping() {
     return angularDamping;
@@ -250,6 +268,7 @@ public class BodyDef {
    * Angular damping is use to reduce the angular velocity. The damping parameter can be larger than
    * 1.0f but the damping effect becomes sensitive to the time step when the damping parameter is
    * large.
+     * @param angularDamping
    */
   public void setAngularDamping(float angularDamping) {
     this.angularDamping = angularDamping;
@@ -258,6 +277,7 @@ public class BodyDef {
   /**
    * Set this flag to false if this body should never fall asleep. Note that this increases CPU
    * usage.
+     * @return 
    */
   public boolean isAllowSleep() {
     return allowSleep;
@@ -266,6 +286,7 @@ public class BodyDef {
   /**
    * Set this flag to false if this body should never fall asleep. Note that this increases CPU
    * usage.
+     * @param allowSleep
    */
   public void setAllowSleep(boolean allowSleep) {
     this.allowSleep = allowSleep;
@@ -273,6 +294,7 @@ public class BodyDef {
 
   /**
    * Is this body initially sleeping?
+     * @return 
    */
   public boolean isAwake() {
     return awake;
@@ -280,6 +302,7 @@ public class BodyDef {
 
   /**
    * Is this body initially sleeping?
+     * @param awake
    */
   public void setAwake(boolean awake) {
     this.awake = awake;
@@ -287,6 +310,7 @@ public class BodyDef {
 
   /**
    * Should this body be prevented from rotating? Useful for characters.
+     * @return 
    */
   public boolean isFixedRotation() {
     return fixedRotation;
@@ -294,6 +318,7 @@ public class BodyDef {
 
   /**
    * Should this body be prevented from rotating? Useful for characters.
+     * @param fixedRotation
    */
   public void setFixedRotation(boolean fixedRotation) {
     this.fixedRotation = fixedRotation;
@@ -304,6 +329,7 @@ public class BodyDef {
    * Note that all bodies are prevented from tunneling through kinematic and static bodies. This
    * setting is only considered on dynamic bodies.
    * 
+     * @return 
    * @warning You should use this flag sparingly since it increases processing time.
    */
   public boolean isBullet() {
@@ -315,6 +341,7 @@ public class BodyDef {
    * Note that all bodies are prevented from tunneling through kinematic and static bodies. This
    * setting is only considered on dynamic bodies.
    * 
+     * @param bullet
    * @warning You should use this flag sparingly since it increases processing time.
    */
   public void setBullet(boolean bullet) {
@@ -323,6 +350,7 @@ public class BodyDef {
 
   /**
    * Does this body start out active?
+     * @return 
    */
   public boolean isActive() {
     return active;
@@ -330,6 +358,7 @@ public class BodyDef {
 
   /**
    * Does this body start out active?
+     * @param active
    */
   public void setActive(boolean active) {
     this.active = active;
@@ -337,6 +366,7 @@ public class BodyDef {
 
   /**
    * Experimental: scales the inertia tensor.
+     * @return 
    */
   public float getGravityScale() {
     return gravityScale;
@@ -344,6 +374,7 @@ public class BodyDef {
 
   /**
    * Experimental: scales the inertia tensor.
+     * @param gravityScale
    */
   public void setGravityScale(float gravityScale) {
     this.gravityScale = gravityScale;

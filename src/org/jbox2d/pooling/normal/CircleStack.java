@@ -43,6 +43,7 @@ public abstract class CircleStack<E> implements IOrderedStack<E>{
   }
 
   @SuppressWarnings("unchecked")
+  @Override
   public final E pop() {
     index++;
     if(index >= size){
@@ -52,6 +53,7 @@ public abstract class CircleStack<E> implements IOrderedStack<E>{
   }
 
   @SuppressWarnings("unchecked")
+  @Override
   public final E[] pop(int argNum) {
     assert (argNum <= container.length) : "Container array is too small";
     if(index + argNum < size){
@@ -69,6 +71,7 @@ public abstract class CircleStack<E> implements IOrderedStack<E>{
   @Override
   public void push(int argNum) {}
 
-  /** Creates a new instance of the object contained by this stack. */
+  /** Creates a new instance of the object contained by this stack.
+     * @return  */
   protected abstract E newInstance();
 }

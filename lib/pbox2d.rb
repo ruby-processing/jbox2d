@@ -5,6 +5,7 @@ Dir[File.join(working_directory, '*.jar')].each do |jar|
 end
 
 ContactListener = Java::OrgJbox2dCallbacks::ContactListener
+ContactAdaptor = Java::OrgJbox2dCallbacks::ContactAdaptor
 
 def import_class_list(list, string)
   list.each { |d| java_import format(string, d) }

@@ -69,6 +69,8 @@ public class ChainShape extends Shape {
 
   /**
    * Get a child edge.
+   * @param edge
+   * @param index
    */
   public void getChildEdge(EdgeShape edge, int index) {
     assert (0 <= index && index < m_count - 1);
@@ -172,7 +174,7 @@ public class ChainShape extends Shape {
   }
 
   @Override
-  public Shape clone() {
+  public Shape clone()  {
     ChainShape clone = new ChainShape();
     clone.createChain(m_vertices, m_count);
     clone.m_prevVertex.set(m_prevVertex);

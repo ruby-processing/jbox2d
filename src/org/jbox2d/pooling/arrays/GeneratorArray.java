@@ -6,8 +6,11 @@ import org.jbox2d.particle.VoronoiDiagram;
 
 public class GeneratorArray {
 
-  private final HashMap<Integer, VoronoiDiagram.Generator[]> map =
-      new HashMap<Integer, VoronoiDiagram.Generator[]>();
+  private final HashMap<Integer, VoronoiDiagram.Generator[]> map;
+
+    public GeneratorArray() {
+        this.map = new HashMap<>();
+    }
 
   public VoronoiDiagram.Generator[] get(int length) {
     assert (length > 0);

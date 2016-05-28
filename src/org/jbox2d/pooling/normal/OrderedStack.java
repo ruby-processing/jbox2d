@@ -28,6 +28,7 @@ package org.jbox2d.pooling.normal;
 
 /**
  * @author Daniel Murphy
+ * @param <E>
  */
 public abstract class OrderedStack<E> {
 
@@ -66,6 +67,7 @@ public abstract class OrderedStack<E> {
     assert (index >= 0) : "Beginning of stack reached, push/pops are unmatched";
   }
 
-  /** Creates a new instance of the object contained by this stack. */
+  /** Creates a new instance of the object contained by this stack.
+     * @return  */
   protected abstract E newInstance();
 }

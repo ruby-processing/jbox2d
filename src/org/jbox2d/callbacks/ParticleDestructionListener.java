@@ -6,6 +6,7 @@ import org.jbox2d.particle.ParticleGroup;
 public interface ParticleDestructionListener {
   /**
    * Called when any particle group is about to be destroyed.
+   * @param group
    */
   void sayGoodbye(ParticleGroup group);
 

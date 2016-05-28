@@ -84,17 +84,18 @@ public abstract class Shape {
    * 
    * @param xf the shape world transform.
    * @param p a point in world coordinates.
+     * @return 
    */
   public abstract boolean testPoint(final Transform xf, final Vec2 p);
 
   /**
    * Cast a ray against a child shape.
    * 
-   * @param argOutput the ray-cast results.
-   * @param argInput the ray-cast input parameters.
-   * @param argTransform the transform to be applied to the shape.
-   * @param argChildIndex the child shape index
-   * @return if hit
+   * @param output
+   * @param input
+   * @param transform
+   * @param childIndex
+   *  @return if hit
    */
   public abstract boolean raycast(RayCastOutput output, RayCastInput input, Transform transform,
       int childIndex);
@@ -103,8 +104,9 @@ public abstract class Shape {
   /**
    * Given a transform, compute the associated axis aligned bounding box for a child shape.
    * 
-   * @param argAabb returns the axis aligned box.
-   * @param argXf the world transform of the shape.
+   * @param aabb returns the axis aligned box.
+   * @param xf the world transform of the shape.
+   * @param childIndex
    */
   public abstract void computeAABB(final AABB aabb, final Transform xf, int childIndex);
 
@@ -123,10 +125,12 @@ public abstract class Shape {
    * 
    * @param xf the shape world transform.
    * @param p a point in world coordinates.
+   * @param childIndex
    * @param normalOut returns the direction in which the distance increases.
    * @return distance returns the distance from the current shape.
    */
   public abstract float computeDistanceToOut(Transform xf, Vec2 p, int childIndex, Vec2 normalOut);
 
+  @Override
   public abstract Shape clone();
 }

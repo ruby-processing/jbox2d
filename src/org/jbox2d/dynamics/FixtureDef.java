@@ -1,7 +1,8 @@
-/*******************************************************************************
+/**
+ * *****************************************************************************
  * Copyright (c) 2013, Daniel Murphy
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
  * 	* Redistributions of source code must retain the above copyright notice,
@@ -9,7 +10,7 @@
  * 	* Redistributions in binary form must reproduce the above copyright notice,
  * 	  this list of conditions and the following disclaimer in the documentation
  * 	  and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -20,161 +21,194 @@
  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
- ******************************************************************************/
+ *****************************************************************************
+ */
 package org.jbox2d.dynamics;
 
 import org.jbox2d.collision.shapes.Shape;
 
 /**
- * A fixture definition is used to create a fixture. This class defines an abstract fixture
- * definition. You can reuse fixture definitions safely.
- * 
+ * A fixture definition is used to create a fixture. This class defines an
+ * abstract fixture definition. You can reuse fixture definitions safely.
+ *
  * @author daniel
  */
 public class FixtureDef {
-  /**
-   * The shape, this must be set. The shape will be cloned, so you can create the shape on the
-   * stack.
-   */
-  public Shape shape = null;
 
-  /**
-   * Use this to store application specific fixture data.
-   */
-  public Object userData;
+    /**
+     * The shape, this must be set. The shape will be cloned, so you can create
+     * the shape on the stack.
+     */
+    public Shape shape = null;
 
-  /**
-   * The friction coefficient, usually in the range [0,1].
-   */
-  public float friction;
+    /**
+     * Use this to store application specific fixture data.
+     */
+    public Object userData;
 
-  /**
-   * The restitution (elasticity) usually in the range [0,1].
-   */
-  public float restitution;
+    /**
+     * The friction coefficient, usually in the range [0,1].
+     */
+    public float friction;
 
-  /**
-   * The density, usually in kg/m^2
-   */
-  public float density;
+    /**
+     * The restitution (elasticity) usually in the range [0,1].
+     */
+    public float restitution;
 
-  /**
-   * A sensor shape collects contact information but never generates a collision response.
-   */
-  public boolean isSensor;
+    /**
+     * The density, usually in kg/m^2
+     */
+    public float density;
 
-  /**
-   * Contact filtering data;
-   */
-  public Filter filter;
+    /**
+     * A sensor shape collects contact information but never generates a
+     * collision response.
+     */
+    public boolean isSensor;
 
-  public FixtureDef() {
-    shape = null;
-    userData = null;
-    friction = 0.2f;
-    restitution = 0f;
-    density = 0f;
-    filter = new Filter();
-    isSensor = false;
-  }
+    /**
+     * Contact filtering data;
+     */
+    public Filter filter;
 
-  /**
-   * The shape, this must be set. The shape will be cloned, so you can create the shape on the
-   * stack.
-   */
-  public Shape getShape() {
-    return shape;
-  }
+    public FixtureDef() {
+        shape = null;
+        userData = null;
+        friction = 0.2f;
+        restitution = 0f;
+        density = 0f;
+        filter = new Filter();
+        isSensor = false;
+    }
 
-  /**
-   * The shape, this must be set. The shape will be cloned, so you can create the shape on the
-   * stack.
-   */
-  public void setShape(Shape shape) {
-    this.shape = shape;
-  }
+    /**
+     * The shape, this must be set. The shape will be cloned, so you can create
+     * the shape on the stack.
+     *
+     * @return
+     */
+    public Shape getShape() {
+        return shape;
+    }
 
-  /**
-   * Use this to store application specific fixture data.
-   */
-  public Object getUserData() {
-    return userData;
-  }
+    /**
+     * The shape, this must be set. The shape will be cloned, so you can create
+     * the shape on the stack.
+     *
+     * @param shape
+     */
+    public void setShape(Shape shape) {
+        this.shape = shape;
+    }
 
-  /**
-   * Use this to store application specific fixture data.
-   */
-  public void setUserData(Object userData) {
-    this.userData = userData;
-  }
+    /**
+     * Use this to store application specific fixture data.
+     *
+     * @return
+     */
+    public Object getUserData() {
+        return userData;
+    }
 
-  /**
-   * The friction coefficient, usually in the range [0,1].
-   */
-  public float getFriction() {
-    return friction;
-  }
+    /**
+     * Use this to store application specific fixture data.
+     *
+     * @param userData
+     */
+    public void setUserData(Object userData) {
+        this.userData = userData;
+    }
 
-  /**
-   * The friction coefficient, usually in the range [0,1].
-   */
-  public void setFriction(float friction) {
-    this.friction = friction;
-  }
+    /**
+     * The friction coefficient, usually in the range [0,1].
+     *
+     * @return
+     */
+    public float getFriction() {
+        return friction;
+    }
 
-  /**
-   * The restitution (elasticity) usually in the range [0,1].
-   */
-  public float getRestitution() {
-    return restitution;
-  }
+    /**
+     * The friction coefficient, usually in the range [0,1].
+     *
+     * @param friction
+     */
+    public void setFriction(float friction) {
+        this.friction = friction;
+    }
 
-  /**
-   * The restitution (elasticity) usually in the range [0,1].
-   */
-  public void setRestitution(float restitution) {
-    this.restitution = restitution;
-  }
+    /**
+     * The restitution (elasticity) usually in the range [0,1].
+     *
+     * @return
+     */
+    public float getRestitution() {
+        return restitution;
+    }
 
-  /**
-   * The density, usually in kg/m^2
-   */
-  public float getDensity() {
-    return density;
-  }
+    /**
+     * The restitution (elasticity) usually in the range [0,1].
+     *
+     * @param restitution
+     */
+    public void setRestitution(float restitution) {
+        this.restitution = restitution;
+    }
 
-  /**
-   * The density, usually in kg/m^2
-   */
-  public void setDensity(float density) {
-    this.density = density;
-  }
+    /**
+     * The density, usually in kg/m^2
+     *
+     * @return
+     */
+    public float getDensity() {
+        return density;
+    }
 
-  /**
-   * A sensor shape collects contact information but never generates a collision response.
-   */
-  public boolean isSensor() {
-    return isSensor;
-  }
+    /**
+     * The density, usually in kg/m^2
+     *
+     * @param density
+     */
+    public void setDensity(float density) {
+        this.density = density;
+    }
 
-  /**
-   * A sensor shape collects contact information but never generates a collision response.
-   */
-  public void setSensor(boolean isSensor) {
-    this.isSensor = isSensor;
-  }
+    /**
+     * A sensor shape collects contact information but never generates a
+     * collision response.
+     *
+     * @return
+     */
+    public boolean isSensor() {
+        return isSensor;
+    }
 
-  /**
-   * Contact filtering data;
-   */
-  public Filter getFilter() {
-    return filter;
-  }
+    /**
+     * A sensor shape collects contact information but never generates a
+     * collision response.
+     *
+     * @param isSensor
+     */
+    public void setSensor(boolean isSensor) {
+        this.isSensor = isSensor;
+    }
 
-  /**
-   * Contact filtering data;
-   */
-  public void setFilter(Filter filter) {
-    this.filter = filter;
-  }
+    /**
+     * Contact filtering data;
+     *
+     * @return
+     */
+    public Filter getFilter() {
+        return filter;
+    }
+
+    /**
+     * Contact filtering data;
+     *
+     * @param filter
+     */
+    public void setFilter(Filter filter) {
+        this.filter = filter;
+    }
 }

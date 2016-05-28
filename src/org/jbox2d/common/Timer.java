@@ -36,7 +36,7 @@ public class Timer {
     reset();
   }
 
-  public void reset() {
+  public final void reset() {
     resetNanos = System.nanoTime();
   }
 

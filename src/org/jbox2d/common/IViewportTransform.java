@@ -44,49 +44,64 @@ public interface IViewportTransform {
   /**
    * This is the half-width and half-height. This should be the actual half-width and half-height,
    * not anything transformed or scaled. Not a copy.
+     * @return 
    */
   Vec2 getExtents();
 
   /**
    * This sets the half-width and half-height. This should be the actual half-width and half-height,
    * not anything transformed or scaled.
+     * @param extents
    */
   void setExtents(Vec2 extents);
 
   /**
    * This sets the half-width and half-height of the viewport. This should be the actual half-width
    * and half-height, not anything transformed or scaled.
+     * @param halfWidth
+     * @param halfHeight
    */
   void setExtents(float halfWidth, float halfHeight);
 
   /**
    * center of the viewport. Not a copy.
+     * @return 
    */
   Vec2 getCenter();
 
   /**
    * sets the center of the viewport.
+     * @param pos
    */
   void setCenter(Vec2 pos);
 
   /**
    * sets the center of the viewport.
+     * @param x
+     * @param y
    */
   void setCenter(float x, float y);
 
   /**
    * Sets the transform's center to the given x and y coordinates, and using the given scale.
+     * @param x
+     * @param y
+     * @param scale
    */
   void setCamera(float x, float y, float scale);
 
   /**
    * Transforms the given directional vector by the viewport transform (not positional)
+     * @param world
+     * @param screen
    */
   void getWorldVectorToScreen(Vec2 world, Vec2 screen);
 
 
   /**
    * Transforms the given directional screen vector back to the world direction.
+     * @param screen
+     * @param world
    */
   void getScreenVectorToWorld(Vec2 screen, Vec2 world);
   
@@ -96,6 +111,8 @@ public interface IViewportTransform {
   /**
    * takes the world coordinate (world) puts the corresponding screen coordinate in screen. It
    * should be safe to give the same object as both parameters.
+     * @param world
+     * @param screen
    */
   void getWorldToScreen(Vec2 world, Vec2 screen);
 
@@ -103,11 +120,14 @@ public interface IViewportTransform {
   /**
    * takes the screen coordinates (screen) and puts the corresponding world coordinates in world. It
    * should be safe to give the same object as both parameters.
+     * @param screen
+     * @param world
    */
   void getScreenToWorld(Vec2 screen, Vec2 world);
 
   /**
    * Multiplies the viewport transform by the given Mat22
+     * @param transform
    */
   void mulByTransform(Mat22 transform);
 }

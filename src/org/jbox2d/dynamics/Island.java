@@ -408,7 +408,7 @@ public class Island {
           continue;
         }
 
-        if ((b.m_flags & Body.e_autoSleepFlag) == 0
+        if ((b.m_flags & Body.E_AUTO_SLEEP_FLAG) == 0
             || b.m_angularVelocity * b.m_angularVelocity > angTolSqr
             || Vec2.dot(b.m_linearVelocity, b.m_linearVelocity) > linTolSqr) {
           b.m_sleepTime = 0.0f;

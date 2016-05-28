@@ -73,7 +73,7 @@ public class ContactID implements Comparable<ContactID> {
     set(c);
   }
 
-  public void set(final ContactID c) {
+  public final void set(final ContactID c) {
     indexA = c.indexA;
     indexB = c.indexB;
     typeA = c.typeA;

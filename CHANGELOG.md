@@ -1,3 +1,7 @@
+### v0.8.0 
+
+Update for JRubyArt-1.1+ and processing-3.1+
+
 ### v0.7.0 
 
 A strike for independence, now building from source using polyglot maven
