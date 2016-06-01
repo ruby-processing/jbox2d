@@ -27,6 +27,7 @@ joint = %w(
   RevoluteJoint
   RevoluteJointDef
   MouseJointDef
+  ConstantVolumeJointDef
 )
 joint_format = 'org.jbox2d.dynamics.joints.%s'
 import_class_list(joint, joint_format)
