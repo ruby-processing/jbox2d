@@ -11,10 +11,12 @@
 
 require 'pbox2d'
 require 'forwardable'
-require_relative 'boundary'
-require_relative 'blob'
+require_relative 'lib/boundary'
+require_relative 'lib/blob'
 
 attr_reader :boundaries, :blob, :box2d
+
+Vect = Struct.new(:x, :y)
 
 def settings
   size(400, 300)
@@ -26,10 +28,10 @@ def setup
   @box2d = WorldBuilder.build(app: self, gravity: [0, -20])
   box2d.create_world
   @boundaries = []
-  boundaries << Boundary.new(box2d, Vec2D.new(width / 2, height - 5), Vec2D.new(width, 10))
-  boundaries << Boundary.new(box2d, Vec2D.new(width / 2, 5), Vec2D.new(width, 10))
-  boundaries << Boundary.new(box2d, Vec2D.new(width - 5, height / 2), Vec2D.new(10, height))
-  boundaries << Boundary.new(box2d, Vec2D.new(5, height / 2), Vec2D.new(10, height))
+  boundaries << Boundary.new(box2d, Vect.new(width / 2, height - 5), Vect.new(width, 10))
+  boundaries << Boundary.new(box2d, Vect.new(width / 2, 5), Vect.new(width, 10))
+  boundaries << Boundary.new(box2d, Vect.new(width - 5, height / 2), Vect.new(10, height))
+  boundaries << Boundary.new(box2d, Vect.new(5, height / 2), Vect.new(10, height))
   # Make a new blob
   @blob = Blob.new
 end
