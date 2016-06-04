@@ -45,9 +45,9 @@ class Bubble
       # For filtering out collisions
       #fd.filter.groupIndex = -2
       # Parameters that affect physics
-      fd.set_density(0.1)
-      fd.set_restitution(0.05)
-      fd.set_friction(1.0)
+      fd.set_density(1.0)
+      fd.set_restitution(0.5)
+      fd.set_friction(0.5)
       # Finalize the body
       body.create_fixture(fd)
       # Add it to the volume
@@ -56,8 +56,8 @@ class Bubble
       outline << body
    end
     # These parameters control how stiff vs. jiggly the blob is
-    cvjd.frequencyHz = 10.0
-    cvjd.dampingRatio = 3.0
+    cvjd.frequencyHz = 0.0
+    cvjd.dampingRatio = 0.0
     # Put the joint thing in our world!
     box2d.world.create_joint(cvjd)
  end
