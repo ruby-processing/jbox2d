@@ -19,8 +19,7 @@ def setup
 end
 
 def draw
-  col = color('#ffffff')
-  background(col)
+  background color('#ffffff')
   particles << Particle.new(self, rand(width), 20, rand(4..8)) if rand < 0.1
   particles.each(&:display)
   particles.reject!(&:done)

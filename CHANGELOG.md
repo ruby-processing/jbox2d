@@ -1,5 +1,9 @@
-### v0.8.0 
 
+### v0.9.0
+
+Update maven artifacts
+
+### v0.8.0 
 Update for JRubyArt-1.1+ and processing-3.1+
 
 ### v0.7.0 

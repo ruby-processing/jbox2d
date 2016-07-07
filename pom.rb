@@ -2,7 +2,7 @@ require 'fileutils'
 project 'pbox2d', 'https://github.com/ruby-processing/jbox2d' do
 
   model_version '4.0.0'
-  id 'ruby-processing:pbox2d', '0.8'
+  id 'ruby-processing:pbox2d', '0.9'
   packaging 'jar'
 
   description 'jbox2d for JRubyArt'
@@ -11,7 +11,7 @@ project 'pbox2d', 'https://github.com/ruby-processing/jbox2d' do
 
   developer 'monkstone' do
     name 'Martin Prout'
-    email 'martin_p@lineone.net'
+    email 'mamba2928@yahoo.co.uk'
     roles 'developer' 
   end
 
@@ -34,18 +34,18 @@ project 'pbox2d', 'https://github.com/ruby-processing/jbox2d' do
             )
 
   pom 'org.jruby:jruby:9.1.2.0'
-  jar 'org.processing:core:3.1'
+  jar 'org.processing:core:3.1.1
   plugin_management do
     plugin :resources, '2.6'
     plugin :dependency, '2.8'
-    plugin( :compiler, '3.3',
+    plugin( :compiler, '3.5.1',
           'source' =>  '1.8',
           'target' =>  '1.8' )
-    plugin( :javadoc, '2.10.3',
+    plugin( :javadoc, '2.10.4',
           'detectOfflineLinks' => 'false',
           'links' => ['${processing.api}', '${jruby.api}']
           )
-    plugin( :jar, '2.6',
+    plugin( :jar, '3.0.2',
             'archive' => {
               'manifestFile' => 'MANIFEST.MF'
             }
