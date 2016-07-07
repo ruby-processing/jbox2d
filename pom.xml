@@ -11,7 +11,7 @@ DO NOT MODIFIY - GENERATED CODE
   <modelVersion>4.0.0</modelVersion>
   <groupId>ruby-processing</groupId>
   <artifactId>pbox2d</artifactId>
-  <version>0.8</version>
+  <version>0.9</version>
   <name>pbox2d</name>
   <description>jbox2d for JRubyArt</description>
   <url>https://github.com/ruby-processing/jbox2d</url>
@@ -29,7 +29,7 @@ DO NOT MODIFIY - GENERATED CODE
     <developer>
       <id>monkstone</id>
       <name>Martin Prout</name>
-      <email>martin_p@lineone.net</email>
+      <email>mamba2928@yahoo.co.uk</email>
       <roles>
         <role>developer</role>
       </roles>
@@ -62,7 +62,7 @@ DO NOT MODIFIY - GENERATED CODE
     <dependency>
       <groupId>org.processing</groupId>
       <artifactId>core</artifactId>
-      <version>3.1</version>
+      <version>3.1.1</version>
     </dependency>
   </dependencies>
   <build>
@@ -81,15 +81,15 @@ DO NOT MODIFIY - GENERATED CODE
         </plugin>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.3</version>
+          <version>3.5.1</version>
           <configuration>
-            <source>1.8</source>
-            <target>1.8</target>
+            <source>${maven.compiler.source}</source>
+            <target>${maven.compiler.target}</target>
           </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-javadoc-plugin</artifactId>
-          <version>2.10.3</version>
+          <version>2.10.4</version>
           <configuration>
             <detectOfflineLinks>false</detectOfflineLinks>
             <links>
@@ -100,7 +100,7 @@ DO NOT MODIFIY - GENERATED CODE
         </plugin>
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>2.6</version>
+          <version>3.0.2</version>
           <configuration>
             <archive>
               <manifestFile>MANIFEST.MF</manifestFile>

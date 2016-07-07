@@ -29,18 +29,20 @@ project 'pbox2d', 'https://github.com/ruby-processing/jbox2d' do
               'project.build.sourceEncoding' => 'UTF-8',
               'maven.compiler.target' => '1.8',
               'polyglot.dump.pom' => 'pom.xml',
-              'processing.api' => "http://processing.github.io/processing-javadocs/core/",
+              'processing.api' => 'http://processing.github.io/processing-javadocs/core/',
               'jruby.api' => "http://jruby.org/apidocs/"
             )
 
   pom 'org.jruby:jruby:9.1.2.0'
-  jar 'org.processing:core:3.1.1
+  jar 'org.processing:core:3.1.1'
   plugin_management do
     plugin :resources, '2.6'
     plugin :dependency, '2.8'
-    plugin( :compiler, '3.5.1',
-          'source' =>  '1.8',
-          'target' =>  '1.8' )
+    plugin( 
+          :compiler, '3.5.1',
+          source: '${maven.compiler.source}',
+          target: '${maven.compiler.target}'
+          )
     plugin( :javadoc, '2.10.4',
           'detectOfflineLinks' => 'false',
           'links' => ['${processing.api}', '${jruby.api}']
