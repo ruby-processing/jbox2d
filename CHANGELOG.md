@@ -1,7 +1,7 @@
 
 ### v0.9.0
 
-Update maven artifacts
+Update maven artifacts, somewhat arbitarily require JRubyArt-1.2+ to get everyone on same page
 
 ### v0.8.0 
 Update for JRubyArt-1.1+ and processing-3.1+
