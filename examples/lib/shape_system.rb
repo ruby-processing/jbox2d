@@ -6,6 +6,7 @@ module Runnable
   end
 end
 
+require 'forwardable'
 # using forwardable to make a custom enumerable
 class ShapeSystem
   include Enumerable, Runnable
