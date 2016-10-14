@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="keywords" content="art, JRubyArt, code, blog, ruby" />
+  <title>Using pbox2d gem</title>
+  <meta name="description" content="You should have JRubyArt (or propane) and the pbox2d gem installed, from your sketch require pbox2d```rubyrequire ‘pbox2d’">
+
+  <link rel="stylesheet" href="https://ruby-processing.github.io/JRubyArt/css/main.css"/>
+  <link rel="canonical" href="http://localhost:4000/jruby_art/update/2016/10/14/welcome.html">
+  <link rel="alternate" type="application/rss+xml" title="PBox2D for JRubyArt" href="http://localhost:4000/feed.xml" />
+</head>
+
+
+
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">PBox2D for JRubyArt</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+          <a class="page-link" href="/classes.html">Classes</a>
+          
+        
+          
+        
+          
+        
+          
+          <a class="page-link" href="/methods.html">Methods</a>
+          
+        
+          
+          <a class="page-link" href="/modules.html">Modules</a>
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Using pbox2d gem</h1>
+    <p class="post-meta">Oct 14, 2016</p>
+  </header>
+
+  <article class="post-content">
+    <p>You should have JRubyArt (or propane) and the pbox2d gem installed, from your sketch <code class="highlighter-rouge">require</code> pbox2d</p>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'pbox2d'</span>
+
+<span class="c1"># A list we'll use to track fixed objects</span>
+<span class="kp">attr_reader</span> <span class="ss">:box2d</span><span class="p">,</span> <span class="ss">:boundaries</span><span class="p">,</span> <span class="ss">:boxes</span>
+</code></pre>
+</div>
+<p>You then need to create an instance of <code class="highlighter-rouge">Box2D</code> in the setup</p>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">setup</span>
+  <span class="n">size</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="mi">300</span><span class="p">)</span>
+  <span class="vi">@box2d</span> <span class="o">=</span> <span class="no">WorldBuilder</span><span class="p">.</span><span class="nf">build</span><span class="p">(</span><span class="ss">app: </span><span class="nb">self</span><span class="p">,</span> <span class="ss">gravity: </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">])</span>
+</code></pre>
+</div>
+
+<h3 id="from-sketch-to-physics-world-and-vice-versa">From sketch to physics world and vice versa</h3>
+
+<p>Because of the peculiar choice by the processing guys down is up (dimensions in pixels) jbox2d doesn’t like to live in the pixel world (where up is really up), and prefers meters or feet and inches (whatever). What this means is that there is a need to scale between the two worlds using <code class="highlighter-rouge">world_to_processing</code> and <code class="highlighter-rouge">processing_to_world</code> <a href="/methods/methods/">methods provided</a>. You should study the included <a href="https://github.com/ruby-processing/JRubyArt-examples/tree/master/external_library/gem/pbox2d/">example sketches</a>.</p>
+
+<h3 id="example-sketch">Example Sketch</h3>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'pbox2d'</span>
+<span class="nb">require_relative</span> <span class="s1">'lib/boundary'</span>
+
+<span class="c1"># A list we'll use to track fixed objects</span>
+<span class="kp">attr_reader</span> <span class="ss">:box2d</span><span class="p">,</span> <span class="ss">:boundaries</span><span class="p">,</span> <span class="ss">:boxes</span>
+
+<span class="n">java_alias</span> <span class="ss">:background_int</span><span class="p">,</span> <span class="ss">:background</span><span class="p">,</span> <span class="p">[</span><span class="no">Java</span><span class="o">::</span><span class="n">int</span><span class="p">]</span>
+<span class="n">java_alias</span> <span class="ss">:stroke_int</span><span class="p">,</span> <span class="ss">:stroke</span><span class="p">,</span> <span class="p">[</span><span class="no">Java</span><span class="o">::</span><span class="n">int</span><span class="p">]</span>
+
+<span class="no">Vect</span> <span class="o">=</span> <span class="no">Struct</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">:x</span><span class="p">,</span> <span class="ss">:y</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">setup</span>
+  <span class="n">sketch_title</span> <span class="s1">'Quick Test'</span>
+  <span class="n">stroke_int</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># set stroke this way to avoid overload warnings</span>
+  <span class="nb">srand</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+  <span class="c1"># Initialize box2d physics and create the world</span>
+  <span class="vi">@box2d</span> <span class="o">=</span> <span class="no">WorldBuilder</span><span class="p">.</span><span class="nf">build</span><span class="p">(</span><span class="ss">app: </span><span class="nb">self</span><span class="p">,</span> <span class="ss">scale: </span><span class="mi">10</span><span class="p">,</span> <span class="ss">gravity: </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="o">.</span><span class="mi">0</span><span class="p">])</span>
+  <span class="nb">puts</span> <span class="n">box2d</span><span class="p">.</span><span class="nf">version</span>
+  <span class="c1"># Set a custom gravity</span>
+  <span class="c1"># box2d.gravity(0, -20)  </span>
+  <span class="c1"># Create ArrayLists</span>
+  <span class="vi">@boxes</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="vi">@boundaries</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="no">Boundary</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">box2d</span><span class="p">,</span> <span class="no">Vect</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">width</span> <span class="o">/</span> <span class="mi">4</span><span class="p">,</span> <span class="n">height</span> <span class="o">-</span> <span class="mi">5</span><span class="p">),</span> <span class="no">Vect</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">width</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">10</span><span class="p">)),</span>
+    <span class="no">Boundary</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">box2d</span><span class="p">,</span> <span class="no">Vect</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">4</span><span class="p">,</span> <span class="n">height</span> <span class="o">-</span> <span class="mi">50</span><span class="p">),</span> <span class="no">Vect</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">width</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+  <span class="p">]</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">draw</span>
+  <span class="n">background_int</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="c1"># set background this way to avoid overload warnings</span>
+  <span class="c1"># Boxes fall from the top every so often</span>
+  <span class="n">boxes</span> <span class="o">&lt;&lt;</span> <span class="no">Box</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">box2d</span><span class="p">,</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span> <span class="k">if</span> <span class="nb">rand</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="o">.</span><span class="mi">99</span>
+  <span class="n">boundaries</span><span class="p">.</span><span class="nf">each</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:display</span><span class="p">)</span>  
+  <span class="n">boxes</span><span class="p">.</span><span class="nf">each</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:display</span><span class="p">)</span>  
+  <span class="c1"># Boxes that leave the screen, we delete them note they have to be deleted</span>
+  <span class="c1"># from both the box2d world and locally  </span>
+  <span class="n">boxes</span><span class="p">.</span><span class="nf">reject!</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:done</span><span class="p">)</span>  
+  <span class="nb">exit</span> <span class="k">if</span> <span class="n">frame_count</span> <span class="o">&gt;=</span> <span class="mi">908</span>
+<span class="k">end</span>
+
+<span class="c1"># A rectangular box</span>
+<span class="k">class</span> <span class="nc">Box</span>
+  <span class="kp">include</span> <span class="no">Processing</span><span class="o">::</span><span class="no">Proxy</span>
+  <span class="c1"># We need to keep track of a Body and a width and height</span>
+  <span class="kp">attr_reader</span> <span class="ss">:box2d</span><span class="p">,</span> <span class="ss">:body</span><span class="p">,</span> <span class="ss">:w</span><span class="p">,</span> <span class="ss">:h</span>
+
+  <span class="c1"># Constructor</span>
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">b2d</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="vi">@w</span> <span class="o">=</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">.</span><span class="nf">.</span><span class="mi">16</span><span class="p">)</span>
+    <span class="vi">@h</span> <span class="o">=</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">.</span><span class="nf">.</span><span class="mi">16</span><span class="p">)</span>
+    <span class="vi">@box2d</span> <span class="o">=</span> <span class="n">b2d</span>
+    <span class="c1"># Add the box to the box2d world</span>
+    <span class="n">make_body</span><span class="p">(</span><span class="no">Vec2</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="k">def</span> <span class="nf">done</span>
+    <span class="c1"># Let's find the screen position of the particle</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">box2d</span><span class="p">.</span><span class="nf">body_coord</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+    <span class="c1"># Is it off the bottom of the screen?</span>
+    <span class="k">return</span> <span class="kp">false</span> <span class="k">unless</span> <span class="p">(</span><span class="n">pos</span><span class="p">.</span><span class="nf">y</span> <span class="o">&gt;</span> <span class="n">box2d</span><span class="p">.</span><span class="nf">height</span> <span class="o">+</span> <span class="n">w</span> <span class="o">*</span> <span class="n">h</span><span class="p">)</span>
+    <span class="n">box2d</span><span class="p">.</span><span class="nf">destroy_body</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+    <span class="kp">true</span>
+  <span class="k">end</span>
+
+  <span class="c1"># Drawing the box</span>
+  <span class="k">def</span> <span class="nf">display</span>
+    <span class="c1"># We look at each body and get its screen position</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">box2d</span><span class="p">.</span><span class="nf">body_coord</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
+    <span class="c1"># Get its angle of rotation</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">body</span><span class="p">.</span><span class="nf">angle</span>    
+    <span class="n">rect_mode</span><span class="p">(</span><span class="no">CENTER</span><span class="p">)</span>
+    <span class="n">push_matrix</span>
+    <span class="n">translate</span><span class="p">(</span><span class="n">pos</span><span class="p">.</span><span class="nf">x</span><span class="p">,</span> <span class="n">pos</span><span class="p">.</span><span class="nf">y</span><span class="p">)</span>
+    <span class="n">rotate</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">fill</span><span class="p">(</span><span class="mi">175</span><span class="p">)</span>
+    <span class="n">rect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+    <span class="n">pop_matrix</span>
+  <span class="k">end</span>
+
+  <span class="c1"># This function adds the rectangle to the box2d world</span>
+  <span class="k">def</span> <span class="nf">make_body</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>    
+    <span class="c1"># Define a polygon (this is what we use for a rectangle)</span>
+    <span class="n">sd</span> <span class="o">=</span> <span class="no">PolygonShape</span><span class="p">.</span><span class="nf">new</span>
+    <span class="n">box2d_w</span> <span class="o">=</span> <span class="n">box2d</span><span class="p">.</span><span class="nf">scale_to_world</span><span class="p">(</span><span class="n">w</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">box2d_h</span> <span class="o">=</span> <span class="n">box2d</span><span class="p">.</span><span class="nf">scale_to_world</span><span class="p">(</span><span class="n">h</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">sd</span><span class="p">.</span><span class="nf">setAsBox</span><span class="p">(</span><span class="n">box2d_w</span><span class="p">,</span> <span class="n">box2d_h</span><span class="p">)</span>    
+    <span class="c1"># Define a fixture</span>
+    <span class="n">fd</span> <span class="o">=</span> <span class="no">FixtureDef</span><span class="p">.</span><span class="nf">new</span>
+    <span class="n">fd</span><span class="p">.</span><span class="nf">shape</span> <span class="o">=</span> <span class="n">sd</span>
+    <span class="c1"># Parameters that affect physics</span>
+    <span class="n">fd</span><span class="p">.</span><span class="nf">density</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">fd</span><span class="p">.</span><span class="nf">friction</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">3</span>
+    <span class="n">fd</span><span class="p">.</span><span class="nf">restitution</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">5</span>    
+    <span class="c1"># Define the body and make it from the shape</span>
+    <span class="n">bd</span> <span class="o">=</span> <span class="no">BodyDef</span><span class="p">.</span><span class="nf">new</span>
+    <span class="n">bd</span><span class="p">.</span><span class="nf">type</span> <span class="o">=</span> <span class="no">BodyType</span><span class="o">::</span><span class="no">DYNAMIC</span>
+    <span class="n">bd</span><span class="p">.</span><span class="nf">position</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="n">box2d</span><span class="p">.</span><span class="nf">processing_to_world</span><span class="p">(</span><span class="n">center</span><span class="p">))</span>    
+    <span class="n">cs</span> <span class="o">=</span> <span class="no">CircleShape</span><span class="p">.</span><span class="nf">new</span>
+    <span class="vi">@body</span> <span class="o">=</span> <span class="n">box2d</span><span class="p">.</span><span class="nf">create_body</span><span class="p">(</span><span class="n">bd</span><span class="p">)</span>
+    <span class="n">body</span><span class="p">.</span><span class="nf">create_fixture</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span>
+    <span class="c1"># Give it some initial random velocity</span>
+    <span class="n">body</span><span class="p">.</span><span class="nf">setLinearVelocity</span><span class="p">(</span><span class="no">Vec2</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="nb">rand</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="o">.</span><span class="mi">0</span><span class="p">.</span><span class="nf">.</span><span class="mi">5</span><span class="p">),</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="p">.</span><span class="nf">.</span><span class="mi">5</span><span class="p">)))</span>
+    <span class="n">body</span><span class="p">.</span><span class="nf">setAngularVelocity</span><span class="p">(</span><span class="nb">rand</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="o">.</span><span class="mi">0</span><span class="p">.</span><span class="nf">.</span><span class="mi">5</span><span class="p">))</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">settings</span>
+  <span class="n">size</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="mi">300</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+<p>The boundary classes</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Boundary</span>
+  <span class="kp">include</span> <span class="no">Processing</span><span class="o">::</span><span class="no">Proxy</span>
+  <span class="kp">attr_reader</span> <span class="ss">:box2d</span><span class="p">,</span> <span class="ss">:b</span><span class="p">,</span> <span class="ss">:pos</span><span class="p">,</span> <span class="ss">:size</span><span class="p">,</span> <span class="ss">:a</span>
+
+  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">b2d</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">sz</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="vi">@box2d</span><span class="p">,</span> <span class="vi">@pos</span><span class="p">,</span> <span class="vi">@size</span><span class="p">,</span> <span class="vi">@a</span> <span class="o">=</span> <span class="n">b2d</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">sz</span><span class="p">,</span> <span class="n">a</span>
+    <span class="c1"># Define the polygon</span>
+    <span class="n">sd</span> <span class="o">=</span> <span class="no">PolygonShape</span><span class="p">.</span><span class="nf">new</span>
+    <span class="c1"># Figure out the box2d coordinates</span>
+    <span class="n">box2d_w</span> <span class="o">=</span> <span class="n">box2d</span><span class="p">.</span><span class="nf">scale_to_world</span><span class="p">(</span><span class="n">size</span><span class="p">.</span><span class="nf">x</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">box2d_h</span> <span class="o">=</span> <span class="n">box2d</span><span class="p">.</span><span class="nf">scale_to_world</span><span class="p">(</span><span class="n">size</span><span class="p">.</span><span class="nf">y</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="c1"># We're just a box</span>
+    <span class="n">sd</span><span class="p">.</span><span class="nf">set_as_box</span><span class="p">(</span><span class="n">box2d_w</span><span class="p">,</span> <span class="n">box2d_h</span><span class="p">)</span>
+    <span class="c1"># Create the body</span>
+    <span class="n">bd</span> <span class="o">=</span> <span class="no">BodyDef</span><span class="p">.</span><span class="nf">new</span>
+    <span class="n">bd</span><span class="p">.</span><span class="nf">type</span> <span class="o">=</span> <span class="no">BodyType</span><span class="o">::</span><span class="no">STATIC</span>
+    <span class="n">bd</span><span class="p">.</span><span class="nf">angle</span> <span class="o">=</span> <span class="n">a</span>
+    <span class="n">bd</span><span class="p">.</span><span class="nf">position</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="n">box2d</span><span class="p">.</span><span class="nf">processing_to_world</span><span class="p">(</span><span class="n">pos</span><span class="p">.</span><span class="nf">x</span><span class="p">,</span> <span class="n">pos</span><span class="p">.</span><span class="nf">y</span><span class="p">))</span>
+    <span class="vi">@b</span> <span class="o">=</span> <span class="n">box2d</span><span class="p">.</span><span class="nf">create_body</span><span class="p">(</span><span class="n">bd</span><span class="p">)</span>
+    <span class="c1"># Attached the shape to the body using a Fixture</span>
+    <span class="n">b</span><span class="p">.</span><span class="nf">create_fixture</span><span class="p">(</span><span class="n">sd</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+  <span class="k">end</span>
+
+  <span class="c1"># Draw the boundary, it doesn't move so we don't have to ask the Body for location</span>
+  <span class="k">def</span> <span class="nf">display</span>
+    <span class="n">fill</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">stroke</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">stroke_weight</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">rect_mode</span><span class="p">(</span><span class="no">CENTER</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="nf">get_angle</span>
+    <span class="n">push_matrix</span>
+    <span class="n">translate</span><span class="p">(</span><span class="n">pos</span><span class="p">.</span><span class="nf">x</span><span class="p">,</span> <span class="n">pos</span><span class="p">.</span><span class="nf">y</span><span class="p">)</span>
+    <span class="n">rotate</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">rect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="p">.</span><span class="nf">x</span><span class="p">,</span><span class="n">size</span><span class="p">.</span><span class="nf">y</span><span class="p">)</span>
+    <span class="n">pop_matrix</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">PBox2D for JRubyArt</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li>PBox2D for JRubyArt</li>
+          <li><a href="mailto:mamba2928@yahoo.co.uk">mamba2928@yahoo.co.uk</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/monkstone">
+              <span class="icon  icon--github">
+                <svg viewBox="0 0 16 16">
+                  <path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+                </svg>
+              </span>
+
+              <span class="username">monkstone</span>
+            </a>
+          </li>
+          
+
+          
+          <li>
+            <a href="https://twitter.com/monkstoneT">
+              <span class="icon  icon--twitter">
+                <svg viewBox="0 0 16 16">
+                  <path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809
+                  c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/>
+                </svg>
+              </span>
+
+              <span class="username">monkstoneT</span>
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+        <p class="text">PBox2D is a ruby wrapper for JBox2D, so you can use the physics engine with JRubyArt or propane (NB: original ruby-processing is no longer supported).
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

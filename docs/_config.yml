@@ -1,0 +1,32 @@
+# Site settings
+port: 4000
+title: PBox2D for JRubyArt
+email: mamba2928@yahoo.co.uk
+description: > # this means to ignore newlines until "baseurl:"
+   PBox2D is a ruby wrapper for JBox2D, so you can use the physics engine with JRubyArt or propane (NB: original ruby-processing is no longer supported).
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://ruby-processing.github.io/pbox2d"
+urls:
+  bugs: http://github.com/ruby-processing/pbox2d/issues
+  github: http://github.com/ruby-processing/pbox2d/
+twitter_username: monkstoneT
+github_username:  monkstone
+include: [collections]
+collections:
+  classes:
+    output: true
+    permalink: /classes/:path
+  methods:
+    output: true
+    permalink: /methods/:path
+  modules:
+    output: true
+    permalink: /modules/:path
+    
+syntax-highlighting:
+  enabled: true
+
+# Build settings
+markdown: kramdown
+gems:
+  - jekyll-sitemap
