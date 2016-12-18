@@ -38,6 +38,7 @@ public class Mat22 implements Serializable {
 
     /**
      * Convert the matrix to printable format.
+     * @return 
      */
     @Override
     public String toString() {
@@ -63,8 +64,8 @@ public class Mat22 implements Serializable {
      * @param c2 Column 2 of matrix
      */
     public Mat22(final Vec2 c1, final Vec2 c2) {
-        ex = c1.clone();
-        ey = c2.clone();
+        ex = new Vec2(c1);
+        ey = new Vec2(c2);
     }
 
     /**

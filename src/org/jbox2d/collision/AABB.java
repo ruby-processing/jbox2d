@@ -69,8 +69,8 @@ public class AABB {
      * @param upperVertex
      */
     public AABB(final Vec2 lowerVertex, final Vec2 upperVertex) {
-        this.lowerBound = lowerVertex.clone(); // clone to be safe
-        this.upperBound = upperVertex.clone();
+        this.lowerBound = new Vec2(lowerVertex); // clone to be safe
+        this.upperBound = new Vec2(upperVertex);
     }
 
     /**

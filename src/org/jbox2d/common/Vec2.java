@@ -268,10 +268,10 @@ public class Vec2 implements Serializable {
      *
      * @return
      */
-    @Override
-    public final Vec2 clone() {
-        return new Vec2(x, y);
-    }
+//   @Override
+//    public final Vec2 clone() {
+//        return new Vec2(this);
+//    }
 
     @Override
     public final String toString() {
@@ -354,6 +354,7 @@ public class Vec2 implements Serializable {
     }
 
     /**
+     * @return 
      * @see java.lang.Object#hashCode()
      */
     @Override
@@ -366,6 +367,8 @@ public class Vec2 implements Serializable {
     }
 
     /**
+     * @param obj
+     * @return 
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override

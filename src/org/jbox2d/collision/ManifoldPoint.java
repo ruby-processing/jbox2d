@@ -57,7 +57,7 @@ import org.jbox2d.common.Vec2;
  * <ul><li>e_circles: the local center of circleB</li>
  * <li>e_faceA: the local center of cirlceB or the clip point of polygonB</li>
  * <li>e_faceB: the clip point of polygonA</li></ul>
- * This structure is stored across time steps, so we keep it small.<br/>
+ * This structure is stored across time steps, so we keep it small.
  * Note: the impulses are used for internal caching and may not
  * provide reliable contact forces, especially for high speed collisions.
  */
@@ -85,7 +85,7 @@ public class ManifoldPoint {
 	 * @param cp point to copy from
 	 */
 	public ManifoldPoint(final ManifoldPoint cp) {
-		localPoint = cp.localPoint.clone();
+		localPoint = new Vec2(cp.localPoint);
 		normalImpulse = cp.normalImpulse;
 		tangentImpulse = cp.tangentImpulse;
 		id = new ContactID(cp.id);

@@ -35,13 +35,18 @@ public class Rot implements Serializable {
 
   public float s, c; // sin and cos
 
-  public Rot() {
-    setIdentity();
-  }
+    public Rot() {
+        setIdentity();
+    }
 
-  public Rot(float angle) {
-    set(angle);
-  }
+    public Rot(float angle) {
+        set(angle);
+    }
+
+    public Rot(Rot rot) {
+        c = rot.c;
+        s = rot.s;
+    }
 
   public float getSin() {
     return s;
@@ -56,7 +61,7 @@ public class Rot implements Serializable {
     return c;
   }
 
-  public Rot set(float angle) {
+  public final Rot set(float angle) {
     s = MathUtils.sin(angle);
     c = MathUtils.cos(angle);
     return this;
@@ -68,7 +73,7 @@ public class Rot implements Serializable {
     return this;
   }
 
-  public Rot setIdentity() {
+  public final Rot setIdentity() {
     s = 0;
     c = 1;
     return this;
@@ -87,12 +92,12 @@ public class Rot implements Serializable {
   }
 
   // @Override // annotation omitted for GWT-compatibility
-  public Rot clone() {
-    Rot copy = new Rot();
-    copy.s = s;
-    copy.c = c;
-    return copy;
-  }
+//  public Rot clone() {
+//    Rot copy = new Rot();
+//    copy.s = s;
+//    copy.c = c;
+//    return copy;
+//  }
 
   public static final void mul(Rot q, Rot r, Rot out) {
     float tempc = q.c * r.c - q.s * r.s;

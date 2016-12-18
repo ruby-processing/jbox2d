@@ -84,7 +84,7 @@ public class MassData {
     public MassData(MassData md) {
         mass = md.mass;
         I = md.I;
-        center = md.center.clone();
+        center = new Vec2(md.center);
     }
 
     public void set(MassData md) {

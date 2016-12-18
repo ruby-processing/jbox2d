@@ -88,8 +88,8 @@ public class Manifold {
    */
   public Manifold(Manifold other) {
     points = new ManifoldPoint[Settings.maxManifoldPoints];
-    localNormal = other.localNormal.clone();
-    localPoint = other.localPoint.clone();
+    localNormal = new Vec2(other.localNormal);
+    localPoint = new Vec2(other.localPoint);
     pointCount = other.pointCount;
     type = other.type;
     // djm: this is correct now

@@ -60,8 +60,8 @@ public class Transform implements Serializable {
      * @param xf
      */
     public Transform(final Transform xf) {
-        p = xf.p.clone();
-        q = xf.q.clone();
+        p = new Vec2(xf.p);
+        q = new Rot(xf.q);
     }
 
     /**
@@ -71,8 +71,8 @@ public class Transform implements Serializable {
      * @param _R
      */
     public Transform(final Vec2 _position, final Rot _R) {
-        p = _position.clone();
-        q = _R.clone();
+        p = new Vec2(_position);
+        q = new Rot(_R);
     }
 
     /**

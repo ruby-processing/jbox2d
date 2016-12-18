@@ -158,7 +158,7 @@ public class Mat33 implements Serializable {
    * in one-shot cases.
    * 
    * @param b
-   * @return
+     * @param out
    */
   public final void solve22ToOut(Vec2 b, Vec2 out) {
     final float a11 = ex.x, a12 = ey.x, a21 = ex.y, a22 = ey.y;
