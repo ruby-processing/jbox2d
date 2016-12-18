@@ -38,7 +38,7 @@ public class Mat22 implements Serializable {
 
     /**
      * Convert the matrix to printable format.
-     * @return 
+     * @return
      */
     @Override
     public String toString() {

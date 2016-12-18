@@ -31,7 +31,7 @@ import java.io.Serializable;
  * @author Daniel Murphy
  */
 public class Mat33 implements Serializable {
-  private static final long serialVersionUID = 2L;
+
 
   public static final Mat33 IDENTITY = new Mat33(new Vec3(1, 0, 0), new Vec3(0, 1, 0), new Vec3(0,
       0, 1));
@@ -52,9 +52,9 @@ public class Mat33 implements Serializable {
   }
 
   public Mat33(Vec3 argCol1, Vec3 argCol2, Vec3 argCol3) {
-    ex = argCol1.clone();
-    ey = argCol2.clone();
-    ez = argCol3.clone();
+    ex = new Vec3(argCol1);
+    ey = new Vec3(argCol2);
+    ez = new Vec3(argCol3);
   }
 
   public void setZero() {

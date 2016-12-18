@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright (c) 2013, Daniel Murphy
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
  * 	* Redistributions of source code must retain the above copyright notice,
@@ -9,7 +9,7 @@
  * 	* Redistributions in binary form must reproduce the above copyright notice,
  * 	  this list of conditions and the following disclaimer in the documentation
  * 	  and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -114,11 +114,6 @@ public class Vec3 implements Serializable {
   }
 
   @Override
-  public Vec3 clone() {
-    return new Vec3(this);
-  }
-
-  @Override
   public String toString() {
     return "(" + x + "," + y + "," + z + ")";
   }
@@ -159,7 +154,7 @@ public class Vec3 implements Serializable {
     out.y = tempy;
     out.z = tempz;
   }
-  
+
   public final static void crossToOutUnsafe(Vec3 a, Vec3 b, Vec3 out) {
     assert(out != b);
     assert(out != a);

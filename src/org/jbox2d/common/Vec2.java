@@ -262,17 +262,6 @@ public class Vec2 implements Serializable {
         y = MathUtils.abs(y);
     }
 
-    // @Override // annotation omitted for GWT-compatibility
-    /**
-     * Return a copy of this vector.
-     *
-     * @return
-     */
-//   @Override
-//    public final Vec2 clone() {
-//        return new Vec2(this);
-//    }
-
     @Override
     public final String toString() {
         return "(" + x + "," + y + ")";
@@ -354,7 +343,7 @@ public class Vec2 implements Serializable {
     }
 
     /**
-     * @return 
+     * @return
      * @see java.lang.Object#hashCode()
      */
     @Override
@@ -368,7 +357,7 @@ public class Vec2 implements Serializable {
 
     /**
      * @param obj
-     * @return 
+     * @return
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override

@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Copyright (c) 2013, Daniel Murphy
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
  * 	* Redistributions of source code must retain the above copyright notice,
@@ -9,7 +9,7 @@
  * 	* Redistributions in binary form must reproduce the above copyright notice,
  * 	  this list of conditions and the following disclaimer in the documentation
  * 	  and/or other materials provided with the distribution.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
@@ -27,7 +27,7 @@ import java.io.Serializable;
 
 /**
  * Represents a rotation
- * 
+ *
  * @author Daniel
  */
 public class Rot implements Serializable {
@@ -90,14 +90,6 @@ public class Rot implements Serializable {
   public void getYAxis(Vec2 yAxis) {
     yAxis.set(-s, c);
   }
-
-  // @Override // annotation omitted for GWT-compatibility
-//  public Rot clone() {
-//    Rot copy = new Rot();
-//    copy.s = s;
-//    copy.c = c;
-//    return copy;
-//  }
 
   public static final void mul(Rot q, Rot r, Rot out) {
     float tempc = q.c * r.c - q.s * r.s;
