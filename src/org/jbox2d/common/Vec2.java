@@ -32,7 +32,9 @@ import java.io.Serializable;
  */
 public class Vec2 implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -8868057637176265779L;
+
+    
 
     public float x, y;
 
