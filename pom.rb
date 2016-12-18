@@ -33,8 +33,10 @@ project 'pbox2d', 'https://github.com/ruby-processing/jbox2d' do
               'jruby.api' => "http://jruby.org/apidocs/"
             )
 
+
   pom 'org.jruby:jruby:9.1.6.0'
   jar 'org.processing:core:3.2.3'
+
   plugin_management do
     plugin :resources, '2.6'
     plugin :dependency, '2.8'

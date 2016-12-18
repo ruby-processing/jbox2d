@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
 in JRubyArt. Features a polyglot maven build, and also demonstrates how creating
 an interface can avoid the need for explicit calls to java reflection."
 EOF
-  spec.homepage      = 'https://github.com/ruby-processing/jbox2d'
+  spec.homepage      = 'https://ruby-processing.github.io/jbox2d'
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.files << 'lib/box2d.jar'
   spec.require_paths = ['lib']

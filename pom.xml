@@ -11,7 +11,7 @@ DO NOT MODIFIY - GENERATED CODE
   <modelVersion>4.0.0</modelVersion>
   <groupId>ruby-processing</groupId>
   <artifactId>pbox2d</artifactId>
-  <version>0.9</version>
+  <version>1.0.0</version>
   <name>pbox2d</name>
   <description>jbox2d for JRubyArt</description>
   <url>https://github.com/ruby-processing/jbox2d</url>
