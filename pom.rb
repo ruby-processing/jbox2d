@@ -2,7 +2,7 @@ require 'fileutils'
 project 'pbox2d', 'https://github.com/ruby-processing/jbox2d' do
 
   model_version '4.0.0'
-  id 'ruby-processing:pbox2d', '0.9.22'
+  id 'ruby-processing:pbox2d', '1.0.0'
   packaging 'jar'
 
   description 'jbox2d for JRubyArt'
@@ -12,7 +12,7 @@ project 'pbox2d', 'https://github.com/ruby-processing/jbox2d' do
   developer 'monkstone' do
     name 'Martin Prout'
     email 'mamba2928@yahoo.co.uk'
-    roles 'developer' 
+    roles 'developer'
   end
 
   license 'BSD-2-clause', 'http://www.opensource.org/licenses/bsd-license.php'
@@ -24,7 +24,7 @@ project 'pbox2d', 'https://github.com/ruby-processing/jbox2d' do
     :connection => 'scm:git:git://github.com/ruby-processing/jbox2d.git',
     :developer_connection => 'scm:git:git@github.com/ruby-processing/jbox2dt.git'
   )
-  
+
   properties( 'maven.compiler.source' => '1.8',
               'project.build.sourceEncoding' => 'UTF-8',
               'maven.compiler.target' => '1.8',
@@ -33,12 +33,14 @@ project 'pbox2d', 'https://github.com/ruby-processing/jbox2d' do
               'jruby.api' => "http://jruby.org/apidocs/"
             )
 
-  pom 'org.jruby:jruby:9.1.5.0'
-  jar 'org.processing:core:3.2.1'
+
+  pom 'org.jruby:jruby:9.1.6.0'
+  jar 'org.processing:core:3.2.3'
+
   plugin_management do
     plugin :resources, '2.6'
     plugin :dependency, '2.8'
-    plugin( 
+    plugin(
           :compiler, '3.5.1',
           source: '${maven.compiler.source}',
           target: '${maven.compiler.target}'

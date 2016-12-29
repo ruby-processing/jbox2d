@@ -93,8 +93,8 @@ public class DistanceJoint extends Joint {
 
   protected DistanceJoint(IWorldPool argWorld, final DistanceJointDef def) {
     super(argWorld, def);
-    m_localAnchorA = def.localAnchorA.clone();
-    m_localAnchorB = def.localAnchorB.clone();
+    m_localAnchorA = new Vec2(def.localAnchorA);
+    m_localAnchorB = new Vec2(def.localAnchorB);
     m_length = def.length;
     m_impulse = 0.0f;
     m_frequencyHz = def.frequencyHz;
@@ -147,6 +147,7 @@ public class DistanceJoint extends Joint {
 
   /**
    * Get the reaction force given the inverse time step. Unit is N.
+     * @param argOut
    */
   @Override
   public void getReactionForce(float inv_dt, Vec2 argOut) {
@@ -157,6 +158,7 @@ public class DistanceJoint extends Joint {
   /**
    * Get the reaction torque given the inverse time step. Unit is N*m. This is always zero for a
    * distance joint.
+     * @return 
    */
   @Override
   public float getReactionTorque(float inv_dt) {

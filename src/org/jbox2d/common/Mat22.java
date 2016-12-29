@@ -32,12 +32,15 @@ import java.io.Serializable;
  */
 public class Mat22 implements Serializable {
 
-    private static final long serialVersionUID = 2L;
+    private static final long serialVersionUID = -3851554186221722070L;
+
+    
 
     public final Vec2 ex, ey;
 
     /**
      * Convert the matrix to printable format.
+     * @return
      */
     @Override
     public String toString() {
@@ -63,8 +66,8 @@ public class Mat22 implements Serializable {
      * @param c2 Column 2 of matrix
      */
     public Mat22(final Vec2 c1, final Vec2 c2) {
-        ex = c1.clone();
-        ey = c2.clone();
+        ex = new Vec2(c1);
+        ey = new Vec2(c2);
     }
 
     /**
@@ -102,16 +105,6 @@ public class Mat22 implements Serializable {
         return this;
     }
 
-    /**
-     * Return a clone of this matrix. djm fixed double allocation
-     *
-     * @return
-     */
-    // @Override // annotation omitted for GWT-compatibility
-    @Override
-    public final Mat22 clone() {
-        return new Mat22(ex, ey);
-    }
 
     /**
      * Set as a matrix representing a rotation.

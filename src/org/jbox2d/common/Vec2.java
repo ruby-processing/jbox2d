@@ -32,7 +32,9 @@ import java.io.Serializable;
  */
 public class Vec2 implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -8868057637176265779L;
+
+    
 
     public float x, y;
 
@@ -262,17 +264,6 @@ public class Vec2 implements Serializable {
         y = MathUtils.abs(y);
     }
 
-    // @Override // annotation omitted for GWT-compatibility
-    /**
-     * Return a copy of this vector.
-     *
-     * @return
-     */
-    @Override
-    public final Vec2 clone() {
-        return new Vec2(x, y);
-    }
-
     @Override
     public final String toString() {
         return "(" + x + "," + y + ")";
@@ -354,6 +345,7 @@ public class Vec2 implements Serializable {
     }
 
     /**
+     * @return
      * @see java.lang.Object#hashCode()
      */
     @Override
@@ -366,6 +358,8 @@ public class Vec2 implements Serializable {
     }
 
     /**
+     * @param obj
+     * @return
      * @see java.lang.Object#equals(java.lang.Object)
      */
     @Override

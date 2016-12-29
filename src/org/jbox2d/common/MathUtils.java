@@ -69,11 +69,11 @@ public class MathUtils extends PlatformMathUtils {
    */
   public static final float RAD2DEG = 180 / PI;
 
-  public static final float[] sinLUT = new float[Settings.SINCOS_LUT_LENGTH];
+  public static final float[] SIN_LUT = new float[Settings.SINCOS_LUT_LENGTH];
 
   static {
     for (int i = 0; i < Settings.SINCOS_LUT_LENGTH; i++) {
-      sinLUT[i] = (float) Math.sin(i * Settings.SINCOS_LUT_PRECISION);
+      SIN_LUT[i] = (float) Math.sin(i * Settings.SINCOS_LUT_PRECISION);
     }
   }
 
@@ -104,13 +104,13 @@ public class MathUtils extends PlatformMathUtils {
 
       // the next index is 0
       if (index == Settings.SINCOS_LUT_LENGTH - 1) {
-        return ((1 - x) * sinLUT[index] + x * sinLUT[0]);
+        return ((1 - x) * SIN_LUT[index] + x * SIN_LUT[0]);
       } else {
-        return ((1 - x) * sinLUT[index] + x * sinLUT[index + 1]);
+        return ((1 - x) * SIN_LUT[index] + x * SIN_LUT[index + 1]);
       }
 
     } else {
-      return sinLUT[MathUtils.round(x / Settings.SINCOS_LUT_PRECISION) % Settings.SINCOS_LUT_LENGTH];
+      return SIN_LUT[MathUtils.round(x / Settings.SINCOS_LUT_PRECISION) % Settings.SINCOS_LUT_LENGTH];
     }
   }
 
