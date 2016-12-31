@@ -16,13 +16,13 @@ public Vec2 processingToWorld(float pixelX, float pixelY) {
       float worldY = map(pixelY, parent.height / 2, parent.height / 2 + scaleFactor, 1f, 0f);
       return new Vec2(worldX, worldY);
 }
-{% endhighlight %}
+```
 
 ### Ruby usage ###
 Use camel case
-{% highlight ruby %}
+```ruby
 processing_to_world(x, y) # returns new Vec2 instance (in the PBox2D world)
-{% endhighlight %}
+```
 
 [pbox2d]:{{ site.github.url }}/classes/pbox2d/
 [world_to_processing]:{{ site.github.url }}/methods/world_to_processing/
