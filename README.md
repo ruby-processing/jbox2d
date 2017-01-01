@@ -30,7 +30,7 @@ Copyright (c) 2014 Daniel Shiffman
  
 This gem was created by Martin Prout
 
-Copyright (c) 2015/16 Martin Prout
+Copyright (c) 2015/17 Martin Prout
 
 ### To compile
 
