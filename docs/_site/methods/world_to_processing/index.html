@@ -82,17 +82,19 @@
 
 <p>The java code (<a href="/classes/pbox2d/">PBox2D</a> inherits this from <a href="/classes/pbox2d/">Box2DProcessing</a>)</p>
 <h3 id="public-vec2-worldtoprocessingfloat-worldx-float-worldy">public Vec2 worldToProcessing(float worldX, float worldY)</h3>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="n">Vec2</span> <span class="nf">worldToProcessing</span><span class="o">(</span><span class="kt">float</span> <span class="n">worldX</span><span class="o">,</span> <span class="kt">float</span> <span class="n">worldY</span><span class="o">)</span> <span class="o">{</span>
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="n">Vec2</span> <span class="nf">worldToProcessing</span><span class="o">(</span><span class="kt">float</span> <span class="n">worldX</span><span class="o">,</span> <span class="kt">float</span> <span class="n">worldY</span><span class="o">)</span> <span class="o">{</span>
         <span class="kt">float</span> <span class="n">pixelX</span> <span class="o">=</span> <span class="n">map</span><span class="o">(</span><span class="n">worldX</span><span class="o">,</span> <span class="mi">0</span><span class="n">f</span><span class="o">,</span> <span class="mi">1</span><span class="n">f</span><span class="o">,</span> <span class="n">parent</span><span class="o">.</span><span class="na">width</span> <span class="o">/</span> <span class="mi">2</span><span class="o">,</span> <span class="n">parent</span><span class="o">.</span><span class="na">width</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">scaleFactor</span><span class="o">);</span>
         <span class="kt">float</span> <span class="n">pixelY</span> <span class="o">=</span> <span class="n">map</span><span class="o">(</span><span class="n">worldY</span><span class="o">,</span> <span class="mi">1</span><span class="n">f</span><span class="o">,</span> <span class="mi">0</span><span class="n">f</span><span class="o">,</span> <span class="n">parent</span><span class="o">.</span><span class="na">height</span> <span class="o">/</span> <span class="mi">2</span><span class="o">,</span> <span class="n">parent</span><span class="o">.</span><span class="na">height</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">scaleFactor</span><span class="o">);</span>
         <span class="k">return</span> <span class="k">new</span> <span class="nf">Vec2</span><span class="o">(</span><span class="n">pixelX</span><span class="o">,</span> <span class="n">pixelY</span><span class="o">);</span>
-<span class="o">}</span></code></pre></figure>
+<span class="o">}</span>
+</code></pre>
+</div>
 
 <h3 id="ruby-usage">Ruby usage</h3>
 <p>Use camel case</p>
-
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">world_to_processing</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="c1"># returns new Vec2 instance (in processing world)</span></code></pre></figure>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">world_to_processing</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="c1"># returns new Vec2 instance (in processing world)</span>
+</code></pre>
+</div>
 
 
   </article>

@@ -11,7 +11,7 @@ Because of the peculiar choice by the processing guys down is up (dimensions in 
 
 The java code ([PBox2D][pbox2d] inherits this from [Box2DProcessing][pbox2d])
 ### public Vec2 worldToProcessing(float worldX, float worldY) ###
-{% highlight java %}
+```java
 public Vec2 worldToProcessing(float worldX, float worldY) {
         float pixelX = map(worldX, 0f, 1f, parent.width / 2, parent.width / 2 + scaleFactor);
         float pixelY = map(worldY, 1f, 0f, parent.height / 2, parent.height / 2 + scaleFactor);

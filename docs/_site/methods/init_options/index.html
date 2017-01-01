@@ -72,28 +72,30 @@
 
   <header class="post-header">
     <h1 class="post-title">init_options</h1>
-    <p class="post-meta">Oct 14, 2016</p>
+    <p class="post-meta">Jan 1, 2017</p>
   </header>
 
   <article class="post-content">
     <h3 id="initoptions-method">init_options method</h3>
 <p>Need not called directly if using <a href="/modules/world_builder/">WorldBuilder</a></p>
-
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">init_options</span><span class="p">(</span><span class="n">args</span> <span class="o">=</span> <span class="p">{})</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">init_options</span><span class="p">(</span><span class="n">args</span> <span class="o">=</span> <span class="p">{})</span>
     <span class="n">args</span> <span class="o">=</span> <span class="n">defaults</span><span class="p">.</span><span class="nf">merge</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
     <span class="n">set_options</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="ss">:scale</span><span class="p">],</span>
                 <span class="n">args</span><span class="p">[</span><span class="ss">:gravity</span><span class="p">].</span><span class="nf">to_java</span><span class="p">(</span><span class="no">Java</span><span class="o">::</span><span class="n">float</span><span class="p">),</span>
                 <span class="n">args</span><span class="p">[</span><span class="ss">:warm</span><span class="p">],</span>
                 <span class="n">args</span><span class="p">[</span><span class="ss">:continuous</span><span class="p">]</span>
                <span class="p">)</span>
-<span class="k">end</span></code></pre></figure>
+<span class="k">end</span>
+</code></pre>
+</div>
 
 <h3 id="related-default-options">related default options</h3>
 <p>Provides defaults for init_options</p>
-
-<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">defaults</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">def</span> <span class="nf">defaults</span>
    <span class="p">{</span> <span class="ss">scale: </span><span class="mi">10</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="ss">gravity: </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">],</span> <span class="ss">warm: </span><span class="kp">true</span><span class="p">,</span> <span class="ss">continuous: </span><span class="kp">true</span> <span class="p">}</span>
-<span class="k">end</span></code></pre></figure>
+<span class="k">end</span>
+</code></pre>
+</div>
 
 
   </article>

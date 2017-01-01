@@ -7,7 +7,7 @@ From sketch to physics world and vice versa
 
 The java code ([PBox2D][pbox2d] inherits this from [Box2DProcessing][pbox2d])
 ### public float scaleToProcessing(float val) ###
-{% highlight java %}
+```java
 public float scaleToProcessing(float val) {
         return val * scaleFactor;
 }
