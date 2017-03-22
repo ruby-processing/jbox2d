@@ -3,7 +3,7 @@
 Here we demonstrate how to use JBox2D library as a rubygem. This approach could be an exemplar of how to use other processing/java libraries with both ruby-processing and JRubyArt (now using a maven build).
 ![liquidy](http://4.bp.blogspot.com/-dwnDQZVugwo/VFXrDxGOy4I/AAAAAAAAEgo/irsZxW_WLOA/s400/liquidy.png)
 
-
+![Travis CI](https://travis-ci.org/ruby-processing/jbox2d.svg)
 [![Gem Version](https://badge.fury.io/rb/pbox2d.svg)](http://badge.fury.io/rb/pbox2d)
 
 ### Web Links
@@ -30,7 +30,7 @@ Copyright (c) 2014 Daniel Shiffman
  
 This gem was created by Martin Prout
 
-Copyright (c) 2015/16 Martin Prout
+Copyright (c) 2015/17 Martin Prout
 
 ### To compile
 
