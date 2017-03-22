@@ -1,6 +1,6 @@
-### v0.9.2
+### v1.0.0
 
-Specify github pages as home
+Specify github pages as home, update to latest jruby-9.1.8.0 and processing-3.3
 
 ### v0.9.1
 
