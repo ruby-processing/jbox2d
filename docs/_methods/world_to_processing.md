@@ -11,6 +11,7 @@ Because of the peculiar choice by the processing guys down is up (dimensions in 
 
 The java code ([PBox2D][pbox2d] inherits this from [Box2DProcessing][pbox2d])
 ### public Vec2 worldToProcessing(float worldX, float worldY) ###
+
 ```java
 public Vec2 worldToProcessing(float worldX, float worldY) {
         float pixelX = map(worldX, 0f, 1f, parent.width / 2, parent.width / 2 + scaleFactor);
@@ -21,6 +22,7 @@ public Vec2 worldToProcessing(float worldX, float worldY) {
 
 ### Ruby usage ###
 Use camel case
+
 ```ruby
 world_to_processing(x, y) # returns new Vec2 instance (in processing world)
 ```
