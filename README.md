@@ -6,7 +6,7 @@ Here we demonstrate how to use JBox2D library as a rubygem. This approach could 
 ![Travis CI](https://travis-ci.org/ruby-processing/jbox2d.svg)
 [![Gem Version](https://badge.fury.io/rb/pbox2d.svg)](http://badge.fury.io/rb/pbox2d)
 
-Build fails because latest processing is not available from maven central.
+CI Build can only pass when processing version is available from maven central.
 
 ### Web Links
 
