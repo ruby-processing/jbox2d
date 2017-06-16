@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'version'
 # Ruby version of java wrapper allows us to have more
 # rubified interface, also needed for add_listener
@@ -9,8 +11,7 @@ class Box2D < Java::ProcessingBox2d::Box2DProcessing
     set_options(args[:scale],
                 args[:gravity].to_java(Java::float),
                 args[:warm],
-                args[:continuous]
-               )
+                args[:continuous])
   end
 
   def step_options(args = {})

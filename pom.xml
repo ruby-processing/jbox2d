@@ -11,9 +11,9 @@ DO NOT MODIFIY - GENERATED CODE
   <modelVersion>4.0.0</modelVersion>
   <groupId>ruby-processing</groupId>
   <artifactId>pbox2d</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <name>pbox2d</name>
-  <description>jbox2d for JRubyArt</description>
+  <description>jbox2d for JRubyArt and propane</description>
   <url>https://github.com/ruby-processing/jbox2d</url>
   <organization>
     <name>ruby-processing</name>
@@ -37,7 +37,7 @@ DO NOT MODIFIY - GENERATED CODE
   </developers>
   <scm>
     <connection>scm:git:git://github.com/ruby-processing/jbox2d.git</connection>
-    <developerConnection>scm:git:git@github.com/ruby-processing/jbox2dt.git</developerConnection>
+    <developerConnection>scm:git:git@github.com/ruby-processing/jbox2d.git</developerConnection>
     <url>https://github.com/ruby-processing/jbox2d</url>
   </scm>
   <issueManagement>
@@ -56,13 +56,13 @@ DO NOT MODIFIY - GENERATED CODE
     <dependency>
       <groupId>org.jruby</groupId>
       <artifactId>jruby</artifactId>
-      <version>9.1.8.0</version>
+      <version>9.1.12.0</version>
       <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.processing</groupId>
       <artifactId>core</artifactId>
-      <version>3.3.2</version>
+      <version>3.3.4</version>
     </dependency>
   </dependencies>
   <build>
