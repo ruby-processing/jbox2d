@@ -1,3 +1,6 @@
+### v1.0.2
+Update to latest processing-3.3.4
+
 ### v1.0.0
 Update to latest processing-3.3.2
 
@@ -12,10 +15,10 @@ Update maven artifacts
 
 Update maven artifacts, somewhat arbitarily require JRubyArt-1.2+ to get everyone on same page
 
-### v0.8.0 
+### v0.8.0
 Update for JRubyArt-1.1+ and processing-3.1+
 
-### v0.7.0 
+### v0.7.0
 
 A strike for independence, now building from source using polyglot maven
 
