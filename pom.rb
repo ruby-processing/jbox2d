@@ -35,7 +35,7 @@ project 'pbox2d', 'https://github.com/ruby-processing/jbox2d' do
 
 
   pom 'org.jruby:jruby:9.1.12.0'
-  jar 'org.processing:core:3.3.4'
+  jar 'org.processing:core:3.3.5'
 
   plugin_management do
     plugin :resources, '2.6'
