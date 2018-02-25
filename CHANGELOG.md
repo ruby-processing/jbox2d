@@ -1,5 +1,5 @@
 ### v 1.0.3
-Update to latest processing-3.3.5
+Update to latest processing-3.3.6 jruby-9.1.16.0 replace $app with Processing.app for JRubyArt-1.4.6 in examples _an incompatible change for earlier JRubyArt versions_
 
 ### v1.0.2
 Update to latest processing-3.3.4

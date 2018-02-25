@@ -2,5 +2,5 @@
 
 # module to give version a namespace
 module Pbox2d
-  VERSION = '1.0.2'.freeze
+  VERSION = '1.0.3'.freeze
 end

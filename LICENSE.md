@@ -1,7 +1,7 @@
 ### License
 
 This work makes use of jbox2d see included LICENCE, and is derived from,
-but different significantly different from Dan Shiffmans PBox2D-for-processing 
+but different significantly different from Dan Shiffmans PBox2D-for-processing
 who claims this:-
 
 Copyright (c) 2014, Daniel Shiffman
@@ -24,11 +24,11 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-I include the Shiffman licence mainly because of the included example 
-(albeit in processing) is his idea. It would be better if everyone stuck to 
+I include the Shiffman licence mainly because of the included example
+(albeit in processing) is his idea. It would be better if everyone stuck to
 recognized licences.....
 
 For my part I lean toward GPL3 but MIT is OK and matches ruby-processing and
 vanilla processing.
 
-Copyright (c) 2014-2015, Martin Prout
+Copyright (c) 2014-2018, Martin Prout
