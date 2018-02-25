@@ -19,6 +19,7 @@ def settings
 end
 
 def setup
+  sketch_title 'Distance Joint'
   # Initialize box2d physics and create the world
   @box2d = WorldBuilder.build(app: self)
   @system = ParticleSystem.new

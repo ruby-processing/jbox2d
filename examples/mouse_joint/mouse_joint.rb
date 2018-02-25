@@ -5,11 +5,12 @@
 # Basic example of controlling an object with the mouse (by attaching a spring)
 
 require 'pbox2d'
+require 'forwardable'
 require_relative 'box'
 require_relative 'boundary'
 require_relative 'spring'
 require_relative 'dummy_spring'
-require 'forwardable'
+
 
 # A reference to our box2d world
 attr_reader :box2d, :boundaries, :box, :spring
