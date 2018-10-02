@@ -2,7 +2,7 @@ require 'fileutils'
 project 'pbox2d', 'https://github.com/ruby-processing/jbox2d' do
 
   model_version '4.0.0'
-  id 'ruby-processing:pbox2d', '1.0.3'
+  id 'ruby-processing:pbox2d', '1.0.4'
   packaging 'jar'
 
   description 'jbox2d for JRubyArt and propane'
@@ -34,14 +34,14 @@ project 'pbox2d', 'https://github.com/ruby-processing/jbox2d' do
             )
 
 
-  pom 'org.jruby:jruby:9.1.16.0'
-  jar 'org.processing:core:3.3.6'
+  pom 'org.jruby:jruby:9.2.0.0'
+  jar 'org.processing:core:3.3.7'
 
   plugin_management do
     plugin :resources, '2.6'
     plugin :dependency, '2.8'
     plugin(
-          :compiler, '3.5.1',
+          :compiler, '3.8.0',
           source: '${maven.compiler.source}',
           target: '${maven.compiler.target}'
           )
