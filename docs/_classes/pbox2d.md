@@ -4,7 +4,7 @@ title: "PBox2D"
 permalink: /classes/pbox2d/
 ---
 
-The PBox2D class is a simple wrapper to help integrate the JBox2D world with ruby implementations of processing (_JRubyArt and propane_). Use the [WorldBuilder][world_builder] in your sketch setup to create an instance of this class.
+The PBox2D class is a simple wrapper to help integrate the JBox2D world with ruby implementations of processing (_JRubyArt, PiCrate and propane_). Use the [WorldBuilder][world_builder] in your sketch setup to create an instance of this class.
 
 ```ruby
 # Ruby version of java wrapper allows us to have more
