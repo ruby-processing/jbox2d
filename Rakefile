@@ -8,7 +8,7 @@ require_relative 'lib/pbox2d/version'
 
 def create_manifest
   title =  'Implementation-Title: box2d (pbox2d java extension for JRubyArt)'
-  version =  format('Implementation-Version: %s', Pbox2d::VERSION)   
+  version =  format('Implementation-Version: %s', Pbox2d::VERSION)
   file = File.open('MANIFEST.MF', 'w') do |f|
     f.puts(title)
     f.puts(version)
@@ -35,4 +35,13 @@ end
 
 Rake::TestTask.new do |t|
   t.test_files = FileList['test/**/*.rb']
+end
+
+desc 'clean'
+task :clean do
+  Dir["./**/*.{jar,gem}"].each do |path|
+    puts "Deleting #{path} ..."
+    File.delete(path)
+  end
+  FileUtils.rm_rf('./target')
 end
