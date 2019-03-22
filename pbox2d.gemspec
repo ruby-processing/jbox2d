@@ -7,7 +7,6 @@ Gem::Specification.new do |spec|
   spec.name          = 'pbox2d'
   spec.version       = Pbox2d::VERSION
   spec.license       = 'BSD-2-Clause'
-  spec.has_rdoc = true
   spec.extra_rdoc_files = ['README.md', 'LICENSE.md']
   spec.authors       = ['Martin Prout']
   spec.email         = ['mamba2928@yahoo.co.uk']

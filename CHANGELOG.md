@@ -1,3 +1,6 @@
+### v 1.0.5
+Update to latest processing-3.5.3 jruby-9.2.6.0
+
 ### v 1.0.4
 Update to latest processing-3.4 jruby-9.2.4.0
 
