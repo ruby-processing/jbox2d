@@ -47,7 +47,7 @@ public class Settings {
   /**
    * smaller the precision, the larger the table. If a small table is used (eg, precision is .006 or
    * greater), make sure you set the table to lerp it's results. Accuracy chart is in the MathUtils
-   * source. Or, run the tests yourself in {@link SinCosTest}.</br> </br> Good lerp precision
+   * source. Or, run the tests yourself in {@link SinCosTest}.<p><p> Good lerp precision
    * values:
    * <ul>
    * <li>.0092</li>

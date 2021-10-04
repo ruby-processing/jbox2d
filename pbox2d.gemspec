@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.extra_rdoc_files = ['README.md', 'LICENSE.md']
   spec.authors       = ['Martin Prout']
   spec.email         = ['mamba2928@yahoo.co.uk']
-  spec.summary       = %q{jbox2d wrapped in a gem for JRubyArt}
+  spec.summary       = %q{jbox2d wrapped in a gem for JRubyArt, PiCrate and propane}
   spec.description   = <<-EOF
 "An exemplar for making java libraries available as a gem, for use in JRubyArt /propane. Features a polyglot maven build, and also demonstrates how to create an interface so avoid needing explicit calls to java reflection."
 EOF
@@ -18,7 +18,7 @@ EOF
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.files << 'lib/box2d.jar'
   spec.require_paths = ['lib']
-  spec.add_development_dependency "rake", "~> 12.0"
-  spec.add_development_dependency "minitest", "~> 5.10"
+  spec.add_development_dependency "rake", "~> 13.0"
+  spec.add_development_dependency "minitest", "~> 5.14"
   spec.platform='java'
 end

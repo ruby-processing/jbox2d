@@ -32,6 +32,9 @@ public interface BroadPhase {
   /**
    * Call MoveProxy as many times as you like, then when you are done call UpdatePairs to finalized
    * the proxy pairs (for your time step).
+   * @param proxyId
+   * @param aabb
+   * @param displacement
    */
   void moveProxy(int proxyId, AABB aabb, Vec2 displacement);
 

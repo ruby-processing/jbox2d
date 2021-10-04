@@ -507,7 +507,7 @@ public class World {
      * destroy a joint. This may cause the connected bodies to begin colliding.
      *
      * @warning This function is locked during callbacks.
-     * @param joint
+     * @param j
      */
     public void destroyJoint(Joint j) {
         assert (isLocked() == false);
@@ -1708,11 +1708,10 @@ public class World {
     }
 
     /**
-     * Destroy a particle. The particle is removed after the next step.
+     * Destroy a particle.The particle is removed after the next step.
      *
-     * @param Index of the particle to destroy.
-     * @param Whether to call the destruction listener just before the particle
-     * is destroyed.
+     * @param index
+     * @param callDestructionListener
      */
     public void destroyParticle(int index, boolean callDestructionListener) {
         m_particleSystem.destroyParticle(index, callDestructionListener);
@@ -1720,12 +1719,12 @@ public class World {
 
     /**
      * Destroy particles inside a shape without enabling the destruction
-     * callback for destroyed particles. This function is locked during
-     * callbacks. For more information see DestroyParticleInShape(Shape&,
-     * Transform&,bool).
+     * callback for destroyed particles.This function is locked during
+ callbacks.For more information see DestroyParticleInShape(Shape&;,
+ Transform&;,bool).
      *
-     * @param Shape which encloses particles that should be destroyed.
-     * @param Transform applied to the shape.
+     * @param shape
+     * @param xf
      * @warning This function is locked during callbacks.
      * @return Number of particles destroyed.
      */

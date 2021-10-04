@@ -22,6 +22,7 @@ public abstract class Box2DProcessing {
     private Step stepO;
     private final float height;
     private final float width;
+    private static final int Y_FLIP_INDICATOR = -1;
     /**
      * The Box2D world (we might need public access for our ContactListener)
      */
@@ -35,7 +36,7 @@ public abstract class Box2DProcessing {
     /**
      * Adjust for processing.org unfathomable choice of y-axis direction
      */
-    private final float yFlip;// = -1.0f; //flip y coordinate
+    private final int yFlip;// = -1.0; //flip y coordinate
 
     /**
      * Controls access to processing pre loop (via reflection)
@@ -52,7 +53,7 @@ public abstract class Box2DProcessing {
         parent = p;
         height = p.height;
         width = p.width;
-        yFlip = -1;
+        yFlip = Y_FLIP_INDICATOR;
         setActive(true);
     }
 

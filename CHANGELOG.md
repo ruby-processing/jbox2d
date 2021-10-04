@@ -1,3 +1,6 @@
+### v 1.0.6
+Update to latest processing-4.0.0 jruby-9.3.0.0 added module-info.java
+
 ### v 1.0.5
 Update to latest processing-3.5.3 jruby-9.2.6.0
 

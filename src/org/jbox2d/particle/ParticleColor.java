@@ -25,7 +25,7 @@ public class ParticleColor {
     set(color);
   }
 
-  public void set(Color3f color) {
+  public final void set(Color3f color) {
     r = (byte) (255 * color.x);
     g = (byte) (255 * color.y);
     b = (byte) (255 * color.z);
@@ -43,7 +43,7 @@ public class ParticleColor {
     return r == 0 && g == 0 && b == 0 && a == 0;
   }
 
-  public void set(byte r, byte g, byte b, byte a) {
+  public final void set(byte r, byte g, byte b, byte a) {
     this.r = r;
     this.g = g;
     this.b = b;

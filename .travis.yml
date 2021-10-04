@@ -1,14 +1,7 @@
-language: ruby
-sudo: false
+language: java
 dist: trusty
 
-rvm:
-  - jruby-9.2.4.0
 jdk:
-  - oraclejdk8
+  - openjdk11
 os:
   - linux
-
-addons:
-   apt:
-   update: true

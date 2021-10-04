@@ -89,7 +89,7 @@ public abstract class Box2DProcessing {
     /**
      * Adjust for processing.org unfathomable choice of y-axis direction
      */
-    private final float yFlip;// = -1.0f; //flip y coordinate
+    private final int yFlip;// = -1; //flip y coordinate
 
     /**
      * Controls access to processing pre loop (via reflection)

@@ -26,9 +26,12 @@ public interface BroadPhaseStrategy {
   void destroyProxy(int proxyId);
 
   /**
-   * Move a proxy with a swepted AABB. If the proxy has moved outside of its fattened AABB, then the
-   * proxy is removed from the tree and re-inserted. Otherwise the function returns immediately.
+   * Move a proxy with a swepted AABB.If the proxy has moved outside of its fattened AABB, then the
+ proxy is removed from the tree and re-inserted.Otherwise the function returns immediately.
    * 
+   * @param proxyId
+   * @param aabb
+   * @param displacement
    * @return true if the proxy was re-inserted.
    */
   boolean moveProxy(int proxyId, AABB aabb, Vec2 displacement);
@@ -38,11 +41,11 @@ public interface BroadPhaseStrategy {
   AABB getFatAABB(int proxyId);
 
   /**
-   * Query an AABB for overlapping proxies. The callback class is called for each proxy that
-   * overlaps the supplied AABB.
+   * Query an AABB for overlapping proxies.The callback class is called for each proxy that
+ overlaps the supplied AABB.
    * 
    * @param callback
-   * @param araabbgAABB
+   * @param aabb
    */
   void query(TreeCallback callback, AABB aabb);
 
@@ -59,6 +62,7 @@ public interface BroadPhaseStrategy {
 
   /**
    * Compute the height of the tree.
+   * @return 
    */
   int computeHeight();
 
